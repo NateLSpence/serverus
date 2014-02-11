@@ -19,3 +19,5 @@
     </nav>
   </div>
 </header>
+
+<div class="header-image"></div>

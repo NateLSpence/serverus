@@ -4,12 +4,15 @@
 
 @import "bootstrap/bootstrap.less";
 
+@color-brand: #428bca;
+
 /* ==========================================================================
    Base
    ========================================================================== */
 
-body { }
-
+body { 
+   
+}
 
 
 /* ==========================================================================
@@ -18,7 +21,16 @@ body { }
 
 .banner { }
 
+.header-img {
+   position: relative;
+   min-height: 1px;
+   padding: 0;
+   margin: 0;
+}
 
+.navbar {
+   margin-bottom: 0;
+}
 
 /* ==========================================================================
    Content
@@ -88,3 +100,34 @@ figure.alignnone { margin-left: 0; margin-right: 0; }
 @media (min-width: @screen-md-min) { }
 
 @media (min-width: @screen-lg-min) { }
+
+
+
+
+
+/* ==========================================================================
+   bbPress
+   ========================================================================== */
+
+#bbpress-forums li.bbp-body ul.forum, 
+#bbpress-forums li.bbp-body ul.topic {
+//   padding: 0;
+}
+
+#bbpress-forums div.bbp-forum-title {
+//   padding: 4px 8px;
+
+   font-weight: bold;
+   font-size: 1.5em;
+
+   //fontstack with details here
+   color: @color-brand;
+}
+
+#bbpress-forums ul.bbp-forums-list {
+   border: none;
+}
+
+#bbpress-forums li.bbp-forum {
+   display: block;
+}
