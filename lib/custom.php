@@ -3,6 +3,46 @@
  * Custom functions
  */
 
+/*
+function bbp_get_forum_title( $anchor, $forum_id = 0 ) {
+	$forum_id = 0;
+	$forum_id  = bbp_get_forum_id( $forum_id );
+	$active_id = bbp_get_forum_last_active_id( $forum_id );
+	$link_url  = $title = '';
+
+	if ( empty( $active_id ) )
+		$active_id = bbp_get_forum_last_reply_id( $forum_id );
+
+	if ( empty( $active_id ) )
+		$active_id = bbp_get_forum_last_topic_id( $forum_id );
+
+	if ( bbp_is_topic( $active_id ) ) {
+		$link_url = bbp_get_forum_last_topic_permalink( $forum_id );
+		$title    = bbp_get_forum_last_topic_title( $forum_id );
+	} elseif ( bbp_is_reply( $active_id ) ) {
+		$link_url = bbp_get_forum_last_reply_url( $forum_id );
+		$title    = bbp_get_forum_last_reply_title( $forum_id );
+	}
+
+	$time_since = bbp_get_forum_last_active_time( $forum_id );
+
+	if ( !empty( $time_since ) && !empty( $link_url ) ) {
+		$anchor = '<a href="' . esc_url( $link_url ) . '" title="' . esc_attr( $title ) . '">' . esc_attr( $title ) . '</a>'; 
+		$time_since_span = '<span>' . esc_html( $time_since ) . '</span>';
+	} else {
+		$anchor = esc_html__( 'No Topics', 'bbpress' );
+	}
+
+    return $anchor;
+    
+    
+    //return "blarg";
+}
+
+add_filter( 'bbp_get_forum_freshness_link', 'bbp_get_forum_title', 9, 2 );*/
+
+
+
 
 /**
  * Customization options
