@@ -16,7 +16,7 @@
 	<li class="bbp-header">
 
 		<ul class="forum-titles">
-			<li class="bbp-topic-title"><?php _e( 'Post Title', 'bbpress' ); ?></li>
+			<li class="bbp-topic-title"><?php _e( 'Topics', 'bbpress' ); ?></li>
 			<li class="bbp-topic-voice-count"><?php _e( 'Voices', 'bbpress' ); ?></li>
 			<li class="bbp-topic-reply-count"><?php bbp_show_lead_topic() ? _e( 'Replies', 'bbpress' ) : _e( 'Posts', 'bbpress' ); ?></li>
 			<li class="bbp-topic-freshness"><?php _e( 'Last Reply', 'bbpress' ); ?></li>

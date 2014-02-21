@@ -109,7 +109,7 @@
 
 			<?php do_action( 'bbp_theme_before_topic_freshness_author' ); ?>
 
-			<span class="bbp-topic-freshness-author"><?php bbp_author_link( array( 'post_id' => bbp_get_topic_last_active_id(), 'type' => 'name' ) ); ?></span>
+			<span class="bbp-topic-freshness-author">by <?php bbp_author_link( array( 'post_id' => bbp_get_topic_last_active_id(), 'type' => 'name' ) ); ?></span>
 
 			<?php do_action( 'bbp_theme_after_topic_freshness_author' ); ?>
 

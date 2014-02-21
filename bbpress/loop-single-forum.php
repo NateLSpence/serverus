@@ -40,7 +40,7 @@ if( bbp_is_forum_category( bbp_get_forum_id() ) || ( isset( $bbp->forum_query->c
 
 			<li class="bbp-forum-topic-count"><?php _e( 'Topics', 'bbpress' ); ?></li>
 			<li class="bbp-forum-reply-count"><?php bbp_show_lead_topic( $cat_id ) ? _e( 'Replies', 'bbpress' ) : _e( 'Replies', 'bbpress' ); ?></li>
-			<li class="bbp-forum-freshness"><?php _e( 'Last Reply', 'bbpress' ); ?></li>
+			<li class="bbp-forum-freshness"><?php _e( 'Activity', 'bbpress' ); ?></li>
 		</ul>
 	</li><!-- .bbp-header -->
 
