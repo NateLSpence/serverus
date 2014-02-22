@@ -188,7 +188,8 @@ figure.alignnone { margin-left: 0; margin-right: 0; }
 
 
    // Category description
-   #bbpress-forums div.bbp-forum-content, #bbpress-forums div.bbp-topic-content, #bbpress-forums div.bbp-reply-content {
+   #bbpress-forums div.bbp-forum-content, 
+   #bbpress-forums div.bbp-topic-content {
       margin-left: 20px;
       padding: 12px;
       text-align: left;
@@ -256,7 +257,8 @@ figure.alignnone { margin-left: 0; margin-right: 0; }
 // TOPICS LIST
    
    // Subscribe button
-   .subscription-toggle {
+   div.clearfix .subscription-toggle,
+   div.clearfix .favorite-toggle {
       .pull-left;
       .btn;
    }
@@ -339,6 +341,35 @@ figure.alignnone { margin-left: 0; margin-right: 0; }
       margin: 0 0 0 40px; /* Width of avatar plus desired margin */
    }
 
+// REPLY LIST
+   // List Header
+   #bbpress-forums div.bbp-reply-content a.subscription-toggle,
+   #bbpress-forums div.bbp-reply-content a.favorite-toggle {
+      .btn;
+      .btn-xs;
+      .btn-default;
+   }
+
+   // Reply Header 
+   #bbpress-forums .bbp-meta .caret {
+      margin: .5em;
+   }
+
+   // Reply avatar
+   #bbpress-forums div.bbp-reply-author img.avatar {
+      float: none !important;
+      margin-bottom: 1em;
+   }
+
+   // Tag list
+   #bbpress-forums div.bbp-topic-tags {
+      float: none;
+   }
+
+   // REPLY FORM
+      #bbpress-forums fieldset.bbp-form .checkbox input {
+         margin: 0 0 0 -20px;
+      }
 
 
 /* ==========================================================================

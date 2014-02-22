@@ -189,7 +189,9 @@ if ( !empty( $sub_forums ) ) {
 					$reply_title    = bbp_get_forum_last_topic_title( $sub_forum->ID );
 				} elseif ( bbp_is_reply( $active_id ) ) {
 					$link_url = bbp_get_forum_last_reply_url( $sub_forum->ID );
-					$reply_title    = bbp_get_forum_last_reply_title( $sub_forum->ID );
+					//$reply_title    = bbp_get_forum_last_reply_title( $sub_forum->ID );
+					$reply_title    = bbp_get_forum_last_topic_title( $sub_forum->ID );
+					
 				}
 
 				$time_since = bbp_get_forum_last_active_time( $sub_forum->ID );
