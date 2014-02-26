@@ -27,7 +27,7 @@
 
 			<!-- <fieldset class="bbp-form"> -->
 			<fieldset>
-				<legend><?php printf( __( 'Reply To %s', 'bbpress' ), bbp_get_topic_title() ); ?></legend>
+				<legend><?php printf( __( 'Reply to "%s"', 'bbpress' ), bbp_get_topic_title() ); ?></legend>
 
 				<?php do_action( 'bbp_theme_before_reply_form_notices' ); ?>
 
@@ -39,13 +39,13 @@
 
 				<?php endif; ?>
 
-				<?php if ( current_user_can( 'unfiltered_html' ) ) : ?>
+<!-- 				<?php if ( current_user_can( 'unfiltered_html' ) ) : ?>
 
-					<div class="bbp-template-notice">
-						<p><?php _e( 'You may post unrestricted HTML.', 'bbpress' ); ?></p>
-					</div>
+	<div class="bbp-template-notice">
+		<p><?php _e( 'You may post unrestricted HTML.', 'bbpress' ); ?></p>
+	</div>
 
-				<?php endif; ?>
+<?php endif; ?> -->
 
 				<?php do_action( 'bbp_template_notices' ); ?>
 
@@ -133,7 +133,7 @@
 
 						<?php bbp_cancel_reply_to_link(); ?>
 
-						<button type="submit" tabindex="<?php bbp_tab_index(); ?>" id="bbp_reply_submit" name="bbp_reply_submit" class="button submit btn btn-success btn-block"><?php _e( 'Submit', 'bbpress' ); ?></button>
+						<button type="submit" tabindex="<?php bbp_tab_index(); ?>" id="bbp_reply_submit" name="bbp_reply_submit" class="button submit btn btn-primary btn-block"><?php _e( 'Submit', 'bbpress' ); ?></button>
 
 						<?php do_action( 'bbp_theme_after_reply_form_submit_button' ); ?>
 

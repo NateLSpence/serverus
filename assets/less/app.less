@@ -36,6 +36,23 @@ body {
    margin-bottom: 0;
 }
 
+.page-header {
+   //padding-bottom: 0;
+   //margin: 40px 0 20px;
+   //border-bottom: none;
+   
+   //text-align: center;
+
+   h1 {
+      //font-size: @font-size-large;
+      font-family: @headings-font-family;
+      font-weight: @headings-font-weight;
+      line-height: @headings-line-height;
+      color: @headings-color;
+      //color: darken(@brand-primary, 25%)
+   }
+}
+
 /* ==========================================================================
    Content
    ========================================================================== */
@@ -145,6 +162,17 @@ figure.alignnone { margin-left: 0; margin-right: 0; }
    margin-bottom: -7px;
    border: 3px double #ddd;
 } 
+
+// ALERTS
+div.bbp-template-notice {
+   .alert;
+   .alert-info;
+}
+
+div.bbp-template-notice.error {
+   .alert;
+   .alert-danger;
+}
 
 // BORDERS
 #bbpress-forums ul.bbp-lead-topic, 
@@ -433,11 +461,16 @@ form div.bbp-submit-wrapper button {
    .btn-block;
 } */
 
+// LOGIN FORM
+.bbp-login-form .bbp-remember-me {
+   padding-left: 25px;
+}
+
 /* ==========================================================================
    Bootstrap tweaks
    ========================================================================== */
 
 // typo in bootstrap
 input[type="radio"], input[type="checkbox"] {
-   margin-top: 1px;
+   margin-top: 3px;
 }
