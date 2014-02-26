@@ -232,15 +232,22 @@ if ( !empty( $sub_forums ) ) {
 				}
 			echo "</li>";
 
-
 		echo "</ul></li>";	
 	} /* END FOREACH */
+
 }
 
 ?>
 
 
 	<?php do_action( 'bbp_theme_after_forum_sub_forums' ); ?>
+
+<li class="bbp-category-footer">
+	<div class="tr">
+		<div class="td colspan4">&nbsp;</div>
+	</div><!-- .tr -->
+</li><!-- .bbp-category-footer -->
+
 	
 </ul><!-- #bbp-forum-<?php bbp_forum_id(); ?> -->
 <?php } //end if ?> 

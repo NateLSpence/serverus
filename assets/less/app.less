@@ -64,9 +64,17 @@ body {
 }
 
 .widget {
-   border: 1px solid #CCC; //TODO border stack
+   border: 1px solid #E0E0E0; //TODO border stack
    margin: 1em;
    padding: 0 1.5em 1.5em 1.5em;
+
+   h3 {
+      // font-size: @font-size-base;
+      // font-family: @headings-font-family;
+      // font-weight: @headings-font-weight;
+      // line-height: @headings-line-height;
+      // color: @headings-color;
+   }
 }
 
 
@@ -138,6 +146,19 @@ figure.alignnone { margin-left: 0; margin-right: 0; }
    border: 3px double #ddd;
 } 
 
+// BORDERS
+#bbpress-forums ul.bbp-lead-topic, 
+#bbpress-forums ul.bbp-topics, 
+#bbpress-forums ul.bbp-forums,
+#bbpress-forums ul.bbp-replies,
+#bbpress-forums ul.bbp-search-results {
+   font-size: 12px;
+   overflow: hidden;
+   border: 1px solid @gray-lighter;
+   margin-bottom: 20px;
+   clear: both;
+}
+
 
 // FORUMS LIST
 
@@ -167,12 +188,30 @@ figure.alignnone { margin-left: 0; margin-right: 0; }
       float: left;
    }
 
-   // Category Header, Forums list Footer
-   #bbpress-forums li.bbp-header, #bbpress-forums li.bbp-footer {
+   // Category Header
+   #bbpress-forums li.bbp-header,
+   #bbpress-forums li.bbp-footer {
       padding: 8px 16px;
 
-      font-size: 16px;
-      font-weight: normal;
+      font-size: @font-size-large;
+      font-weight: @headings-font-weight;
+   }
+
+   // Forums list Footers
+   #bbpress-forums li.bbp-footer,
+   #bbpress-forums li.bbp-category-footer {
+      background: lighten(@gray-lighter, 2%);
+      border-top: 1px solid #eee;
+      text-align: center;
+   }
+
+   #bbpress-forums li.bbp-footer {
+      font-size: @font-size-large * .75;
+   }
+
+   #bbpress-forums li.bbp-category-footer {
+      font-size: @font-size-large / 4;
+      clear: both;
    }
 
    // Category Header
@@ -371,6 +410,28 @@ figure.alignnone { margin-left: 0; margin-right: 0; }
          margin: 0 0 0 -20px;
       }
 
+// LOGIN WIDGET
+/*form div.bbp-username,
+form div.bbp-password,
+form div.bbp-remember-me,
+form div.bbp-submit-wrapper {
+   .form-group;
+}
+
+form div.bbp-username input,
+form div.bbp-password input{
+   .form-control;
+}
+
+form div.bbp-remember-me {
+   .checkbox;
+}
+
+form div.bbp-submit-wrapper button {
+   .btn;
+   .btn-default;
+   .btn-block;
+} */
 
 /* ==========================================================================
    Bootstrap tweaks
