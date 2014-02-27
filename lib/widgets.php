@@ -22,8 +22,24 @@ function roots_widgets_init() {
     'after_title'   => '</h3>',
   ));
 
+
+
+    //Login Sidebar
+  register_sidebar(array(
+    'name' => __('Login Location', 'serverus'),
+    'id' => 'sidebar-login',
+    'description' => 'Put the Login/Register widget here.',
+    'before_widget' => '<div class="%1$s %2$s">',
+    'after_widget' => '</div>',
+    'before_title' => '',
+    'after_title' => '',
+  ));
+
+
+
   // Widgets
   register_widget('Roots_Vcard_Widget');
+  register_widget('Serverus_Login_Widget');
 }
 add_action('widgets_init', 'roots_widgets_init');
 
@@ -130,4 +146,139 @@ class Roots_Vcard_Widget extends WP_Widget {
     <?php
     }
   }
+}
+
+
+/**
+ * LOGIN/REGISTER WIDGET
+ */
+class Serverus_Login_Widget extends WP_Widget {
+
+  /**
+   * Serverus Login Widget
+   *
+   * Registers the login widget
+   */
+  public function __construct() {
+    $widget_ops = array(
+      'classname'   => 'login-register-widget',
+      'description' => __( 'A bbPress login/register widget for the Serverus theme. Place in the "Login Location" area.', 'bbpress' ) /*TODO should this (and below) say bbpress or serverus?*/
+    );
+
+    parent::__construct( false, __( '(Serverus) Login Widget', 'bbpress' ), $widget_ops );
+  }
+
+  /**
+   * Register the widget
+   *
+   * @uses register_widget()
+   */
+  public static function register_widget() {
+    register_widget( 'Serverus_Login_Widget' );
+  }
+
+  /**
+   * Displays the output, the login form
+   *
+   * @param mixed $args Arguments
+   * @param array $instance Instance
+   * @uses get_template_part() To get the login/logged in form 
+   *    This is from the bbPress login widget's notes.
+   *    I don't see where it uses get_template_part(). 
+   */
+  public function widget( $args = array(), $instance = array() ) {
+
+    // Get widget settings
+    $settings = $this->parse_settings( $instance );
+
+    // Typical WordPress filter
+    $settings['title'] = apply_filters( 'widget_title', $settings['title'], $instance, $this->id_base );
+
+
+    echo $args['before_widget'];
+
+/*    if ( !empty( $settings['title'] ) ) {
+      echo $args['before_title'] . $settings['title'] . $args['after_title'];
+    }*/ // TODO are we using the title field at all?
+
+    if ( !is_user_logged_in() ) : ?>
+
+      <?php if ( !empty( $settings['login'] ) ) : ?>
+
+        <div class="bbp-login-links">
+          <a href="<?php echo esc_url( $settings['login'] ); ?>" title="<?php esc_attr_e( 'Login/Register', 'bbpress' ); ?>" class="serverus-login-link"><?php _e( 'Login/Register', 'bbpress' ); ?></a>
+
+        </div>
+
+      <?php endif; ?>
+
+    <?php else : ?>
+
+      <div class="bbp-logged-in">
+        <a href="<?php bbp_user_profile_url( bbp_get_current_user_id() ); ?>" class="submit user-submit serverus-login-avatar"><?php echo get_avatar( bbp_get_current_user_id(), '30' ); ?></a>
+        <span class="login-widget-username"><?php bbp_user_profile_link( bbp_get_current_user_id() ); ?></span>
+
+        <a href="<?php echo wp_logout_url(); ?>" class="logout-link" title="Log out"><span class="glyphicon glyphicon-log-out"></span></a>
+
+      </div>
+
+    <?php endif;
+
+    echo $args['after_widget'];
+  }
+
+
+  /**
+   * Update the login widget options
+   *
+   * @param array $new_instance The new instance options
+   * @param array $old_instance The old instance options
+   */
+  public function update( $new_instance, $old_instance ) {
+    $instance             = $old_instance;
+    $instance['title']    = strip_tags( $new_instance['title'] );
+    $instance['login'] = esc_url_raw( $new_instance['login'] );
+
+    return $instance;
+  }
+
+  /**
+   * Output the login widget options form
+   *
+   * @param $instance Instance
+   * @uses Serverus_Login_Widget::get_field_id() To output the field id
+   * @uses Serverus_Login_Widget::get_field_name() To output the field name
+   */
+  public function form( $instance = array() ) {
+
+    // Get widget settings
+    $settings = $this->parse_settings( $instance ); ?>
+
+    <p>
+      <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'bbpress' ); ?>
+      <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $settings['title'] ); ?>" /></label>
+    </p>
+
+    <p>
+      <label for="<?php echo $this->get_field_id( 'login' ); ?>"><?php _e( 'Login URI:', 'bbpress' ); ?>
+      <input class="widefat" id="<?php echo $this->get_field_id( 'login' ); ?>" name="<?php echo $this->get_field_name( 'login' ); ?>" type="text" value="<?php echo esc_url( $settings['login'] ); ?>" /></label>
+    </p>
+
+
+    <?php
+  }
+
+  /**
+   * Merge the widget settings into defaults array.
+   *
+   * @param $instance Instance
+   * @uses bbp_parse_args() To merge widget settings into defaults
+   */
+  public function parse_settings( $instance = array() ) {
+    return bbp_parse_args( $instance, array(
+      'title'    => '',
+      'login'    => ''
+    ), 'login_widget_settings' );
+  }
+
 }

@@ -3,6 +3,11 @@
  * Custom functions
  */
 
+// Disable WP admin bar
+add_filter('show_admin_bar', '__return_false');
+
+
+
 /*
 function bbp_get_forum_title( $anchor, $forum_id = 0 ) {
 	$forum_id = 0;
@@ -41,11 +46,8 @@ function bbp_get_forum_title( $anchor, $forum_id = 0 ) {
 
 add_filter( 'bbp_get_forum_freshness_link', 'bbp_get_forum_title', 9, 2 );*/
 
-
-
-
 /**
- * Customization options
+ *	Customization options
  */
 function customize_register( $wp_customize ) {
 	

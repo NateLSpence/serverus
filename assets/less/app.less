@@ -36,6 +36,71 @@ body {
    margin-bottom: 0;
 }
 
+.login-register-widget {
+   float: left;
+   //font-size: @font-size-base;
+   line-height: @line-height-computed;
+
+   .bbp-login-links {
+      padding: @navbar-padding-vertical @navbar-padding-horizontal;
+
+   }
+
+   .bbp-logged-in {
+      padding: 10px @navbar-padding-horizontal;
+      font-size: @font-size-small;
+
+      .serverus-login-avatar {
+         img {
+            margin: 0;
+         }
+      }
+
+      .login-widget-username {
+         margin: 5px 10px 5px 6px;
+         display: inline-block;
+         
+         a {
+            &:hover,
+            &:focus {
+             text-decoration: none;
+            }
+         }
+      }
+
+      .logout-link {
+         font-size: @font-size-base;
+         color: @link-color;
+         
+         opacity:0.4;
+         filter:alpha(opacity=40); /* For IE8 and earlier */
+         
+         .glyphicon {
+            top: 2px;
+         }
+
+         &:hover,
+         &:focus {
+            opacity: 1;
+         }
+      }
+   }
+
+
+/*  @media (min-width: @grid-float-breakpoint) {
+    .navbar > .container & {
+      margin-left: -@navbar-padding-horizontal;
+    }
+  }*/
+}
+
+
+/* ==========================================================================
+   Content
+   ========================================================================== */
+
+.content { }
+
 .page-header {
    //padding-bottom: 0;
    //margin: 40px 0 20px;
@@ -52,13 +117,6 @@ body {
       //color: darken(@brand-primary, 25%)
    }
 }
-
-/* ==========================================================================
-   Content
-   ========================================================================== */
-
-.content { }
-
 
 
 /* ==========================================================================

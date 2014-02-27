@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php echo home_url(); ?>/"><?php bloginfo('name'); ?></a>
+      <!-- <a class="navbar-brand" href="<?php echo home_url(); ?>/"><?php bloginfo('name'); ?></a> -->
     </div>
 
     <nav class="collapse navbar-collapse" role="navigation">
@@ -16,7 +16,13 @@
           wp_nav_menu(array('theme_location' => 'primary_navigation', 'menu_class' => 'nav navbar-nav'));
         endif;
       ?>
+
+      <div class="pull-right">
+        <?php include roots_sidebar_login_path(); ?>
+      </div>
+
     </nav>
+
   </div>
 </header>
 
