@@ -140,15 +140,51 @@ body {
 
 .widget {
    border: 1px solid #E0E0E0; //TODO border stack
-   margin: 1em;
-   padding: 0 1.5em 1.5em 1.5em;
+   margin: 1em 0;
 
-   h3 {
-      // font-size: @font-size-base;
-      // font-family: @headings-font-family;
-      // font-weight: @headings-font-weight;
-      // line-height: @headings-line-height;
-      // color: @headings-color;
+   font-size: @font-size-widget-base;   
+
+   .widget-title {
+      color: @brand-complement-text-contrast;
+      background-color: @brand-complement;
+      border-left: 6px solid @brand-primary;
+
+      font-size: @font-size-widget-large;
+      line-height: @line-height-computed;
+      
+      font-family: @headings-font-family;
+      font-weight: @font-weight-heavier;
+
+      padding: @padding-base-vertical @padding-large-horizontal;
+   }
+}
+
+.widget_serverus_display_topics {
+   
+   .widget_serverus_display_topics_inner {
+      padding: @padding-large-vertical @padding-large-horizontal;
+      list-style-type: none;
+      margin-bottom: 0;
+   }
+
+   .widget_serverus_display_topics_single {
+      
+      margin-bottom: @padding-large-vertical;
+
+      .topic-avatar {
+      }
+
+      font-size: @font-size-widget-small;
+
+      .bbp-forum-title {
+         font-size: @font-size-widget-base;
+         margin-left: @padding-xs-horizontal;
+      }
+
+      .topic-info {
+         margin-left: @padding-xs-horizontal + 32 + 0; // Account for avatar, then indent
+         margin-bottom: 0;
+      }
    }
 }
 
@@ -303,7 +339,7 @@ div.bbp-template-notice.error {
    // Category Header
    #bbpress-forums li.bbp-header {
       background-color: @brand-primary;
-      color: white;
+      color: @brand-primary-text-contrast;
    }
 
       // Category Title
@@ -495,6 +531,11 @@ div.bbp-template-notice.error {
       #bbpress-forums fieldset.bbp-form .checkbox input {
          margin: 0 0 0 -20px;
       }
+
+   // reply Revision log
+   .bbp-reply-revision-log .avatar {
+      display: none;
+   }
 
 // LOGIN WIDGET
 /*form div.bbp-username,

@@ -9,8 +9,8 @@ function roots_widgets_init() {
     'id'            => 'sidebar-primary',
     'before_widget' => '<section class="widget %1$s %2$s"><div class="widget-inner">',
     'after_widget'  => '</div></section>',
-    'before_title'  => '<h3>',
-    'after_title'   => '</h3>',
+    'before_title'  => '<div class="widget-title">',
+    'after_title'   => '</div>',
   ));
 
   register_sidebar(array(
@@ -40,6 +40,7 @@ function roots_widgets_init() {
   // Widgets
   register_widget('Roots_Vcard_Widget');
   register_widget('Serverus_Login_Widget');
+  register_widget('Serverus_Topics_Widget');
 }
 add_action('widgets_init', 'roots_widgets_init');
 
@@ -281,4 +282,230 @@ class Serverus_Login_Widget extends WP_Widget {
     ), 'login_widget_settings' );
   }
 
+}
+
+
+
+/**
+ * Serverus Topic Widget for bbPress
+ * Adds a widget which displays the topic list in a theme-friendly way
+ * Based on bbPress's own widget
+ *
+ * @uses WP_Widget
+ */
+class Serverus_Topics_Widget extends WP_Widget {
+
+  /**
+   * Serverus Topic Widget
+   *
+   * Registers the topic widget
+   *
+   * @uses apply_filters() Calls 'bbp_topics_widget_options' with the
+   *                        widget options
+   */
+  public function __construct() {
+    $widget_ops = array(
+      'classname'   => 'widget_serverus_display_topics',
+      'description' => __( 'A list of recent topics.', 'bbpress' )
+    );
+
+    parent::__construct( false, __( '(Serverus) Recent Topics', 'bbpress' ), $widget_ops );
+  }
+
+  /**
+   * Register the widget
+   *
+   * @uses register_widget()
+   */
+  public static function register_widget() {
+    register_widget( 'Serverus_Topics_Widget' );
+  }
+
+  /**
+   * Displays the output, the topic list
+   *
+   * @param mixed $args
+   * @param array $instance
+   * @uses bbp_topic_permalink() To display the topic permalink
+   * @uses bbp_topic_title() To display the topic title
+   * @uses bbp_get_topic_last_active_time() To get the topic last active
+   *                                         time
+   * @uses bbp_get_topic_id() To get the topic id
+   */
+  public function widget( $args = array(), $instance = array() ) {
+
+    // Get widget settings
+    $settings = $this->parse_settings( $instance );
+
+    // Typical WordPress filter
+    $settings['title'] = apply_filters( 'widget_title',           $settings['title'], $instance, $this->id_base );
+
+
+    // Order by most recent replies. Other options stripped.
+      $topics_query = array(
+        'post_type'           => bbp_get_topic_post_type(),
+        'post_parent'         => $settings['parent_forum'],
+        'posts_per_page'      => (int) $settings['max_shown'],
+        'post_status'         => array( bbp_get_public_status_id(), bbp_get_closed_status_id() ),
+        'ignore_sticky_posts' => true,
+        'no_found_rows'       => true,
+        'meta_key'            => '_bbp_last_active_time',
+        'orderby'             => 'meta_value',
+        'order'               => 'DESC',
+      );
+
+    
+
+    // Note: private and hidden forums will be excluded via the
+    // bbp_pre_get_posts_normalize_forum_visibility action and function.
+    $widget_query = new WP_Query( $topics_query );
+
+    // Bail if no topics are found
+    if ( ! $widget_query->have_posts() ) {
+      return;
+    }
+
+    echo $args['before_widget'];
+
+    if ( !empty( $settings['title'] ) ) {
+      echo $args['before_title'] . $settings['title'] . $args['after_title'];
+    } ?>
+
+    <ul class="widget_serverus_display_topics_inner">
+
+      <?php while ( $widget_query->have_posts() ) :
+
+        $widget_query->the_post();
+        $topic_id    = bbp_get_topic_id( $widget_query->post->ID );
+        $author_link = '';
+        $author_avatar = '';
+
+        // Get the topic author's link avatar. Stripped option to remove this. Changed to display author of last reply rather than author of topic
+        $author_link = bbp_get_author_link( array( 'post_id' => bbp_get_topic_last_active_id( $topic_id ), 'type' => 'name' ) );
+        $author_avatar = bbp_get_author_link( array( 'post_id' => bbp_get_topic_last_active_id( $topic_id ), 'size' => 32, 'type' => 'avatar' ) );
+        ?>
+              <!-- //FIXME continue customizing from here. Removing some options. -->
+
+
+        <li class="widget_serverus_display_topics_single">
+            <?php 
+              //printf( _x( '%1$s', 'widgets', 'bbpress' ), '<span class="topic-avatar">' . $author_avatar . '</span>' );
+              echo '<span class="topic-avatar">' . $author_avatar . '</span>'; 
+            ?>
+
+          <a class="bbp-forum-title" href="<?php bbp_topic_permalink( $topic_id ); ?>"><?php bbp_topic_title( $topic_id ); ?></a>
+
+
+          <p class="topic-info">
+            <?php
+              //printf( _x( '%1$s', 'widgets', 'bbpress' ), '<span class="topic-author">' . $author_link . '</span>' );
+              echo '<span class="topic-author">' . $author_link . '</span>'; 
+            ?>
+
+            <?php if ( ! empty( $settings['show_date'] ) ) { ?>
+
+              <span class='topic-date'><?php bbp_topic_last_active_time( $topic_id ); ?></span>
+              </p>
+
+            <?php } else { ?>
+              </p>
+            <?php } ?>
+
+        </li>
+
+      <?php endwhile; ?>
+
+    </ul>
+
+    <?php echo $args['after_widget'];
+
+    // Reset the $post global
+    wp_reset_postdata();
+  }
+
+  /**
+   * Update the topic widget options
+   *
+   * @since bbPress (r2653)
+   *
+   * @param array $new_instance The new instance options
+   * @param array $old_instance The old instance options
+   */
+  public function update( $new_instance = array(), $old_instance = array() ) {
+    $instance                 = $old_instance;
+    $instance['title']        = strip_tags( $new_instance['title'] );
+    $instance['order_by']     = strip_tags( $new_instance['order_by'] );
+    $instance['parent_forum'] = sanitize_text_field( $new_instance['parent_forum'] );
+    $instance['show_date']    = (bool) $new_instance['show_date'];
+    $instance['show_user']    = (bool) $new_instance['show_user'];
+    $instance['max_shown']    = (int) $new_instance['max_shown'];
+
+    // Force to any
+    if ( !empty( $instance['parent_forum'] ) && !is_numeric( $instance['parent_forum'] ) ) {
+      $instance['parent_forum'] = 'any';
+    }
+
+    return $instance;
+  }
+
+  /**
+   * Output the topic widget options form
+   *
+   * @since bbPress (r2653)
+   *
+   * @param $instance Instance
+   * @uses BBP_Topics_Widget::get_field_id() To output the field id
+   * @uses BBP_Topics_Widget::get_field_name() To output the field name
+   */
+  public function form( $instance = array() ) {
+
+    // Get widget settings
+    $settings = $this->parse_settings( $instance ); ?>
+
+    <p><label for="<?php echo $this->get_field_id( 'title'     ); ?>"><?php _e( 'Title:',                  'bbpress' ); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'title'     ); ?>" name="<?php echo $this->get_field_name( 'title'     ); ?>" type="text" value="<?php echo esc_attr( $settings['title']     ); ?>" /></label></p>
+    <p><label for="<?php echo $this->get_field_id( 'max_shown' ); ?>"><?php _e( 'Maximum topics to show:', 'bbpress' ); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'max_shown' ); ?>" name="<?php echo $this->get_field_name( 'max_shown' ); ?>" type="text" value="<?php echo esc_attr( $settings['max_shown'] ); ?>" /></label></p>
+
+    <p>
+      <label for="<?php echo $this->get_field_id( 'parent_forum' ); ?>"><?php _e( 'Parent Forum ID:', 'bbpress' ); ?>
+        <input class="widefat" id="<?php echo $this->get_field_id( 'parent_forum' ); ?>" name="<?php echo $this->get_field_name( 'parent_forum' ); ?>" type="text" value="<?php echo esc_attr( $settings['parent_forum'] ); ?>" />
+      </label>
+
+      <br />
+
+      <small><?php _e( '"0" to show only root - "any" to show all', 'bbpress' ); ?></small>
+    </p>
+
+    <p><label for="<?php echo $this->get_field_id( 'show_date' ); ?>"><?php _e( 'Show post date:',    'bbpress' ); ?> <input type="checkbox" id="<?php echo $this->get_field_id( 'show_date' ); ?>" name="<?php echo $this->get_field_name( 'show_date' ); ?>" <?php checked( true, $settings['show_date'] ); ?> value="1" /></label></p>
+    <p><label for="<?php echo $this->get_field_id( 'show_user' ); ?>"><?php _e( 'Show topic author:', 'bbpress' ); ?> <input type="checkbox" id="<?php echo $this->get_field_id( 'show_user' ); ?>" name="<?php echo $this->get_field_name( 'show_user' ); ?>" <?php checked( true, $settings['show_user'] ); ?> value="1" /></label></p>
+
+    <p>
+      <label for="<?php echo $this->get_field_id( 'order_by' ); ?>"><?php _e( 'Order By:',        'bbpress' ); ?></label>
+      <select name="<?php echo $this->get_field_name( 'order_by' ); ?>" id="<?php echo $this->get_field_name( 'order_by' ); ?>">
+        <option <?php selected( $settings['order_by'], 'newness' );   ?> value="newness"><?php _e( 'Newest Topics',                'bbpress' ); ?></option>
+        <option <?php selected( $settings['order_by'], 'popular' );   ?> value="popular"><?php _e( 'Popular Topics',               'bbpress' ); ?></option>
+        <option <?php selected( $settings['order_by'], 'freshness' ); ?> value="freshness"><?php _e( 'Topics With Recent Replies', 'bbpress' ); ?></option>
+      </select>
+    </p>
+
+    <?php
+  }
+
+  /**
+   * Merge the widget settings into defaults array.
+   *
+   * @since bbPress (r4802)
+   *
+   * @param $instance Instance
+   * @uses bbp_parse_args() To merge widget options into defaults
+   */
+  public function parse_settings( $instance = array() ) {
+    return bbp_parse_args( $instance, array(
+      'title'        => __( 'Recent Topics', 'bbpress' ),
+      'max_shown'    => 5,
+      'show_date'    => false,
+      'show_user'    => false,
+      'parent_forum' => 'any',
+      'order_by'     => false
+    ), 'topic_widget_settings' );
+  }
 }

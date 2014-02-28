@@ -19,6 +19,11 @@
 // -------------------------
 
 @brand-primary:         #428bca;
+@brand-primary-text-contrast: #ffffff;
+
+@brand-complement:      @gray-lighter;
+@brand-complement-text-contrast: @text-color;
+
 @brand-success:         #5cb85c;
 @brand-warning:         #f0ad4e;
 @brand-danger:          #d9534f;
@@ -48,6 +53,10 @@
 @font-size-large:         ceil(@font-size-base * 1.25); // ~18px
 @font-size-small:         ceil(@font-size-base * 0.85); // ~12px
 
+@font-size-widget-base: @font-size-small; // ~ 12px
+@font-size-widget-large: ceil(@font-size-widget-base * 1.25); // ~ 15px
+@font-size-widget-small: @font-size-widget-base - 1; // ~ 11px
+
 @font-size-h1:            floor(@font-size-base * 2.6); // ~36px
 @font-size-h2:            floor(@font-size-base * 2.15); // ~30px
 @font-size-h3:            ceil(@font-size-base * 1.7); // ~24px
@@ -62,6 +71,9 @@
 @headings-font-weight:    500;
 @headings-line-height:    1.1;
 @headings-color:          inherit;
+
+@font-weight-heavy: 500;
+@font-weight-heavier: 600;
 
 
 // Iconography
