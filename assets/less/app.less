@@ -4,11 +4,6 @@
 
 @import "bootstrap/bootstrap.less";
 
-@color-brand: #428bca; //I think I'm using color-primary now instead
-
-.bg-contrast-mix(@bgcolor:@body-bg;@mixcolor:#888){
-   background-color: mix(@mixcolor, @bgcolor, 10%);
-}
 
 /* ==========================================================================
    Base
@@ -162,14 +157,15 @@ body {
 .widget_serverus_display_topics {
    
    .widget_serverus_display_topics_inner {
-      padding: @padding-large-vertical @padding-large-horizontal;
+      padding: @padding-small-vertical 0;
       list-style-type: none;
       margin-bottom: 0;
    }
 
    .widget_serverus_display_topics_single {
       
-      margin-bottom: @padding-large-vertical;
+      margin: 0;
+      padding: @padding-small-vertical @padding-large-horizontal;
 
       .topic-avatar {
       }
@@ -179,12 +175,28 @@ body {
       .bbp-forum-title {
          font-size: @font-size-widget-base;
          margin-left: @padding-xs-horizontal;
+         font-weight: @font-weight-heavy;
+
+         margin-left: @padding-xs-horizontal + 32 + 0; // Account for avatar, then indent
+         display: block;
       }
 
       .topic-info {
          margin-left: @padding-xs-horizontal + 32 + 0; // Account for avatar, then indent
          margin-bottom: 0;
+         .text-muted;
+
+         a {
+            .text-muted;
+         }
       }
+
+      &:hover,
+      &:focus {
+         .bg-contrast-mix();
+         cursor: default;
+      }
+
    }
 }
 

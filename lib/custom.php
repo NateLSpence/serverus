@@ -6,45 +6,106 @@
 // Disable WP admin bar
 add_filter('show_admin_bar', '__return_false');
 
+// Replace bbPress time since function to only output the largest chunk of time passed. 
+// There ought to be a better way. This is replacing the functionality of already-run code. 
 
+add_filter( 'bbp_get_time_since', 'serverus_get_time_since', 1, 3 );
 
-/*
-function bbp_get_forum_title( $anchor, $forum_id = 0 ) {
-	$forum_id = 0;
-	$forum_id  = bbp_get_forum_id( $forum_id );
-	$active_id = bbp_get_forum_last_active_id( $forum_id );
-	$link_url  = $title = '';
+	/**
+	 * Return formatted time to display human readable time difference.
+	 * Modified for Serverus theme.
+	 *
+	 * @since bbPress (r2544)
+	 *
+	 * @param string $older_date Unix timestamp from which the difference begins.
+	 * @param string $newer_date Optional. Unix timestamp from which the
+	 *                            difference ends. False for current time.
+	 * @uses current_time() To get the current time in mysql format
+	 * @uses human_time_diff() To get the time differene in since format
+	 * @uses apply_filters() Calls 'bbp_get_time_since' with the time
+	 *                        difference and time
+	 * @return string Formatted time
+	 */
+function serverus_get_time_since( $output, $older_date, $newer_date = false ) {
+	
+	$gmt = false;
 
-	if ( empty( $active_id ) )
-		$active_id = bbp_get_forum_last_reply_id( $forum_id );
+	// Setup the strings
+	$unknown_text   = apply_filters( 'bbp_core_time_since_unknown_text',   __( 'sometime',  'bbpress' ) );
+	$right_now_text = apply_filters( 'bbp_core_time_since_right_now_text', __( 'right now', 'bbpress' ) );
+	$ago_text       = apply_filters( 'bbp_core_time_since_ago_text',       __( '%s ago',    'bbpress' ) );
 
-	if ( empty( $active_id ) )
-		$active_id = bbp_get_forum_last_topic_id( $forum_id );
+	// array of time period chunks
+	$chunks = array(
+		array( 60 * 60 * 24 * 365 , __( 'year',   'bbpress' ), __( 'years',   'bbpress' ) ),
+		array( 60 * 60 * 24 * 30 ,  __( 'month',  'bbpress' ), __( 'months',  'bbpress' ) ),
+		array( 60 * 60 * 24 * 7,    __( 'week',   'bbpress' ), __( 'weeks',   'bbpress' ) ),
+		array( 60 * 60 * 24 ,       __( 'day',    'bbpress' ), __( 'days',    'bbpress' ) ),
+		array( 60 * 60 ,            __( 'hour',   'bbpress' ), __( 'hours',   'bbpress' ) ),
+		array( 60 ,                 __( 'minute', 'bbpress' ), __( 'minutes', 'bbpress' ) ),
+		array( 1,                   __( 'second', 'bbpress' ), __( 'seconds', 'bbpress' ) )
+	);
 
-	if ( bbp_is_topic( $active_id ) ) {
-		$link_url = bbp_get_forum_last_topic_permalink( $forum_id );
-		$title    = bbp_get_forum_last_topic_title( $forum_id );
-	} elseif ( bbp_is_reply( $active_id ) ) {
-		$link_url = bbp_get_forum_last_reply_url( $forum_id );
-		$title    = bbp_get_forum_last_reply_title( $forum_id );
+	if ( !empty( $older_date ) && !is_numeric( $older_date ) ) {
+		$time_chunks = explode( ':', str_replace( ' ', ':', $older_date ) );
+		$date_chunks = explode( '-', str_replace( ' ', '-', $older_date ) );
+		$older_date  = gmmktime( (int) $time_chunks[1], (int) $time_chunks[2], (int) $time_chunks[3], (int) $date_chunks[1], (int) $date_chunks[2], (int) $date_chunks[0] );
 	}
 
-	$time_since = bbp_get_forum_last_active_time( $forum_id );
+	// $newer_date will equal false if we want to know the time elapsed
+	// between a date and the current time. $newer_date will have a value if
+	// we want to work out time elapsed between two known dates.
+	$newer_date = ( !$newer_date ) ? strtotime( current_time( 'mysql', $gmt ) ) : $newer_date;
 
-	if ( !empty( $time_since ) && !empty( $link_url ) ) {
-		$anchor = '<a href="' . esc_url( $link_url ) . '" title="' . esc_attr( $title ) . '">' . esc_attr( $title ) . '</a>'; 
-		$time_since_span = '<span>' . esc_html( $time_since ) . '</span>';
+	// Difference in seconds
+	$since = $newer_date - $older_date;
+
+	// Something went wrong with date calculation and we ended up with a negative date.
+	if ( 0 > $since ) {
+		$output = $unknown_text;
+
+	// We only want to output one chunk of time here, eg:
+	//     x years
+	//     x days
+	// so there's only one bit of calculation below:
 	} else {
-		$anchor = esc_html__( 'No Topics', 'bbpress' );
+
+		// Step one: the first chunk
+		for ( $i = 0, $j = count( $chunks ); $i < $j; ++$i ) {
+			$seconds = $chunks[$i][0];
+
+			// Finding the biggest chunk (if the chunk fits, break)
+			$count = floor( $since / $seconds );
+			if ( 0 != $count ) {
+				break;
+			}
+		}
+
+		// If $i iterates all the way to $j, then the event happened 0 seconds ago
+		if ( !isset( $chunks[$i] ) ) {
+			$output = $right_now_text;
+
+		} else {
+
+			// Set output var
+			$output = ( 1 == $count ) ? '1 '. $chunks[$i][1] : $count . ' ' . $chunks[$i][2];
+
+			// No output, so happened right now
+			if ( ! (int) trim( $output ) ) {
+				$output = $right_now_text;
+			}
+		}
 	}
 
-    return $anchor;
-    
-    
-    //return "blarg";
+	// Append 'ago' to the end of time-since if not 'right now'
+	if ( $output != $right_now_text ) {
+		$output = sprintf( $ago_text, $output );
+	}
+
+	return $output;
 }
 
-add_filter( 'bbp_get_forum_freshness_link', 'bbp_get_forum_title', 9, 2 );*/
+
 
 /**
  *	Customization options

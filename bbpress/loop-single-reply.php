@@ -25,7 +25,7 @@
 		<?php endif; ?>
 
 
-		<a href="<?php bbp_reply_url(); ?>" class="bbp-reply-permalink">link<?php //bbp_reply_id(); ?></a>
+		<a href="<?php bbp_reply_url(); ?>" class="bbp-reply-permalink"><span class="glyphicon glyphicon-link"></span><?php //bbp_reply_id(); ?></a>
 
 
 		<?php do_action( 'bbp_theme_before_reply_admin_links' ); ?>

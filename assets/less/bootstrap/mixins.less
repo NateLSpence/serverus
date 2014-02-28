@@ -3,6 +3,16 @@
 // --------------------------------------------------
 
 
+// Colors
+// ------------------------
+
+// Automatically get a mildly contrasting color, for striping/hovers
+.bg-contrast-mix(@bgcolor:@body-bg;@mixcolor:#888){
+   background-color: mix(@mixcolor, @bgcolor, 10%);
+}
+
+
+
 // Utilities
 // -------------------------
 
