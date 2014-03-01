@@ -7,11 +7,11 @@ function roots_widgets_init() {
   register_sidebar(array(
     'name'          => __('Primary', 'roots'),
     'id'            => 'sidebar-primary',
-    'before_widget' => '<section class="widget %1$s %2$s"><div class="widget-inner">',
+    'before_widget' => '<section class="widget %1$s %2$s">',
     'after_widget'  => '</div></section>',
     'before_title'  => '<div class="widget-title">',
-    'after_title'   => '</div>',
-  ));
+    'after_title'   => '</div><div class="widget-inner">',
+  )); // Kind of funky setup with the widget-inner. It divides the title and contents into two easy divs.
 
   register_sidebar(array(
     'name'          => __('Footer', 'roots'),
@@ -41,6 +41,7 @@ function roots_widgets_init() {
   register_widget('Roots_Vcard_Widget');
   register_widget('Serverus_Login_Widget');
   register_widget('Serverus_Topics_Widget');
+  register_widget('Serverus_Stats_Widget');
 }
 add_action('widgets_init', 'roots_widgets_init');
 
@@ -288,7 +289,7 @@ class Serverus_Login_Widget extends WP_Widget {
 
 /**
  * Serverus Topic Widget for bbPress
- * Adds a widget which displays the topic list in a theme-friendly way
+ * Adds a widget which displays the recent topics list in a theme-friendly way.
  * Based on bbPress's own widget
  *
  * @uses WP_Widget
@@ -341,7 +342,7 @@ class Serverus_Topics_Widget extends WP_Widget {
     $settings['title'] = apply_filters( 'widget_title',           $settings['title'], $instance, $this->id_base );
 
 
-    // Order by most recent replies. Other options stripped.
+    // (Serverus) Order by most recent replies. Other options stripped.
       $topics_query = array(
         'post_type'           => bbp_get_topic_post_type(),
         'post_parent'         => $settings['parent_forum'],
@@ -384,12 +385,9 @@ class Serverus_Topics_Widget extends WP_Widget {
         $author_link = bbp_get_author_link( array( 'post_id' => bbp_get_topic_last_active_id( $topic_id ), 'type' => 'name' ) );
         $author_avatar = bbp_get_author_link( array( 'post_id' => bbp_get_topic_last_active_id( $topic_id ), 'size' => 32, 'type' => 'avatar' ) );
         ?>
-              <!-- //FIXME continue customizing from here. Removing some options. -->
-
 
         <li class="widget_serverus_display_topics_single">
             <?php 
-              //printf( _x( '%1$s', 'widgets', 'bbpress' ), '<span class="topic-avatar">' . $author_avatar . '</span>' );
               echo '<span class="topic-avatar">' . $author_avatar . '</span>'; 
             ?>
 
@@ -398,7 +396,6 @@ class Serverus_Topics_Widget extends WP_Widget {
 
           <p class="topic-info">
             <?php
-              //printf( _x( '%1$s', 'widgets', 'bbpress' ), '<span class="topic-author">' . $author_link . '</span>' );
               echo '<span class="topic-author">' . $author_link . '</span>'; 
             ?>
 
@@ -434,10 +431,8 @@ class Serverus_Topics_Widget extends WP_Widget {
   public function update( $new_instance = array(), $old_instance = array() ) {
     $instance                 = $old_instance;
     $instance['title']        = strip_tags( $new_instance['title'] );
-    $instance['order_by']     = strip_tags( $new_instance['order_by'] );
     $instance['parent_forum'] = sanitize_text_field( $new_instance['parent_forum'] );
     $instance['show_date']    = (bool) $new_instance['show_date'];
-    $instance['show_user']    = (bool) $new_instance['show_user'];
     $instance['max_shown']    = (int) $new_instance['max_shown'];
 
     // Force to any
@@ -472,20 +467,10 @@ class Serverus_Topics_Widget extends WP_Widget {
 
       <br />
 
-      <small><?php _e( '"0" to show only root - "any" to show all', 'bbpress' ); ?></small>
+      <small><?php _e( 'Use "any" to show all, "0" for root. Visit a forum to find its ID number.', 'bbpress' ); ?></small>
     </p>
 
     <p><label for="<?php echo $this->get_field_id( 'show_date' ); ?>"><?php _e( 'Show post date:',    'bbpress' ); ?> <input type="checkbox" id="<?php echo $this->get_field_id( 'show_date' ); ?>" name="<?php echo $this->get_field_name( 'show_date' ); ?>" <?php checked( true, $settings['show_date'] ); ?> value="1" /></label></p>
-    <p><label for="<?php echo $this->get_field_id( 'show_user' ); ?>"><?php _e( 'Show topic author:', 'bbpress' ); ?> <input type="checkbox" id="<?php echo $this->get_field_id( 'show_user' ); ?>" name="<?php echo $this->get_field_name( 'show_user' ); ?>" <?php checked( true, $settings['show_user'] ); ?> value="1" /></label></p>
-
-    <p>
-      <label for="<?php echo $this->get_field_id( 'order_by' ); ?>"><?php _e( 'Order By:',        'bbpress' ); ?></label>
-      <select name="<?php echo $this->get_field_name( 'order_by' ); ?>" id="<?php echo $this->get_field_name( 'order_by' ); ?>">
-        <option <?php selected( $settings['order_by'], 'newness' );   ?> value="newness"><?php _e( 'Newest Topics',                'bbpress' ); ?></option>
-        <option <?php selected( $settings['order_by'], 'popular' );   ?> value="popular"><?php _e( 'Popular Topics',               'bbpress' ); ?></option>
-        <option <?php selected( $settings['order_by'], 'freshness' ); ?> value="freshness"><?php _e( 'Topics With Recent Replies', 'bbpress' ); ?></option>
-      </select>
-    </p>
 
     <?php
   }
@@ -503,9 +488,141 @@ class Serverus_Topics_Widget extends WP_Widget {
       'title'        => __( 'Recent Topics', 'bbpress' ),
       'max_shown'    => 5,
       'show_date'    => false,
-      'show_user'    => false,
       'parent_forum' => 'any',
-      'order_by'     => false
     ), 'topic_widget_settings' );
+  }
+}
+
+
+
+/**
+ * Serverus Stats Widget
+ *
+ * Adds a widget which displays the forum statistics
+ *
+ * Modified for the Serverus theme
+ *
+ * @since bbPress (r4509)
+ *
+ * @uses WP_Widget
+ */
+class Serverus_Stats_Widget extends WP_Widget { // FIXME not yet customized
+
+  /**
+   * bbPress Stats Widget
+   *
+   * Registers the stats widget
+   *
+   * @since bbPress (r4509)
+   *
+   * @uses  apply_filters() Calls 'bbp_stats_widget_options' with the
+   *        widget options
+   */
+  public function __construct() {
+    $widget_ops = apply_filters( 'bbp_stats_widget_options', array(
+      'classname'   => 'widget_display_stats',
+      'description' => __( 'Some statistics from your forum.', 'bbpress' )
+    ) );
+
+    parent::__construct( false, __( '(bbPress) Statistics', 'bbpress' ), $widget_ops );
+  }
+
+  /**
+   * Register the widget
+   *
+   * @since bbPress (r4509)
+   *
+   * @uses register_widget()
+   */
+  public static function register_widget() {
+    register_widget( 'BBP_Stats_Widget' );
+  }
+
+  /**
+   * Displays the output, the statistics
+   *
+   * @since bbPress (r4509)
+   *
+   * @param mixed $args     Arguments
+   * @param array $instance Instance
+   *
+   * @uses apply_filters() Calls 'bbp_stats_widget_title' with the title
+   * @uses bbp_get_template_part() To get the content-forum-statistics template
+   */
+  public function widget( $args = array(), $instance = array() ) {
+
+    // Get widget settings
+    $settings = $this->parse_settings( $instance );
+
+    // Typical WordPress filter
+    $settings['title'] = apply_filters( 'widget_title',           $settings['title'], $instance, $this->id_base );
+
+    // bbPress widget title filter
+    $settings['title'] = apply_filters( 'bbp_stats_widget_title', $settings['title'], $instance, $this->id_base );
+
+    echo $args['before_widget'];
+
+    if ( !empty( $settings['title'] ) ) {
+      echo $args['before_title'] . $settings['title'] . $args['after_title'];
+    }
+
+    bbp_get_template_part( 'content', 'statistics' );
+
+    echo $args['after_widget'];
+  }
+
+  /**
+   * Update the stats widget options
+   *
+   * @since bbPress (r4509)
+   *
+   * @param array $new_instance The new instance options
+   * @param array $old_instance The old instance options
+   *
+   * @return array
+   */
+  public function update( $new_instance, $old_instance ) {
+    $instance          = $old_instance;
+    $instance['title'] = strip_tags( $new_instance['title'] );
+
+    return $instance;
+  }
+
+  /**
+   * Output the stats widget options form
+   *
+   * @since bbPress (r4509)
+   *
+   * @param $instance
+   *
+   * @return string|void
+   */
+  public function form( $instance ) {
+
+    // Get widget settings
+    $settings = $this->parse_settings( $instance ); ?>
+
+    <p>
+      <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'bbpress' ); ?>
+        <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $settings['title'] ); ?>"/>
+      </label>
+    </p>
+
+  <?php
+  }
+
+  /**
+   * Merge the widget settings into defaults array.
+   *
+   * @since bbPress (r4802)
+   *
+   * @param $instance Instance
+   * @uses bbp_parse_args() To merge widget settings into defaults
+   */
+  public function parse_settings( $instance = array() ) {
+    return bbp_parse_args( $instance, array(
+      'title' => __( 'Forum Statistics', 'bbpress' )
+    ),
+    'stats_widget_settings' );
   }
 }
