@@ -65,7 +65,6 @@
 	</div><!-- .bbp-reply-author -->
 
 	<div class="bbp-reply-content">
-
 		<?php do_action( 'bbp_theme_before_reply_content' ); ?>
 
 		<?php //bbp_reply_content(); ?>
