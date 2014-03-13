@@ -13,7 +13,6 @@
 
 <ul id="forums-list-<?php bbp_forum_id(); ?>" class="bbp-forums">
 
-
 	<li class="bbp-body">
 
 		<?php while ( bbp_forums() ) : bbp_the_forum(); ?>

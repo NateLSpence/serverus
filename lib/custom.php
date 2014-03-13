@@ -6,6 +6,7 @@
 // Disable WP admin bar
 add_filter('show_admin_bar', '__return_false');
 
+
 // Replace bbPress time since function to only output the largest chunk of time passed. 
 // There ought to be a better way. This is replacing the functionality of already-run code. 
 
@@ -173,3 +174,248 @@ function set_header_properties() {
   echo $styles;
 
 }
+
+
+/**
+ *	Custom Shortcodes
+ */
+
+// [srv_frontpage posts_per_page=# char_limit=# show_avatar=true]
+function srv_frontpage_func( $atts ) {
+	extract( shortcode_atts( array(
+		'posts_per_page' => '5',
+		'char_limit' => '250',
+		'show_avatar' => true,
+	), $atts ) );
+
+	$output = "";
+
+
+
+	// for ($postcount=0; $postcount < $posts_per_page; $postcount++) { 
+	// 	$output .= "Post<br>";
+	// }
+
+	return $output;
+}
+add_shortcode( 'srv_frontpage', 'srv_frontpage_func' );
+
+
+
+/*************************************************************************/
+/*************************************************************************/
+/**********    TODO Class for handling new bbPress shortcodes    *********/
+/*************************************************************************/
+/*************************************************************************/
+
+/**
+ * bbPress Shortcodes for Serverus theme
+ *
+ * @package bbPress (Serverus theme)
+ * @subpackage Shortcodes
+ */
+
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
+
+if ( !class_exists( 'Serverus_Shortcodes' ) ) :
+/**
+ * bbPress Shortcode Class
+ *
+ * @since bbPress (r3031)
+ */
+class Serverus_Shortcodes {
+
+	/** Vars ******************************************************************/
+
+	/**
+	 * @var array Shortcode => function
+	 */
+	public $codes = array();
+
+	/** Functions *************************************************************/
+
+	/**
+	 * Add the register_shortcodes action to bbp_init
+	 *
+	 * @since bbPress (r3031)
+	 *
+	 * @uses setup_globals()
+	 * @uses add_shortcodes()
+	 */
+	public function __construct() {
+		$this->setup_globals();
+		$this->add_shortcodes();
+	}
+
+	/**
+	 * Shortcode globals
+	 *
+	 * @since bbPress (r3143)
+	 * @access private
+	 *
+	 * @uses apply_filters()
+	 */
+	private function setup_globals() {
+
+		// Setup the shortcodes
+		$this->codes = array(
+			'bbp-single-reply' => array( $this, 'display_reply' ), // Specific reply - pass an 'id' attribute
+		);
+	}
+
+	/**
+	 * Register the bbPress shortcodes
+	 *
+	 * @since bbPress (r3031)
+	 *
+	 * @uses add_shortcode()
+	 * @uses do_action()
+	 */
+	private function add_shortcodes() {
+		foreach ( (array) $this->codes as $code => $function ) {
+			add_shortcode( $code, $function );
+		}
+	}
+
+	/**
+	 * Unset some globals in the $bbp object that hold query related info
+	 *
+	 * @since bbPress (r3034)
+	 */
+	private function unset_globals() { //TODO can cull some of this
+		$bbp = bbpress();
+
+		// Unset global queries
+		$bbp->forum_query  = new WP_Query();
+		$bbp->topic_query  = new WP_Query();
+		$bbp->reply_query  = new WP_Query();
+		$bbp->search_query = new WP_Query();
+
+		// Unset global ID's
+		$bbp->current_view_id      = 0;
+		$bbp->current_forum_id     = 0;
+		$bbp->current_topic_id     = 0;
+		$bbp->current_reply_id     = 0;
+		$bbp->current_topic_tag_id = 0;
+
+		// Reset the post data
+		wp_reset_postdata();
+	}
+
+	/** Output Buffers ********************************************************/
+
+	/**
+	 * Start an output buffer.
+	 *
+	 * This is used to put the contents of the shortcode into a variable rather
+	 * than outputting the HTML at run-time. This allows shortcodes to appear
+	 * in the correct location in the_content() instead of when it's created.
+	 *
+	 * @since bbPress (r3079)
+	 *
+	 * @param string $query_name
+	 *
+	 * @uses bbp_set_query_name()
+	 * @uses ob_start()
+	 */
+	private function start( $query_name = '' ) {
+
+		// Set query name
+		bbp_set_query_name( $query_name );
+
+		// Start output buffer
+		ob_start();
+	}
+
+	/**
+	 * Return the contents of the output buffer and flush its contents.
+	 *
+	 * @since bbPress( r3079)
+	 *
+	 * @uses Serverus_Shortcodes::unset_globals() Cleans up global values
+	 * @return string Contents of output buffer.
+	 */
+	private function end() {
+
+		// Unset globals
+		$this->unset_globals();
+
+		// Reset the query name
+		bbp_reset_query_name();
+
+		// Return and flush the output buffer
+		return ob_get_clean();
+	}
+
+	/** Shortcodes *********************************************************/
+
+
+	/**
+	 * Display the contents of a specific reply ID in an output buffer
+	 * and return to ensure that post/page contents are displayed first.
+	 *
+	 * @since bbPress (r3031)
+	 *
+	 * @param array $attr
+	 * @param string $content
+	 * @uses get_template_part()
+	 * @return string
+	 */
+	public function display_reply( $attr, $content = '' ) {
+
+		// Sanity check required info
+		if ( !empty( $content ) || ( empty( $attr['id'] ) || !is_numeric( $attr['id'] ) ) )
+			return $content;
+
+		// Unset globals
+		$this->unset_globals();
+
+		// Set passed attribute to $reply_id for clarity
+		$reply_id = bbpress()->current_reply_id = $attr['id'];
+		$forum_id = bbp_get_reply_forum_id( $reply_id );
+
+		// Bail if ID passed is not a reply
+		if ( !bbp_is_reply( $reply_id ) )
+			return $content;
+
+		// Reset the queries if not in theme compat
+		if ( !bbp_is_theme_compat_active() ) {
+
+			$bbp = bbpress();
+
+			// Reset necessary forum_query attributes for replys loop to function
+			$bbp->forum_query->query_vars['post_type'] = bbp_get_forum_post_type();
+			$bbp->forum_query->in_the_loop             = true;
+			$bbp->forum_query->post                    = get_post( $forum_id );
+
+			// Reset necessary reply_query attributes for replys loop to function
+			$bbp->reply_query->query_vars['post_type'] = bbp_get_reply_post_type();
+			$bbp->reply_query->in_the_loop             = true;
+			$bbp->reply_query->post                    = get_post( $reply_id );
+		}
+
+		// Start output buffer
+		$this->start( 'bbp_single_reply' );
+
+		// Check forum caps
+		if ( bbp_user_can_view_forum( array( 'forum_id' => $forum_id ) ) ) {
+			bbp_get_template_part( 'content',  'single-reply' );
+
+		// Forum is private and user does not have caps
+		} elseif ( bbp_is_forum_private( $forum_id, false ) ) {
+			bbp_get_template_part( 'feedback', 'no-access'    );
+		}
+
+		// Return contents of output buffer
+		return $this->end();
+	}
+
+}
+endif;
+
+/*************************************************************************/
+/*************************************************************************/
+/************************    TODO END Class     **************************/
+/*************************************************************************/
+/*************************************************************************/

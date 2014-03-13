@@ -100,15 +100,19 @@ body {
    //padding-bottom: 0;
    //margin: 40px 0 20px;
    //border-bottom: none;
+   padding-bottom: 0px;
+   margin: 25px 0 10px;
+   border-bottom: 1px solid #eee; //TODO border stack
    
    //text-align: center;
 
-   h1 {
+   h3 {
       //font-size: @font-size-large;
       font-family: @headings-font-family;
-      font-weight: @headings-font-weight;
+      font-weight: @font-weight-heavier;
       line-height: @headings-line-height;
       color: @headings-color;
+
       //color: darken(@brand-primary, 25%)
    }
 }
@@ -130,7 +134,7 @@ body {
    ========================================================================== */
 
 .sidebar {
-   margin-top: 26px;
+   margin-top: 49px;
 }
 
 .widget {
@@ -155,6 +159,7 @@ body {
 
    .widget-inner {
       padding: @padding-large-vertical @padding-large-horizontal;
+
    }
 }
 
@@ -164,7 +169,7 @@ body {
       padding: @padding-large-vertical 0;
    }
 
-   .widget_serverus_display_topics_inner {
+   ul.widget_serverus_display_topics_inner {
       list-style-type: none;
       margin-bottom: 0;
       padding: 0;
@@ -205,6 +210,82 @@ body {
          cursor: default;
       }
 
+   }
+}
+
+
+.widget_list_serverus(){
+
+   .widget-inner {
+      padding: 0;
+   }
+
+   .list-group {
+      margin-bottom: 0;
+   }
+
+/*   .list-group-item {
+   }*/
+}
+
+.widget_display_forums,
+.widget_display_views {
+
+   .widget_list_serverus();
+
+   .widget-inner {
+
+      ul {
+         list-style-type: none;
+         padding: 0;
+         margin: 0;
+
+         //.list-group;
+
+         li {
+            //.list-group-item;
+            border-left: none;
+            border-right: none;
+            padding: 0;
+
+            a {
+               padding: @padding-base-vertical @padding-large-horizontal;
+               display: block;
+
+               &:hover,
+               &:focus {
+                  .bg-contrast-mix();
+               }
+            }
+
+            &:first-child {
+               border-top: none;
+               padding-top: @padding-base-vertical;
+            }
+
+            &:last-child {
+               border-bottom: none;
+               padding-bottom: @padding-base-vertical;
+            }
+
+         }
+      }
+   }
+
+}
+
+.widget_display_stats {
+
+   .widget_list_serverus();
+   
+   .widget-inner {
+      padding: .5em 0;
+   }
+
+   .list-group-item {
+      .text-muted;
+      border: none;
+      padding: .5em 1.5em;
    }
 }
 
@@ -385,8 +466,8 @@ div.bbp-template-notice.error {
 
 
    // Category description
-   #bbpress-forums div.bbp-forum-content, 
-   #bbpress-forums div.bbp-topic-content {
+   #bbpress-forums .forum div.bbp-forum-content, 
+   #bbpress-forums .forum div.bbp-topic-content {
       margin-left: 20px;
       padding: 12px;
       text-align: left;
@@ -417,7 +498,7 @@ div.bbp-template-notice.error {
       }
 
       // Forum description
-      #bbpress-forums .bbp-forum-info .bbp-forum-content {
+      #bbpress-forums li.bbp-forum-info div.bbp-forum-content {
          font-size: 11px;
          margin: 0;
          padding: 0;
@@ -553,9 +634,27 @@ div.bbp-template-notice.error {
    }
 
    // Reply avatar
-   #bbpress-forums div.bbp-reply-author img.avatar {
-      float: none !important;
-      margin-bottom: 1em;
+   #bbpress-forums div.bbp-reply-author,
+   #bbp-search-results div.bbp-topic-author {
+      
+      img.avatar {
+         float: none !important;
+         margin-bottom: 4px;
+      }
+
+      div.bbp-author-role {
+         margin-bottom: 8px;
+      }
+      div.bbp-reply-ip {
+         margin-top: -8px;
+         margin-bottom: 8px;
+      }
+   }
+
+   #bbpress-forums .bbp-body div.bbp-forum-author, 
+   #bbpress-forums .bbp-body div.bbp-topic-author, 
+   #bbpress-forums .bbp-body div.bbp-reply-author {
+      .bg-contrast-mix();
    }
 
    // Tag list
@@ -599,6 +698,16 @@ form div.bbp-submit-wrapper button {
 // LOGIN FORM
 .bbp-login-form .bbp-remember-me {
    padding-left: 25px;
+}
+
+.serverus-lost-pass-form {
+   margin-top: -2em;
+   padding: 2em;
+   .bg-contrast-mix();
+}
+
+.bbp-lost-pass-btn {
+   margin-left: 1em;
 }
 
 /* ==========================================================================
