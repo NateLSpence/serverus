@@ -73,7 +73,7 @@
 			if ( ! has_filter( 'bbp_get_reply_content', 'bbp_reply_content_append_revisions' ) )
 			    add_filter( 'bbp_get_reply_content', 'bbp_reply_content_append_revisions', 99, 2 );
 
-			bbp_reply_content();
+			bbp_reply_content(); 
 			
 		?>
 

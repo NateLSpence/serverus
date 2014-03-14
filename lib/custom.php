@@ -182,88 +182,10 @@ function set_header_properties() {
 
 
 
-/*************************************************************************/
-/*************************************************************************/
-/**********    TODO Class for handling new bbPress shortcodes    *********/
-/*************************************************************************/
-/*************************************************************************/
+// [srv_frontpage forum_id=0 posts_per_page=5 char_limit=250 show_avatar=true show_stickies=false]
+function srv_frontpage_func( $attr, $content = '' ) {
 
-/**
- * bbPress Shortcodes for Serverus theme
- *
- * @package bbPress (Serverus theme)
- * @subpackage Shortcodes
- */
-
-// Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
-
-if ( !class_exists( 'Serverus_Shortcodes' ) ) :
-/**
- * bbPress Shortcode Class
- *
- * @since bbPress (r3031)
- */
-class Serverus_Shortcodes {
-
-	/** Vars ******************************************************************/
-
-	/**
-	 * @var array Shortcode => function
-	 */
-	public $codes = array();
-
-	/** Functions *************************************************************/
-
-	/**
-	 * Add the register_shortcodes action to bbp_init
-	 *
-	 * @since bbPress (r3031)
-	 *
-	 * @uses setup_globals()
-	 * @uses add_shortcodes()
-	 */
-	public function __construct() {
-		$this->setup_globals();
-		$this->add_shortcodes();
-	}
-
-	/**
-	 * Shortcode globals
-	 *
-	 * @since bbPress (r3143)
-	 * @access private
-	 *
-	 * @uses apply_filters()
-	 */
-	private function setup_globals() {
-
-		// Setup the shortcodes
-		$this->codes = array(
-			'srv_frontpage' => array( $this, 'display_frontpage' ), // Specific reply - pass an 'id' attribute
-		);
-	}
-
-	/**
-	 * Register the bbPress shortcodes
-	 *
-	 * @since bbPress (r3031)
-	 *
-	 * @uses add_shortcode()
-	 * @uses do_action()
-	 */
-	private function add_shortcodes() {
-		foreach ( (array) $this->codes as $code => $function ) {
-			add_shortcode( $code, $function );
-		}
-	}
-
-	/**
-	 * Unset some globals in the $bbp object that hold query related info
-	 *
-	 * @since bbPress (r3034)
-	 */
-	private function unset_globals() { //TODO can cull some of this
+	function srv_unset_globals() { //TODO can cull some of this?
 		$bbp = bbpress();
 
 		// Unset global queries
@@ -299,7 +221,7 @@ class Serverus_Shortcodes {
 	 * @uses bbp_set_query_name()
 	 * @uses ob_start()
 	 */
-	private function start( $query_name = '' ) {
+	function srv_start( $query_name = '' ) {
 
 		// Set query name
 		bbp_set_query_name( $query_name );
@@ -307,6 +229,7 @@ class Serverus_Shortcodes {
 		// Start output buffer
 		ob_start();
 	}
+	
 
 	/**
 	 * Return the contents of the output buffer and flush its contents.
@@ -316,89 +239,17 @@ class Serverus_Shortcodes {
 	 * @uses Serverus_Shortcodes::unset_globals() Cleans up global values
 	 * @return string Contents of output buffer.
 	 */
-	private function end() {
+	function srv_end() {
 
 		// Unset globals
-		$this->unset_globals();
+		srv_unset_globals();
 
 		// Reset the query name
 		bbp_reset_query_name();
 
 		// Return and flush the output buffer
 		return ob_get_clean();
-	}
-
-	/** Shortcodes *********************************************************/
-
-
-	/**
-	 * Display the contents of a specific reply ID in an output buffer
-	 * and return to ensure that post/page contents are displayed first.
-	 *
-	 * @since bbPress (r3031)
-	 *
-	 * @param array $attr
-	 * @param string $content
-	 * @uses get_template_part()
-	 * @return string
-	 */
-	public function display_frontpage( $attr, $content = '' ) {
-
-		// Sanity check required info
-		if ( !empty( $content ) || ( empty( $attr['id'] ) || !is_numeric( $attr['id'] ) ) )
-			return $content;
-
-		// Unset globals
-		$this->unset_globals();
-
-		// Set passed attribute to $reply_id for clarity
-		$reply_id = bbpress()->current_reply_id = $attr['id'];
-		$forum_id = bbp_get_reply_forum_id( $reply_id );
-
-		// Bail if ID passed is not a reply
-		if ( !bbp_is_reply( $reply_id ) )
-			return $content;
-
-		// Reset the queries if not in theme compat
-		if ( !bbp_is_theme_compat_active() ) {
-
-			$bbp = bbpress();
-
-			// Reset necessary forum_query attributes for replys loop to function
-			$bbp->forum_query->query_vars['post_type'] = bbp_get_forum_post_type();
-			$bbp->forum_query->in_the_loop             = true;
-			$bbp->forum_query->post                    = get_post( $forum_id );
-
-			// Reset necessary reply_query attributes for replys loop to function
-			$bbp->reply_query->query_vars['post_type'] = bbp_get_reply_post_type();
-			$bbp->reply_query->in_the_loop             = true;
-			$bbp->reply_query->post                    = get_post( $reply_id );
-		}
-
-		// Start output buffer
-		$this->start( 'bbp_single_reply' );
-
-		// Check forum caps
-		if ( bbp_user_can_view_forum( array( 'forum_id' => $forum_id ) ) ) {
-			bbp_get_template_part( 'content',  'single-reply' );
-
-		// Forum is private and user does not have caps
-		} elseif ( bbp_is_forum_private( $forum_id, false ) ) {
-			bbp_get_template_part( 'feedback', 'no-access'    );
-		}
-
-		// Return contents of output buffer
-		return $this->end();
-	}
-
-
-/*************************************************************************/
-/*************************************************************************/
-/************************     END REPLY func    **************************/
-/*************************************************************************/
-/*************************************************************************/
-
-
+	}	
 
 	/**
 	 * Display the contents of a specific forum ID in an output buffer
@@ -412,79 +263,74 @@ class Serverus_Shortcodes {
 	 * @uses bbp_single_forum_description()
 	 * @return string
 	 */
-	public function display_forum( $attr, $content = '' ) {
 
-		$attr = bbp_parse_args( $attr, array(
-			'forum_id' 			=> 	'0',
-			'posts_per_page'	=> 	'5',
-			'char_limit'		=> 	'250',
-			'show_avatar'		=> 	true,
-			'show_stickies'		=> 	false,
-		) );
+	$attr = bbp_parse_args( $attr, array( //FIXME this isn't getting passed to templates
+		'forum_id' 			=> 	'0',
+		'posts_per_page'	=> 	'5',
+		'char_limit'		=> 	'250',
+		'show_avatar'		=> 	true,
+		'show_stickies'		=> 	false,
+	) );
+	
 
-		// Sanity check required info
-		if ( !empty( $content ) || ( empty( $attr['forum_id'] ) || !is_numeric( $attr['forum_id'] ) ) )
-			return $content;
+	// Sanity check required info
+	if ( !empty( $content ) || ( empty( $attr['forum_id'] ) || !is_numeric( $attr['forum_id'] ) ) )
+		return $content;
 
-		// Set passed attribute to $forum_id for clarity
-		$forum_id = bbpress()->current_forum_id = $attr['forum_id'];
 
-		// Bail if ID passed is not a forum
-		if ( !bbp_is_forum( $forum_id ) )
-			return $content;
+	// Set passed attribute to $forum_id for clarity
+	$forum_id = bbpress()->current_forum_id = $attr['forum_id'];
 
-		// Start output buffer
-		$this->start( 'bbp_single_forum' );
+	// Bail if ID passed is not a forum
+	if ( !bbp_is_forum( $forum_id ) )
+		return $content;
 
-		// Check forum caps
-		if ( bbp_user_can_view_forum( array( 'forum_id' => $forum_id ) ) ) {
-			bbp_get_template_part( 'content',  'frontpage' );
+	// Start output buffer
+	srv_start( 'bbp_single_forum' );
 
-		// Forum is private and user does not have caps
-		} elseif ( bbp_is_forum_private( $forum_id, false ) ) {
-			bbp_get_template_part( 'feedback', 'no-access'    );
-		}
+	// Check forum caps
+	if ( bbp_user_can_view_forum( array( 'forum_id' => $forum_id ) ) ) {
 
-		// Return contents of output buffer
-		return $this->end();
+		// Copied template part here to apply arguments from shortcode into bbp_has_topics query
+		//bbp_get_template_part( 'content',  'frontpage' );
+
+		if ( post_password_required() ) : 
+			bbp_get_template_part( 'form', 'protected' );
+
+		else : 
+
+			if ( bbp_has_topics( array(
+				'post_type'      => bbp_get_topic_post_type(), // Narrow query down to bbPress topics
+				'post_parent'    => $attr['forum_id'],	       // Forum ID
+				'meta_key'       => '_bbp_last_active_time',   // Make sure topic has some last activity time
+				'orderby'        => 'date',              	   // 'meta_value', 'author', 'date', 'title', 'modified', 'parent', rand',
+				'order'          => 'DESC',                    // 'ASC', 'DESC'
+				'posts_per_page' => $attr['posts_per_page'],   // Topics per page
+				'paged'          => bbp_get_paged(),           // Page Number
+				's'              => $default_topic_search,     // Topic Search
+				'show_stickies'  => $attr['show_stickies'],    // Ignore sticky topics?
+				'max_num_pages'  => false,                     // Maximum number of pages to show
+			) ) ) : 
+
+				 bbp_get_template_part( 'loop',       'fronttopics'    ); 
+
+				 bbp_get_template_part( 'pagination', 'topics'    ); 
+
+			else : 
+
+				 bbp_get_template_part( 'feedback',   'no-topics' ); 
+
+			endif;
+
+		endif;
+
+
+	// Forum is private and user does not have caps
+	} elseif ( bbp_is_forum_private( $forum_id, false ) ) {
+		bbp_get_template_part( 'feedback', 'no-access'    );
 	}
 
-
-
-
-
-
-
-/*************************************************************************/
-/*************************************************************************/
-/************************    TODO END Class     **************************/
-/*************************************************************************/
-/*************************************************************************/
-
-}
-endif;
-
-
-/**
- * Register the bbPress shortcodes
- *
- * @since bbPress (r3031)
- *
- * @uses BBP_Shortcodes
- */
-public function register_shortcodes() {
-	$this->shortcodes = new BBP_Shortcodes();
-}
-
-
-
-// [srv_frontpage forum_id=0 posts_per_page=5 char_limit=250 show_avatar=true show_stickies=false]
-function srv_frontpage_func( $atts ) {
-
-	$output = "";
-
-
-
-	return $output;
+	// Return contents of output buffer
+	return srv_end();	
 }
 add_shortcode( 'srv_frontpage', 'srv_frontpage_func' );
