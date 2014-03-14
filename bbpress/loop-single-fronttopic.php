@@ -9,17 +9,6 @@
 
 ?>
 
-
-<?php //FIXME reference only. remove
-	$attr = bbp_parse_args( $attr, array(
-		'forum_id' 			=> 	'0',
-		'posts_per_page'	=> 	'5',
-		'char_limit'		=> 	'250',
-		'show_avatar'		=> 	true,
-		'show_stickies'		=> 	false,
-	) );
-?>
-
 <ul id="bbp-topic-<?php bbp_topic_id(); ?>" <?php bbp_topic_class(); ?>>
 
 	<li class="bbp-topic-title">
@@ -128,3 +117,7 @@
 	</li>
 
 </ul><!-- #bbp-topic-<?php bbp_topic_id(); ?> -->
+
+<div>
+	<?php bbp_get_template_part( 'content', 'single-topic-lead-frontpage' ); ?>
+</div>

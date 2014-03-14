@@ -6,6 +6,14 @@
 // Disable WP admin bar
 add_filter('show_admin_bar', '__return_false');
 
+// Enable Lead Reply
+function custom_bbp_show_lead_topic( $show_lead ) {
+  $show_lead[] = 'true';
+  return $show_lead;
+}
+ 
+add_filter('bbp_show_lead_topic', 'custom_bbp_show_lead_topic' );
+
 
 // Replace bbPress time since function to only output the largest chunk of time passed. 
 // There ought to be a better way. This is replacing the functionality of already-run code. 
