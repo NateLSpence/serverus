@@ -620,12 +620,30 @@ div.bbp-template-notice.error {
    }
 
 // REPLY LIST
-   // List Header
+   // Lead Post
+   #bbpress-forums .bbp-lead-topic li.bbp-header {
+      text-align: left;
+      font-weight: @font-weight-heavier;
+   }
+
+   #bbpress-forums ul.bbp-lead-topic {
+      //margin-bottom: 0;
+   }
+
+   // Lead Header
    #bbpress-forums div.bbp-reply-content a.subscription-toggle,
-   #bbpress-forums div.bbp-reply-content a.favorite-toggle {
+   #bbpress-forums div.bbp-reply-content a.favorite-toggle,
+   #bbpress-forums .bbp-lead-topic .bbp-header a.subscription-toggle,
+   #bbpress-forums .bbp-lead-topic .bbp-header a.favorite-toggle {
       .btn;
       .btn-xs;
       .btn-default;
+   }
+
+   // Reply list header
+   #bbpress-forums .bbp-replies li.bbp-header {
+      padding: 0;
+      height: 8px;
    }
 
    // Reply Header 
@@ -633,8 +651,9 @@ div.bbp-template-notice.error {
       margin: .5em;
    }
 
-   // Reply avatar
+   // Reply avatar and author info
    #bbpress-forums div.bbp-reply-author,
+   #bbpress-forums .bbp-lead-topic div.bbp-topic-author,
    #bbp-search-results div.bbp-topic-author {
       
       img.avatar {
@@ -645,7 +664,8 @@ div.bbp-template-notice.error {
       div.bbp-author-role {
          margin-bottom: 8px;
       }
-      div.bbp-reply-ip {
+      div.bbp-reply-ip,
+      div.bbp-topic-ip {
          margin-top: -8px;
          margin-bottom: 8px;
       }

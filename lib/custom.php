@@ -191,9 +191,37 @@ function set_header_properties() {
 
 
 // [srv_frontpage forum_id=0 posts_per_page=5 char_limit=250 show_avatar=true show_stickies=false]
-function srv_frontpage_func( $attr, $content = '' ) {
+class srv_frontpage_class {
 
-	function srv_unset_globals() { //TODO can cull some of this?
+	public static $attr = array();
+	private $content = '';
+
+	public function __construct( $attr ){
+		
+		self::$attr = bbp_parse_args( $attr, array(
+			'forum_id' 			=> 	'0',
+			'posts_per_page'	=> 	'5',
+			'char_limit'		=> 	'50',
+			'show_avatar'		=> 	true, 
+			'show_stickies'		=> 	false,
+		) );
+
+		if( self::$attr['show_avatar'] == 'false' ) {
+			self::$attr['show_avatar'] = false;
+		} else {
+			self::$attr['show_avatar'] = true;
+		}
+
+
+		if( self::$attr['show_stickies'] == 'true' ){
+			self::$attr['show_stickies'] = true;
+		} else {
+			self::$attr['show_stickies'] = false;
+		}
+
+	}
+
+	private static function srv_unset_globals() { //TODO can cull some of this?
 		$bbp = bbpress();
 
 		// Unset global queries
@@ -229,7 +257,7 @@ function srv_frontpage_func( $attr, $content = '' ) {
 	 * @uses bbp_set_query_name()
 	 * @uses ob_start()
 	 */
-	function srv_start( $query_name = '' ) {
+	private static function srv_start( $query_name = '' ) {
 
 		// Set query name
 		bbp_set_query_name( $query_name );
@@ -247,10 +275,10 @@ function srv_frontpage_func( $attr, $content = '' ) {
 	 * @uses Serverus_Shortcodes::unset_globals() Cleans up global values
 	 * @return string Contents of output buffer.
 	 */
-	function srv_end() {
+	private static function srv_end() {
 
 		// Unset globals
-		srv_unset_globals();
+		self::srv_unset_globals();
 
 		// Reset the query name
 		bbp_reset_query_name();
@@ -271,74 +299,77 @@ function srv_frontpage_func( $attr, $content = '' ) {
 	 * @uses bbp_single_forum_description()
 	 * @return string
 	 */
-
-	$attr = bbp_parse_args( $attr, array( //FIXME this isn't getting passed to templates
-		'forum_id' 			=> 	'0',
-		'posts_per_page'	=> 	'5',
-		'char_limit'		=> 	'250',
-		'show_avatar'		=> 	true,
-		'show_stickies'		=> 	false,
-	) );
 	
+	public function srv_get_content(){
+		// Sanity check required info
+		if ( !empty( $this->content ) || ( empty( self::$attr['forum_id'] ) || !is_numeric( self::$attr['forum_id'] ) ) )
+			return $this->content;
 
-	// Sanity check required info
-	if ( !empty( $content ) || ( empty( $attr['forum_id'] ) || !is_numeric( $attr['forum_id'] ) ) )
-		return $content;
 
+		// Set passed attribute to $forum_id for clarity
+		$forum_id = bbpress()->current_forum_id = self::$attr['forum_id'];
 
-	// Set passed attribute to $forum_id for clarity
-	$forum_id = bbpress()->current_forum_id = $attr['forum_id'];
+		// Bail if ID passed is not a forum
+		if ( !bbp_is_forum( $forum_id ) )
+			return $this->content;
 
-	// Bail if ID passed is not a forum
-	if ( !bbp_is_forum( $forum_id ) )
-		return $content;
+		// Start output buffer
+		self::srv_start( 'bbp_single_forum' );
 
-	// Start output buffer
-	srv_start( 'bbp_single_forum' );
+		echo "<div id='bbpress-forums' class='srv-front-page'>";
 
-	// Check forum caps
-	if ( bbp_user_can_view_forum( array( 'forum_id' => $forum_id ) ) ) {
+		// Check forum caps
+		if ( bbp_user_can_view_forum( array( 'forum_id' => $forum_id ) ) ) {
 
-		// Copied template part here to apply arguments from shortcode into bbp_has_topics query
-		//bbp_get_template_part( 'content',  'frontpage' );
+			// Copied template part here to apply arguments from shortcode into bbp_has_topics query
+			//bbp_get_template_part( 'content',  'frontpage' );
 
-		if ( post_password_required() ) : 
-			bbp_get_template_part( 'form', 'protected' );
-
-		else : 
-
-			if ( bbp_has_topics( array(
-				'post_type'      => bbp_get_topic_post_type(), // Narrow query down to bbPress topics
-				'post_parent'    => $attr['forum_id'],	       // Forum ID
-				'meta_key'       => '_bbp_last_active_time',   // Make sure topic has some last activity time
-				'orderby'        => 'date',              	   // 'meta_value', 'author', 'date', 'title', 'modified', 'parent', rand',
-				'order'          => 'DESC',                    // 'ASC', 'DESC'
-				'posts_per_page' => $attr['posts_per_page'],   // Topics per page
-				'paged'          => bbp_get_paged(),           // Page Number
-				's'              => $default_topic_search,     // Topic Search
-				'show_stickies'  => $attr['show_stickies'],    // Ignore sticky topics?
-				'max_num_pages'  => false,                     // Maximum number of pages to show
-			) ) ) : 
-
-				 bbp_get_template_part( 'loop',       'fronttopics'    ); 
-
-				 bbp_get_template_part( 'pagination', 'topics'    ); 
+			if ( post_password_required() ) : 
+				bbp_get_template_part( 'form', 'protected' );
 
 			else : 
 
-				 bbp_get_template_part( 'feedback',   'no-topics' ); 
+				if ( bbp_has_topics( array(
+					'post_type'      => bbp_get_topic_post_type(), // Narrow query down to bbPress topics
+					'post_parent'    => $forum_id,	       // Forum ID
+					'meta_key'       => '_bbp_last_active_time',   // Make sure topic has some last activity time
+					'orderby'        => 'date',              	   // 'meta_value', 'author', 'date', 'title', 'modified', 'parent', rand',
+					'order'          => 'DESC',                    // 'ASC', 'DESC'
+					'posts_per_page' => self::$attr['posts_per_page'],   // Topics per page
+					'paged'          => bbp_get_paged(),           // Page Number
+					's'              => $default_topic_search,     // Topic Search
+					'show_stickies'  => self::$attr['show_stickies'],    // Ignore sticky topics?
+					'max_num_pages'  => false,                     // Maximum number of pages to show
+				) ) ) : 
+
+					bbp_get_template_part( 'loop',       'fronttopics'    ); 
+
+					bbp_get_template_part( 'pagination', 'topics'    ); 
+
+				else : 
+
+					bbp_get_template_part( 'feedback',   'no-topics' ); 
+
+				endif;
 
 			endif;
 
-		endif;
 
+		// Forum is private and user does not have caps
+		} elseif ( bbp_is_forum_private( $forum_id, false ) ) {
+			bbp_get_template_part( 'feedback', 'no-access'    );
+		}
 
-	// Forum is private and user does not have caps
-	} elseif ( bbp_is_forum_private( $forum_id, false ) ) {
-		bbp_get_template_part( 'feedback', 'no-access'    );
+		echo "</div>";
+
+		// Return contents of output buffer
+		return self::srv_end();	
 	}
+}
 
-	// Return contents of output buffer
-	return srv_end();	
+
+function srv_frontpage_func( $attr ){
+	$frontpage = new srv_frontpage_class( $attr );
+	return $frontpage->srv_get_content();
 }
 add_shortcode( 'srv_frontpage', 'srv_frontpage_func' );

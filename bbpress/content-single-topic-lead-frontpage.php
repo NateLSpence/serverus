@@ -15,11 +15,11 @@
 
 	<li class="bbp-header">
 
-		<div class="bbp-topic-author"><?php  _e( 'Creator',  'bbpress' ); ?></div><!-- .bbp-topic-author -->
+		<div class="bbp-topic-author"><?php  //_e( 'Creator',  'bbpress' ); ?></div><!-- .bbp-topic-author -->
 
 		<div class="bbp-topic-content">
 
-			<?php _e( 'Topic', 'bbpress' ); ?>
+			<?php //_e( 'Topic', 'bbpress' ); ?>
 
 			<?php bbp_topic_subscription_link(); ?>
 
@@ -37,13 +37,13 @@
 
 				<span class="bbp-topic-post-date"><?php bbp_topic_post_date(); ?></span>
 
-				<a href="<?php bbp_topic_permalink(); ?>" class="bbp-topic-permalink">#<?php bbp_topic_id(); ?></a>
+<!--				<a href="<?php bbp_topic_permalink(); ?>" class="bbp-topic-permalink">#<?php bbp_topic_id(); ?></a>
 
-				<?php do_action( 'bbp_theme_before_topic_admin_links' ); ?>
+ 				<?php do_action( 'bbp_theme_before_topic_admin_links' ); ?>
 
 				<?php bbp_topic_admin_links(); ?>
 
-				<?php do_action( 'bbp_theme_after_topic_admin_links' ); ?>
+				<?php do_action( 'bbp_theme_after_topic_admin_links' ); ?> -->
 
 			</div><!-- .bbp-meta -->
 
@@ -55,17 +55,11 @@
 
 				<?php do_action( 'bbp_theme_before_topic_author_details' ); ?>
 
-				<?php bbp_topic_author_link( array( 'sep' => '<br />', 'show_role' => true ) ); ?>
-
-				<?php if ( bbp_is_user_keymaster() ) : ?>
-
-					<?php do_action( 'bbp_theme_before_topic_author_admin_details' ); ?>
-
-					<div class="bbp-topic-ip"><?php bbp_author_ip( bbp_get_topic_id() ); ?></div>
-
-					<?php do_action( 'bbp_theme_after_topic_author_admin_details' ); ?>
-
-				<?php endif; ?>
+				<?php if( srv_frontpage_class::$attr['show_avatar'] == false ) {
+					bbp_topic_author_link( array( 'sep' => '' , 'show_role' => true , 'type' => 'name' ) ); 
+				} else {
+					bbp_topic_author_link( array( 'sep' => '' , 'show_role' => true , 'type' => 'both' ) ); 
+				} ?>
 
 				<?php do_action( 'bbp_theme_after_topic_author_details' ); ?>
 
@@ -75,7 +69,7 @@
 
 				<?php do_action( 'bbp_theme_before_topic_content' ); ?>
 
-				<?php bbp_topic_content(); ?>
+				<?php echo substr ( bbp_get_topic_content() , 0 , (srv_frontpage_class::$attr['char_limit'] + 3) ); //correcting 3 char offset ?> 
 
 				<?php do_action( 'bbp_theme_after_topic_content' ); ?>
 
