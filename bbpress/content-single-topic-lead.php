@@ -51,7 +51,7 @@
 
 		<div id="post-<?php bbp_topic_id(); ?>" <?php bbp_topic_class(); ?>>
 
-			<div class="bbp-topic-author">
+			<div class="bbp-topic-author"> 
 
 				<?php do_action( 'bbp_theme_before_topic_author_details' ); ?>
 

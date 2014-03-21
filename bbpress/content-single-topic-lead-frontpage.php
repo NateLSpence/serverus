@@ -15,61 +15,35 @@
 
 	<li class="bbp-header">
 
-		<div class="bbp-topic-author"><?php  //_e( 'Creator',  'bbpress' ); ?></div><!-- .bbp-topic-author -->
+		<?php echo bbp_get_topic_title(); ?>
 
-		<div class="bbp-topic-content">
+		<!-- <span class='pull-right'>
 
-			<?php //_e( 'Topic', 'bbpress' ); ?>
-
-			<?php bbp_topic_subscription_link(); ?>
+			<?php bbp_topic_subscription_link( array( 'before' => '' ) ); ?>
 
 			<?php bbp_topic_favorite_link(); ?>
 
-		</div><!-- .bbp-topic-content -->
+		</span> -->
 
 	</li><!-- .bbp-header -->
 
 	<li class="bbp-body">
 
-		<div class="bbp-topic-header">
-
-			<div class="bbp-meta">
-
-				<span class="bbp-topic-post-date"><?php bbp_topic_post_date(); ?></span>
-
-<!--				<a href="<?php bbp_topic_permalink(); ?>" class="bbp-topic-permalink">#<?php bbp_topic_id(); ?></a>
-
- 				<?php do_action( 'bbp_theme_before_topic_admin_links' ); ?>
-
-				<?php bbp_topic_admin_links(); ?>
-
-				<?php do_action( 'bbp_theme_after_topic_admin_links' ); ?> -->
-
-			</div><!-- .bbp-meta -->
-
-		</div><!-- .bbp-topic-header -->
-
 		<div id="post-<?php bbp_topic_id(); ?>" <?php bbp_topic_class(); ?>>
-
-			<div class="bbp-topic-author">
-
-				<?php do_action( 'bbp_theme_before_topic_author_details' ); ?>
-
-				<?php if( srv_frontpage_class::$attr['show_avatar'] == false ) {
-					bbp_topic_author_link( array( 'sep' => '' , 'show_role' => true , 'type' => 'name' ) ); 
-				} else {
-					bbp_topic_author_link( array( 'sep' => '' , 'show_role' => true , 'type' => 'both' ) ); 
-				} ?>
-
-				<?php do_action( 'bbp_theme_after_topic_author_details' ); ?>
-
-			</div><!-- .bbp-topic-author -->
 
 			<div class="bbp-topic-content">
 
 				<?php do_action( 'bbp_theme_before_topic_content' ); ?>
 
-				<?php echo substr ( bbp_get_topic_content() , 0 , (srv_frontpage_class::$attr['char_limit'] + 3) ); //correcting 3 char offset ?> 
+				<?php 
+
+				if ( srv_frontpage_class::$attr['char_limit'] == 0 ) {
+					echo bbp_get_topic_content();
+				} else {
+					echo substr ( bbp_get_topic_content() , 0 , (srv_frontpage_class::$attr['char_limit'] + 3) ); //correcting 3 char offset 
+				}
+
+				?> 
 
 				<?php do_action( 'bbp_theme_after_topic_content' ); ?>
 
@@ -78,6 +52,26 @@
 		</div><!-- #post-<?php bbp_topic_id(); ?> -->
 
 	</li><!-- .bbp-body -->
+
+	<div class="bbp-frontpage-topic-footer">
+
+		<div class="bbp-meta">
+
+			<?php do_action( 'bbp_theme_before_topic_author_details' ); ?>
+
+			By <?php bbp_topic_author_link( array( 'sep' => '' , 'show_role' => false , 'type' => 'name' ) );  ?> on <?php bbp_topic_post_date(); ?> | <a href="<?php bbp_topic_permalink(); ?>">Comments (<?php bbp_topic_reply_count(); ?>)</a>
+
+			<?php do_action( 'bbp_theme_after_topic_author_details' ); ?> 
+
+		</div><!-- .bbp-meta -->
+
+	</div><!-- .bbp-topic-header -->
+
+<!-- 	<li class="bbp-footer">
+
+		&nbsp;
+
+	</li> -->
 
 </ul><!-- #bbp-topic-<?php bbp_topic_id(); ?>-lead -->
 

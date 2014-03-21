@@ -26,4 +26,9 @@
   </div>
 </header>
 
-<div class="header-image"></div>
+
+
+<!-- <img src="<?php header_image(); ?>" height="" width="<?php echo get_custom_header()->width; ?>" alt="" /> -->
+
+
+<div class="header-image"><div class="container"><a href="<?php echo home_url(); ?>/"><h1 class="header-image-title" >HELLO2</h1></a></div></div>

@@ -4,7 +4,9 @@
  */
 
 // Disable WP admin bar
-add_filter('show_admin_bar', '__return_false');
+if ( !bbp_is_user_keymaster() ) {
+	add_filter('show_admin_bar', '__return_false');
+}
 
 // Enable Lead Reply
 function custom_bbp_show_lead_topic( $show_lead ) {
@@ -190,7 +192,7 @@ function set_header_properties() {
 
 
 
-// [srv_frontpage forum_id=0 posts_per_page=5 char_limit=250 show_avatar=true show_stickies=false]
+// [srv_frontpage forum_id=0 posts_per_page=5 char_limit=0 show_avatar=true show_stickies=false]
 class srv_frontpage_class {
 
 	public static $attr = array();
@@ -201,7 +203,7 @@ class srv_frontpage_class {
 		self::$attr = bbp_parse_args( $attr, array(
 			'forum_id' 			=> 	'0',
 			'posts_per_page'	=> 	'5',
-			'char_limit'		=> 	'50',
+			'char_limit'		=> 	'0',
 			'show_avatar'		=> 	true, 
 			'show_stickies'		=> 	false,
 		) );
