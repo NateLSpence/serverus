@@ -210,7 +210,8 @@ body {
    .widget_serverus_display_topics_single {
       
       margin: 0;
-      padding: @padding-small-vertical @padding-large-horizontal;
+      padding: 3px @padding-large-horizontal;
+      min-height: 38px;
 
       .topic-avatar {
       }
@@ -219,6 +220,7 @@ body {
 
       .bbp-forum-title {
          font-size: @font-size-widget-base;
+         //font-size: @font-size-widget-small;
          margin-left: @padding-xs-horizontal;
          font-weight: @font-weight-heavy;
 
@@ -231,7 +233,7 @@ body {
          margin-bottom: 0;
          .text-muted;
 
-         font-size: @font-size-widget-small;
+         font-size: @font-size-widget-small - 1;
 
          a {
             .text-muted;
