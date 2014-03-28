@@ -1,4 +1,4 @@
-<?php if ( post_password_required() ) : ?>
+<!-- <?php if ( post_password_required() ) : ?>
 	<?php bbp_get_template_part( 'form', 'protected' ); ?>
 
 <?php else : ?>
@@ -16,9 +16,9 @@
 		'max_num_pages'  => false,                     // Maximum number of pages to show
 	) ) ) : ?>
 
-		<?php bbp_get_template_part( 'loop',       'fronttopics'    ); ?>
+		<?php //bbp_get_template_part( 'loop',       'fronttopics'    ); ?>
 
-		<?php bbp_get_template_part( 'pagination', 'topics'    ); ?>
+		<?php //bbp_get_template_part( 'pagination', 'topics'    ); ?>
 
 	<?php else : ?>
 
@@ -26,4 +26,4 @@
 
 	<?php endif; ?>
 
-<?php endif; ?>
+<?php endif; ?> -->

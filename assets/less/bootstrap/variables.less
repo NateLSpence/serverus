@@ -35,7 +35,8 @@
 @body-bg:               #fff;
 @body-bg-contrast-mix: mix(#888, @body-bg, 10%);
 
-@back-bg: 				#555;
+@back-bg: 				@brand-complement;
+
 @text-color:            @gray-dark;
 
 //@body-bg-accent: 		darken(@body-bg, 5%); // Using .bg-contrast-mix() instead
@@ -74,6 +75,7 @@
 
 @line-height-base:        1.428571429; // 20/14
 @line-height-computed:    floor(@font-size-base * @line-height-base); // ~17px
+@line-height-widget-title: ceil(@font-size-widget-large + 3); // ~ 18px
 
 @headings-font-family:    @font-family-base;
 @headings-font-weight:    500;
@@ -266,7 +268,7 @@
 // Number of columns in the grid system
 @grid-columns:              12;
 // Padding, to be divided by two and applied to the left and right of all columns
-@grid-gutter-width:         30px;
+@grid-gutter-width:         20px;
 
 // Navbar collapse
 
