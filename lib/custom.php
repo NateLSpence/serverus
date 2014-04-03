@@ -4,9 +4,45 @@
  */
 
 // Disable WP admin bar
-if ( !bbp_is_user_keymaster() ) {
-	add_filter('show_admin_bar', '__return_false');
+/*if ( bbp_get_user_role( bbp_get_current_user_id() ) == 'bbp_moderator' || bbp_get_user_role( bbp_get_current_user_id() ) == 'bbp_keymaster' ) {
+
+} else {
+	add_filter('show_admin_bar', '__return_false');	
+}*/
+
+
+// Disable Admin Bar for everyone but administrators
+if (!function_exists('disable_admin_bar')) {
+
+	function disable_admin_bar() {
+		
+		if (bbp_get_user_role( bbp_get_current_user_id() ) != 'bbp_moderator' && bbp_get_user_role( bbp_get_current_user_id() ) != 'bbp_keymaster') {
+		
+			// for the admin page
+			remove_action('admin_footer', 'wp_admin_bar_render', 1000);
+			// for the front-end
+			remove_action('wp_footer', 'wp_admin_bar_render', 1000);
+			
+			// css override for the admin page
+			function remove_admin_bar_style_backend() { 
+				echo '<style>body.admin-bar #wpcontent, body.admin-bar #adminmenu { padding-top: 0px !important; }</style>';
+			}	  
+			add_filter('admin_head','remove_admin_bar_style_backend');
+			
+			// css override for the frontend
+			function remove_admin_bar_style_frontend() {
+				echo '<style type="text/css" media="screen">
+				html { margin-top: 0px !important; }
+				* html body { margin-top: 0px !important; }
+				</style>';
+			}
+			add_filter('wp_head','remove_admin_bar_style_frontend', 99);
+			
+		}
+  	}
 }
+add_action('init','disable_admin_bar');
+
 
 // Enable Lead Reply
 function custom_bbp_show_lead_topic( $show_lead ) {
@@ -14,7 +50,7 @@ function custom_bbp_show_lead_topic( $show_lead ) {
   return $show_lead;
 }
  
-add_filter('bbp_show_lead_topic', 'custom_bbp_show_lead_topic' );
+add_filter( 'bbp_show_lead_topic', 'custom_bbp_show_lead_topic' );
 
 
 // Replace bbPress time since function to only output the largest chunk of time passed. 
