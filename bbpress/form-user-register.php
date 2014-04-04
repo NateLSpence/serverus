@@ -9,8 +9,11 @@
 
 ?>
 
-<div class="col-md-6">
-	<h2>Register</h2>
+<div class="col-sm-6">
+<div class="serverus-registration-wrapper">
+<div class="serverus-login-title">Register</div>
+<div class="serverus-registration-inner">
+
 	<form method="post" action="<?php bbp_wp_login_action( array( 'context' => 'login_post' ) ); ?>" class="bbp-login-form">
 		<fieldset class="bbp-form">
 			<legend><?php _e( 'Create an Account', 'bbpress' ); ?></legend>
@@ -43,4 +46,4 @@
 
 		</fieldset>
 	</form>
-</div>
+</div></div></div>

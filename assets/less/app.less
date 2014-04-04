@@ -723,6 +723,8 @@ div.bbp-template-notice.error {
    #bbpress-forums .bbp-lead-topic div.bbp-topic-author,
    #bbp-search-results div.bbp-topic-author {
       
+      border-radius: 3px;
+
       img.avatar {
          float: none !important;
          margin-bottom: 4px;
@@ -812,8 +814,43 @@ form div.bbp-submit-wrapper button {
 } */
 
 // LOGIN FORM
+.serverus-login-title {
+   border-bottom: 1px dotted @brand-primary;
+   //padding: 2em;
+
+   color: @brand-complement-text-contrast;
+   background-color: @brand-complement;
+
+   font-size: @font-size-widget-large;
+   line-height: @line-height-widget-title;
+   
+   font-family: @headings-font-family;
+   font-weight: @font-weight-heavier;
+
+   padding: @padding-large-vertical @padding-large-horizontal;
+
+}
+
+.serverus-login-wrapper,
+.serverus-registration-wrapper {
+   overflow: hidden;
+   .box-shadow( 0 0 6px 1px @brand-complement );  
+   border: @border-stack; 
+   border-radius: 12px;
+}
+
+.serverus-login-inner, 
+.serverus-registration-inner {
+   padding: @padding-large-vertical @padding-large-horizontal;
+}
+
 .bbp-login-form .bbp-remember-me {
    padding-left: 25px;
+}
+
+.serverus-show-lost-pass {
+   padding: @padding-base-vertical @padding-large-horizontal;
+   .bg-contrast-mix();
 }
 
 .serverus-lost-pass-form {
@@ -823,7 +860,7 @@ form div.bbp-submit-wrapper button {
 }
 
 .bbp-lost-pass-btn {
-   margin-left: 1em;
+   display: block;
 }
 
 /* ==========================================================================
@@ -832,5 +869,5 @@ form div.bbp-submit-wrapper button {
 
 // typo in bootstrap
 input[type="radio"], input[type="checkbox"] {
-   margin-top: 3px;
+   margin-top: 1px;
 }

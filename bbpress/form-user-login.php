@@ -9,7 +9,10 @@
 
 ?>
 <div class="col-md-6">
-	<h2>Login</h2>
+<div class="serverus-login-wrapper">
+<div class="serverus-login-title">Login</div>
+<div class="serverus-login-inner">
+	
 	<form method="post" action="<?php bbp_wp_login_action( array( 'context' => 'login_post' ) ); ?>" class="bbp-login-form">
 		<fieldset class="bbp-form">
 			<legend><?php _e( 'Log In', 'bbpress' ); ?></legend>
@@ -45,6 +48,8 @@
 		</fieldset>
 	</form>
 
+</div>
+
 	<div class="serverus-show-lost-pass">
 		<?php bbp_get_template_part( 'button', 'lostpass' ); ?> 
 	</div>
@@ -70,4 +75,4 @@
 		</fieldset>
 	</form>
 
-</div>
+</div></div>
