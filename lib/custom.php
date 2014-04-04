@@ -10,6 +10,42 @@
 	add_filter('show_admin_bar', '__return_false');	
 }*/
 
+// Override redirect on failed login
+	// hook failed login
+if( ! function_exists( 'custom_login_fail' ) ) {
+	function custom_login_fail($username){
+	    // Get the reffering page, where did the post submission come from?
+	    $referrer = $_SERVER['HTTP_REFERER'];
+	 
+	    // if there's a valid referrer, and it's not the default log-in screen
+	    if(!empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin')){
+	        // let's append some information (login=failed) to the URL for the theme to use
+            if ( !strstr($referrer,'?login=failed') ) { // prevent appending twice
+                wp_redirect( $referrer . '?login=failed' );
+            } else {
+                wp_redirect( $referrer );
+            }
+	    exit;
+	    }
+	}
+}
+add_action('wp_login_failed', 'custom_login_fail'); 
+
+	// hook empty login
+if( ! function_exists( 'custom_login_empty' ) ) {
+    function custom_login_empty(){
+        $referrer = $_SERVER['HTTP_REFERER'];
+        if ( strstr($referrer,get_home_url()) && $user==null ) { 
+            if ( !strstr($referrer,'?login=failed') ) { // prevent appending twice
+                wp_redirect( $referrer . '?login=failed' );
+            } else {
+                wp_redirect( $referrer );
+            }
+        }
+    }
+}
+add_action( 'authenticate', 'custom_login_empty');
+
 
 // Disable Admin Bar for everyone but administrators
 if (!function_exists('disable_admin_bar')) {

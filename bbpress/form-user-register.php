@@ -18,15 +18,14 @@
 		<fieldset class="bbp-form">
 			<legend><?php _e( 'Create an Account', 'bbpress' ); ?></legend>
 
-
 			<div class="bbp-username form-group">
-				<!-- <label for="user_login"><?php _e( 'Username', 'bbpress' ); ?>: </label> -->
+				<label for="user_login" class="sr-only"><?php _e( 'Username', 'bbpress' ); ?>: </label> 
 				<input type="text" class="form-control" name="user_login" value="<?php bbp_sanitize_val( 'user_login' ); ?>" size="20" id="user_login" tabindex="<?php bbp_tab_index(); ?>" placeholder="<?php _e( 'Username', 'bbpress' ); ?>" />
 			</div>
 
 			<div class="bbp-email form-group">
-				<!-- <label for="user_email"><?php _e( 'Email', 'bbpress' ); ?>: </label> -->
-				<input type="text" class="form-control" name="user_email" value="<?php bbp_sanitize_val( 'user_email' ); ?>" size="20" id="user_email" tabindex="<?php bbp_tab_index(); ?>" placeholder="<?php _e( 'Email', 'bbpress' ); ?>" />
+				<label for="user_email" class="sr-only"><?php _e( 'Email', 'bbpress' ); ?>: </label>
+				<input type="email" class="form-control" name="user_email" value="<?php bbp_sanitize_val( 'user_email' ); ?>" size="20" id="user_email" tabindex="<?php bbp_tab_index(); ?>" placeholder="<?php _e( 'Email', 'bbpress' ); ?>" />
 			</div>
 
 			<?php do_action( 'register_form' ); ?>

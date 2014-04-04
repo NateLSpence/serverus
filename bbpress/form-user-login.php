@@ -19,12 +19,12 @@
 
 			<div class="bbp-username form-group">
 				<label for="user_login" class="sr-only"><?php _e( 'Username', 'bbpress' ); ?>: </label>
-				<input type="text" class="form-control" name="log" value="<?php bbp_sanitize_val( 'user_login', 'text' ); ?>" size="20" id="user_login" tabindex="<?php bbp_tab_index(); ?>" placeholder="<?php _e( 'Username', 'bbpress' ); ?>" />
+				<input type="text" class="form-control" name="log" value="<?php bbp_sanitize_val( 'user_login', 'text' ); ?>" size="20" id="user_login" tabindex="<?php bbp_tab_index(); ?>" placeholder="<?php _e( 'Username', 'bbpress' ); ?>" required />
 			</div>
 
 			<div class="bbp-password form-group">
 				<label for="user_pass" class="sr-only"><?php _e( 'Password', 'bbpress' ); ?>: </label>
-				<input type="password" class="form-control" name="pwd" value="<?php bbp_sanitize_val( 'user_pass', 'password' ); ?>" size="20" id="user_pass" tabindex="<?php bbp_tab_index(); ?>" placeholder="<?php _e( 'Password', 'bbpress' ); ?>" />
+				<input type="password" class="form-control" name="pwd" value="<?php bbp_sanitize_val( 'user_pass', 'password' ); ?>" size="20" id="user_pass" tabindex="<?php bbp_tab_index(); ?>" placeholder="<?php _e( 'Password', 'bbpress' ); ?>" required />
 			</div>
 
 			<div class="bbp-submit-wrapper form-group">
@@ -47,6 +47,32 @@
 
 		</fieldset>
 	</form>
+
+	<script>
+		$(document).ready(function () {
+
+			
+			
+			/*
+			function field_has_errors( raw_field ) {
+				if ( $(raw_field).value() === null ) {
+					return true;
+				} else {
+					return false;
+				};
+			}
+
+			function check_fields(  )
+
+			$(".bbp-lost-pass-btn").click( function(e){
+				e.preventDefault();
+				toggle_lostpass_form();
+				$(this).toggleClass("active");
+			});
+
+		});*/
+	</script>
+
 
 </div>
 
