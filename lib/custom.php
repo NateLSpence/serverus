@@ -10,9 +10,30 @@
 	add_filter('show_admin_bar', '__return_false');	
 }*/
 
+/**
+ * Custom Login form
+ */
+
+
+function custom_login_stylesheet() { ?>
+    <link rel="stylesheet" id="custom_wp_admin_css"  href="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/assets/css/main.min.css'; ?>" type="text/css" media="all" />
+<?php }
+add_action( 'login_enqueue_scripts', 'custom_login_stylesheet' );
+
+function custom_login_logo_url() {
+    return get_bloginfo( 'url' );
+}
+add_filter( 'login_headerurl', 'custom_login_logo_url' );
+
+function custom_login_logo_url_title() {
+    return 'Home';
+}
+add_filter( 'login_headertitle', 'custom_login_logo_url_title' );
+
+
 // Override redirect on failed login
 	// hook failed login
-if( ! function_exists( 'custom_login_fail' ) ) {
+/*if( ! function_exists( 'custom_login_fail' ) ) {
 	function custom_login_fail($username){
 	    // Get the reffering page, where did the post submission come from?
 	    $referrer = $_SERVER['HTTP_REFERER'];
@@ -45,7 +66,7 @@ if( ! function_exists( 'custom_login_empty' ) ) {
     }
 }
 add_action( 'authenticate', 'custom_login_empty');
-
+*/
 
 // Disable Admin Bar for everyone but administrators
 if (!function_exists('disable_admin_bar')) {

@@ -9,6 +9,10 @@
    Base
    ========================================================================== */
 
+html {
+   background-color: @back-bg;
+}
+
 body { 
    background-color: @back-bg;
 
@@ -813,6 +817,10 @@ form div.bbp-submit-wrapper button {
    .btn-block;
 } */
 
+/* ==========================================================================
+   Login / Register / Lost Password page
+   ========================================================================== */
+
 // LOGIN FORM
 .serverus-login-title {
    border-bottom: 1px dotted @brand-primary;
@@ -862,6 +870,89 @@ form div.bbp-submit-wrapper button {
 .bbp-lost-pass-btn {
    display: block;
 }
+
+// Default Login page overrides
+body.login {
+   background-color: @back-bg;
+}
+
+body.login div#login {}
+body.login div#login h1 {}
+body.login div#login h1 a {}
+
+body.login div#login form#loginform,
+body.login div#login form#registerform,
+body.login div#login form#lostpasswordform {
+   .box-shadow( 0 0 6px 1px @brand-complement );  
+   border: @border-stack; 
+   border-radius: 12px;
+   padding: 2em;
+}
+
+body.login div#login form#loginform p {}
+
+body.login div#login form#loginform p label,
+body.login div#login form#registerform p label,
+body.login div#login form#lostpasswordform p label {
+   display: block;
+   color: @text-color;
+}
+
+body.login div#login form#loginform input {}
+
+body.login div#login form#loginform input#user_login,
+body.login div#login form#loginform input#user_pass,
+body.login div#login form#registerform input#user_login,
+body.login div#login form#registerform input#user_email,
+body.login div#login form#lostpasswordform input#user_login {
+   .form-control;
+}
+
+
+body.login div#login form#loginform p.forgetmenot {
+   .checkbox;
+   position: relative;
+   top: 32px;
+}
+
+body.login div#login form#loginform p.forgetmenot input#rememberme {
+   float: left;
+   margin-left: -20px;
+   border: 1px solid @input-border;
+   border-radius: @input-border-radius;
+   background-color: @input-bg;
+   background-image: none;
+}
+
+@media (max-width: 782px) {
+   body.login div#login form#loginform p.forgetmenot {
+      top: 40px;
+   }
+   body.login div#login form#loginform p.forgetmenot input#rememberme {
+      height: 25px;
+      width: 25px;
+      margin-right: 5px;
+      margin-top: -3px;
+   }
+}
+
+body.login div#login form#loginform p.submit {
+   position: relative;
+   top: -36px;
+}
+
+body.login div#login form#loginform p.submit input#wp-submit,
+body.login div#login form#registerform p.submit input#wp-submit,
+body.login div#login form#lostpasswordform p.submit input#wp-submit {
+   .btn;
+   .btn-primary;
+   .btn-block;
+}
+
+body.login div#login p#nav {}
+body.login div#login p#nav a {}
+body.login div#login p#backtoblog {}
+body.login div#login p#backtoblog a {}
 
 /* ==========================================================================
    Bootstrap tweaks
