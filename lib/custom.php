@@ -110,6 +110,9 @@ function custom_bbp_show_lead_topic( $show_lead ) {
 add_filter( 'bbp_show_lead_topic', 'custom_bbp_show_lead_topic' );
 
 
+// Remove WP filter to wrap the_content in <p> tags on home page.
+remove_filter('the_content', 'wpautop');
+
 // Replace bbPress time since function to only output the largest chunk of time passed. 
 // There ought to be a better way. This is replacing the functionality of already-run code. 
 
