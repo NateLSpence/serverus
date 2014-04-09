@@ -34,6 +34,12 @@
 
 		<?php endif; ?>
 
+		<div id="topiclead-ad-sidebar">
+			<?php
+			if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('topiclead-ad-sidebar') ) :
+			endif; ?>
+		</div>
+
 		<?php if ( bbp_has_replies() ) : ?>
 
 			<?php bbp_get_template_part( 'loop',       'replies' ); ?>

@@ -35,6 +35,27 @@ function roots_widgets_init() {
     'after_title' => '',
   ));
 
+    //Frontpage Ad Sidebar
+  register_sidebar(array(
+    'name' => __('Frontpage Ad Location', 'serverus'),
+    'id' => 'frontpage-ad-sidebar',
+    'description' => 'Put a text widget here, and paste your ad code into it (banner size works best).',
+    'before_widget' => '<div class="serverus-ad %1$s %2$s">',
+    'after_widget' => '</div>',
+    'before_title' => '',
+    'after_title' => '',
+  ));
+
+    //Lead Topic Ad Sidebar
+  register_sidebar(array(
+    'name' => __('Under First Post Ad Location', 'serverus'),
+    'id' => 'topiclead-ad-sidebar',
+    'description' => 'Put a text widget here, and paste your ad code into it (banner size works best).',
+    'before_widget' => '<div class="serverus-ad %1$s %2$s">',
+    'after_widget' => '</div>',
+    'before_title' => '',
+    'after_title' => '',
+  ));
 
 
   // Widgets

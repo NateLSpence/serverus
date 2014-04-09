@@ -418,6 +418,14 @@ class srv_frontpage_class {
 
 		echo "<div id='bbpress-forums' class='srv-front-page'>";
 
+		?>
+		<div id="frontpage-ad-sidebar">
+			<?php
+			if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('frontpage-ad-sidebar') ) :
+			endif; ?>
+		</div>
+		<?php
+
 		// Check forum caps
 		if ( bbp_user_can_view_forum( array( 'forum_id' => $forum_id ) ) ) {
 
