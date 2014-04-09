@@ -371,6 +371,24 @@
 // Alternate navbars
 // --------------------------------------------------
 
+//bbpress fix
+body.bbpress nav .menu-forums {
+  &,
+  &:hover,
+  &:focus {
+    color: @navbar-default-link-active-color;
+    background-color: @navbar-default-link-active-bg;
+  }
+  @media (max-width: @grid-float-breakpoint-max) {
+    &,
+    &:hover,
+    &:focus {
+      color: @navbar-default-link-active-color;
+      background-color: @navbar-default-link-active-bg;
+    }
+  }
+}
+
 // Default navbar
 .navbar-default {
   background-color: @navbar-default-bg;

@@ -55,7 +55,22 @@
 
 					<?php do_action( 'bbp_theme_before_reply_form_content' ); ?>
 
-					<?php bbp_the_content( array( 'context' => 'reply' ) ); ?>
+					<?php bbp_the_content( array( 'context' => 'reply', 'media_buttons' => true ) ); ?>
+
+					<script>
+					$(document).ready(function(){
+						$('#new-post').validate({
+						  rules: {
+						    bbp_reply_content: 'required'
+						  },
+						  messages: {
+						    bbp_reply_content: {
+						      required: "Your reply cannot be empty."
+						    }
+						  }
+						});
+					});
+					</script>
 
 					<?php do_action( 'bbp_theme_after_reply_form_content' ); ?>
 

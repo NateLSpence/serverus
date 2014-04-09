@@ -19,9 +19,9 @@
 
 		<span class='pull-right'>
 
-			<?php bbp_topic_subscription_link( array( 'before' => '' ) ); ?>
+			<?php bbp_topic_subscription_link( array( 'before' => '', 'after' => '' ) ); ?>
 
-			<?php bbp_topic_favorite_link(); ?>
+			<?php bbp_topic_favorite_link( array('before' => '', 'after' => '') ); ?>
 
 		</span>
 

@@ -81,7 +81,7 @@
 
 					<?php do_action( 'bbp_theme_before_topic_form_content' ); ?>
 
-					<?php bbp_the_content( array( 'context' => 'topic' ) ); ?>
+					<?php bbp_the_content( array( 'context' => 'topic', 'media_buttons' => true ) ); ?>
 
 					<?php do_action( 'bbp_theme_after_topic_form_content' ); ?>
 
@@ -202,6 +202,25 @@
 						<?php do_action( 'bbp_theme_before_topic_form_submit_button' ); ?>
 
 						<button type="submit" tabindex="<?php bbp_tab_index(); ?>" id="bbp_topic_submit" class="btn btn-success btn-block" name="bbp_topic_submit" class="button submit"><?php _e( 'Submit', 'bbpress' ); ?></button>
+
+						<script>
+						$(document).ready(function(){
+							$('#new-post').validate({
+							  rules: {
+							    bbp_topic_content: 'required',
+							    bbp_topic_title: 'required'
+							  },
+							  messages: {
+							    bbp_topic_content: {
+							      required: "Your topic cannot be empty."
+							    },
+							    bbp_topic_title: {
+							      required: "Your title cannot be empty."
+							    }
+							  }
+							});
+						});
+						</script>
 
 						<?php do_action( 'bbp_theme_after_topic_form_submit_button' ); ?>
 

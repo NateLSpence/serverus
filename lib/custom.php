@@ -3,18 +3,20 @@
  * Custom functions
  */
 
-// Disable WP admin bar
-/*if ( bbp_get_user_role( bbp_get_current_user_id() ) == 'bbp_moderator' || bbp_get_user_role( bbp_get_current_user_id() ) == 'bbp_keymaster' ) {
+// Add jQuery Validation plugin
 
-} else {
-	add_filter('show_admin_bar', '__return_false');	
-}*/
+function serverus_scripts() {
+	//wp_enqueue_style( 'style-name', get_stylesheet_uri() );
+	//wp_enqueue_script( 'script-name', get_template_directory_uri() . '/js/example.js', array(), '1.0.0', true );
+	wp_enqueue_script( 'jquery_validate', get_template_directory_uri() . '/assets/js/
+		plugins/jquery.validate.min.js'/*, array(), '1.0.0', true*/ );
+}
 
-/**
- * Custom Login form
- */
+add_action( 'wp_enqueue_scripts', 'serverus_scripts' );
 
 
+// Custom Login form
+ 
 function custom_login_stylesheet() { ?>
     <link rel="stylesheet" id="custom_wp_admin_css"  href="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/assets/css/main.min.css'; ?>" type="text/css" media="all" />
 <?php }
