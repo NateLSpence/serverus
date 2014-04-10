@@ -15,15 +15,10 @@ html {
 
 body { 
    background-color: @back-bg;
+   color: @text-color;
 
    .wrap.container {
       background-color: @body-bg;
-      //border: 15px solid @brand-complement; //TODO not centralized
-      //border: 15px solid mix(#888, @body-bg, 30%); //TODO not centralized
-      //border-right: 15px solid mix(#888, @body-bg, 30%); //TODO not centralized
-      
-      /*border-left: 1px solid black;
-      border-right: 1px solid black;*/
 
       .box-shadow( 0 0 2px 0 #000 );
 
@@ -136,7 +131,6 @@ body.bbpress nav .menu-forums {
    margin: 0;
    //margin: 25px 0 10px;
    border-bottom: none;
-   //border-bottom: 1px solid #eee; //TODO border stack
    
    //text-align: center;
 
@@ -417,7 +411,7 @@ figure.alignnone { margin-left: 0; margin-right: 0; }
 #bbpress-forums span.bbp-topic-freshness-author img.avatar, {
    float: none;
    margin-bottom: -7px;
-   border: 3px double #ddd;
+   border: 3px double @border-color-main;
 } 
 
 // ALERTS
@@ -471,6 +465,13 @@ div.bbp-template-notice.error {
 
 // FORUMS LIST
 
+   // Background
+   #bbpress-forums div.odd, #bbpress-forums ul.odd,
+   #bbpress-forums div.even, #bbpress-forums ul.even {
+      background-color: @body-bg;
+
+   }
+
    // Breadcrumbs
    #bbpress-forums div.bbp-breadcrumb {
       float: none;
@@ -487,7 +488,7 @@ div.bbp-template-notice.error {
 
    @media only screen and (max-width: 480px){
       div.bbp-search-form input, div.bbp-search-form button {
-         font-size: @font-size-large; // TODO use variable
+         font-size: @font-size-large; 
          padding: 6px 12px;
       }
    }
@@ -511,8 +512,8 @@ div.bbp-template-notice.error {
    // Forums list Footers
    #bbpress-forums li.bbp-footer,
    #bbpress-forums li.bbp-category-footer {
-      background: lighten(@gray-lighter, 2%);
-      border-top: 1px solid #eee;
+      background: @body-bg-contrast-mix;
+      border-top: @border-stack;
       text-align: center;
    }
 
@@ -558,7 +559,7 @@ div.bbp-template-notice.error {
    #bbpress-forums .bbp-subforum ul li {
       padding-top: 8px;
       padding-bottom: 8px;
-      border-top: 1px solid @gray-lighter;
+      border-top: @border-stack;
    }
       
       // Forum Title
@@ -576,7 +577,7 @@ div.bbp-template-notice.error {
          padding: 0;
          word-wrap: break-word;
 
-         color: @gray; //TODO make better variable
+         color: @text-color;
       }
 
       // Forum Subforums
@@ -733,8 +734,27 @@ div.bbp-template-notice.error {
 
 
    // Reply Header 
+   #bbpress-forums div.bbp-forum-header, #bbpress-forums div.bbp-topic-header, #bbpress-forums div.bbp-reply-header {
+      background-color: @body-bg-contrast-mix;
+   }
+
+   #bbpress-forums div.bbp-forum-header, div.bbp-topic-header, div.bbp-reply-header {
+      border-top: @border-stack;
+   }
+   
    #bbpress-forums .bbp-meta .caret {
       margin: .5em;
+   }
+
+   #bbpress-forums span.bbp-admin-links {
+      color: @text-color;
+   }
+   
+   #bbpress-forums span.bbp-admin-links a {
+      .text-muted;
+      font-size: 10px;
+      text-transform: uppercase;
+      text-decoration: none;
    }
 
    // Reply avatar and author info
@@ -779,6 +799,13 @@ div.bbp-template-notice.error {
    .bbp-reply-revision-log .avatar {
       display: none;
    }
+
+   // Images
+   #bbpress-forums .bbp-body .bbp-topic-content img,
+   #bbpress-forums .bbp-body .bbp-reply-content img {
+      margin: .5em 1em;
+   }
+
 
 // FRONT PAGE
    #bbpress-forums.srv-front-page div.bbp-topic-content {
