@@ -7,7 +7,7 @@
  */
 
 
-/*	//		DEFAULT    BLUE/WHITE
+	//		DEFAULT    BLUE/WHITE
 
 // Brand colors
 // -------------------------
@@ -19,9 +19,13 @@
 @brand-complement-text-contrast: @text-color;
 
 @brand-success:         #5cb85c;
+@brand-success-muted:   #ECFFEC;
 @brand-warning:         #f0ad4e;
+@brand-warning-muted:   #FFF6E8;
 @brand-danger:          #d9534f;
+@brand-danger-muted:    #FDE1DF;
 @brand-info:            #5bc0de;
+@brand-info-muted:      #F4F8FA;
 
 // Scaffolding
 // -------------------------
@@ -29,7 +33,7 @@
 @body-bg:               #fff;
 @body-bg-contrast-mix:  mix(#888, @body-bg, 10%);
 @body-bg-contrast-more:	darken(@body-bg-contrast-mix, 10%);
-@input-bg:              @body-bg-contrast-mix;
+@input-bg:              @body-bg;
 
 @back-bg: 				@brand-complement;
 
@@ -46,58 +50,18 @@
 // -------------------------
 
 @link-color:            @brand-primary;
-@link-hover-color:      darken(@link-color, 15%);*/
+@link-hover-color:      darken(@link-color, 15%);
 
 
 
 
-//			YELLOW/PURPLE, DARK http://colorschemedesigner.com/#1K61TvCw0U8Un
 
-// Brand colors
-// -------------------------
-
-@brand-primary:         #FFF103;
-@brand-primary-text-contrast: #333;
-
-@brand-complement:      #482F5F;
-@brand-complement-text-contrast: #ffffff;
-
-@brand-success:         #71F7AB;
-@brand-warning:         #FFB574;
-@brand-danger:          #FF7A03;
-@brand-info:            #B97AF6;
-
-// Scaffolding
-// -------------------------
-
-@body-bg:               @gray-dark;
-@body-bg-contrast-mix:  mix(#888, @body-bg, 10%);
-@body-bg-contrast-more:	lighten(@body-bg-contrast-mix, 10%);
-@input-bg:              @body-bg-contrast-more;
-
-@back-bg: 				@brand-complement;
-
-@text-color:            @gray-lighter;
-@text-muted:            @gray-light;
-
-@border-color-main: @gray-darker;
-@border-color-main-contrast: lighten(@border-color-main, 10%);
-
-@border-stack: 1px solid @border-color-main; // Standard border stack
-@border-stack-thick: 2px solid @border-color-main; // Thicker border stack
-
-// Links
-// -------------------------
-
-@link-color:            @brand-primary;
-@link-hover-color:      #FFFCCE;
-
-
-/*
+/* *********************************************************
  * BOOTSTRAP'S VARIABLES
  * All variables below are derived from the variables above. 
  * Change the variables above to alter the color scheme.
  * Small tweaks may be required.
+ * *********************************************************
  */
 
 
@@ -208,7 +172,7 @@
 @btn-font-weight:                normal;
 
 @btn-default-color:              @text-color;
-@btn-default-bg:                 @body-bg-contrast-mix;
+@btn-default-bg:                 @input-bg;
 @btn-default-border:             @border-color-main;
 
 @btn-primary-color:              @brand-primary-text-contrast;
@@ -473,21 +437,21 @@
 // Form states and alerts
 // -------------------------
 
-@state-success-text:             @brand-primary-text-contrast;
-@state-success-bg:               @brand-success;
-@state-success-border:           darken(spin(@state-success-bg, -10), 5%);
+@state-success-text:             @brand-success;
+@state-success-bg:               @brand-success-muted;
+@state-success-border:           darken(spin(@brand-success, -10), 15%);
 
-@state-info-text:                @brand-primary-text-contrast;
-@state-info-bg:                  @brand-info;
-@state-info-border:              darken(spin(@state-info-bg, -10), 7%);
+@state-info-text:                @brand-info;
+@state-info-bg:                  @brand-info-muted;
+@state-info-border:              darken(spin(@brand-info, -10), 15%);
 
-@state-warning-text:             @brand-primary-text-contrast;
-@state-warning-bg:               @brand-warning;
-@state-warning-border:           darken(spin(@state-warning-bg, -10), 5%);
+@state-warning-text:             @brand-warning;
+@state-warning-bg:               @brand-warning-muted;
+@state-warning-border:           darken(spin(@brand-warning, -10), 15%);
 
-@state-danger-text:              @brand-primary-text-contrast;
-@state-danger-bg:                @brand-danger;
-@state-danger-border:            darken(spin(@state-danger-bg, -10), 5%);
+@state-danger-text:              @brand-danger;
+@state-danger-bg:                @brand-danger-muted;
+@state-danger-border:            darken(spin(@brand-danger, -10), 15%);
 
 
 // Tooltips
