@@ -2,18 +2,53 @@
 // Variables
 // --------------------------------------------------
 
+/*
+ * COLOR SCHEME
+ */
 
-// Global values
-// --------------------------------------------------
 
-// Grays
+/*	//		DEFAULT    BLUE/WHITE
+
+// Brand colors
 // -------------------------
 
-@gray-darker:            lighten(#000, 13.5%); // #222
-@gray-dark:              lighten(#000, 20%);   // #333
-@gray:                   lighten(#000, 33.5%); // #555
-@gray-light:             lighten(#000, 60%);   // #999
-@gray-lighter:           lighten(#000, 93.5%); // #eee
+@brand-primary:         #428bca;
+@brand-primary-text-contrast: #ffffff;
+
+@brand-complement:      @gray-lighter;
+@brand-complement-text-contrast: @text-color;
+
+@brand-success:         #5cb85c;
+@brand-warning:         #f0ad4e;
+@brand-danger:          #d9534f;
+@brand-info:            #5bc0de;
+
+// Scaffolding
+// -------------------------
+
+@body-bg:               #fff;
+@body-bg-contrast-mix:  mix(#888, @body-bg, 10%);
+@body-bg-contrast-more:	darken(@body-bg-contrast-mix, 10%);
+@input-bg:              @body-bg-contrast-mix;
+
+@back-bg: 				@brand-complement;
+
+@text-color:            @gray-dark;
+@text-muted:            @gray-light;
+
+@border-color-main: #E0E0E0;
+@border-color-main-contrast: darken(@border-color-main, 10%);
+
+@border-stack: 1px solid @border-color-main; // Standard border stack
+@border-stack-thick: 2px solid @border-color-main; // Standard border stack
+
+// Links
+// -------------------------
+
+@link-color:            @brand-primary;
+@link-hover-color:      darken(@link-color, 15%);*/
+
+
 
 
 //			YELLOW/PURPLE, DARK http://colorschemedesigner.com/#1K61TvCw0U8Un
@@ -38,6 +73,7 @@
 @body-bg:               @gray-dark;
 @body-bg-contrast-mix:  mix(#888, @body-bg, 10%);
 @body-bg-contrast-more:	lighten(@body-bg-contrast-mix, 10%);
+@input-bg:              @body-bg-contrast-more;
 
 @back-bg: 				@brand-complement;
 
@@ -47,8 +83,8 @@
 @border-color-main: @gray-darker;
 @border-color-main-contrast: lighten(@border-color-main, 10%);
 
-@border-stack: 1px solid @gray-darker; // Standard border stack
-@border-stack-thick: 2px solid @gray-darker; // Standard border stack
+@border-stack: 1px solid @border-color-main; // Standard border stack
+@border-stack-thick: 2px solid @border-color-main; // Thicker border stack
 
 // Links
 // -------------------------
@@ -58,41 +94,25 @@
 
 
 /*
-	//				DEFAULT
+ * BOOTSTRAP'S VARIABLES
+ * All variables below are derived from the variables above. 
+ * Change the variables above to alter the color scheme.
+ * Small tweaks may be required.
+ */
 
-// Brand colors
+
+// Global values
+// --------------------------------------------------
+
+// Grays
 // -------------------------
 
-@brand-primary:         #428bca;
-@brand-primary-text-contrast: #ffffff;
+@gray-darker:            lighten(#000, 13.5%); // #222
+@gray-dark:              lighten(#000, 20%);   // #333
+@gray:                   lighten(#000, 33.5%); // #555
+@gray-light:             lighten(#000, 60%);   // #999
+@gray-lighter:           lighten(#000, 93.5%); // #eee
 
-@brand-complement:      @gray-lighter;
-@brand-complement-text-contrast: @text-color;
-
-@brand-success:         #5cb85c;
-@brand-warning:         #f0ad4e;
-@brand-danger:          #d9534f;
-@brand-info:            #5bc0de;
-
-// Scaffolding
-// -------------------------
-
-@body-bg:               #fff;
-@body-bg-contrast-mix: mix(#888, @body-bg, 10%);
-
-@back-bg: 				@brand-complement;
-
-@text-color:            @gray-dark;
-
-@border-color-main: #E0E0E0;
-@border-stack: 1px solid @border-color-main; // Standard border stack
-@border-stack-thick: 2px solid @border-color-main; // Standard border stack
-
-// Links
-// -------------------------
-
-@link-color:            @brand-primary;
-@link-hover-color:      darken(@link-color, 15%);*/
 
 // Typography
 // -------------------------
@@ -217,7 +237,7 @@
 // Forms
 // -------------------------
 
-@input-bg:                       @body-bg-contrast-more;
+//@input-bg:                       @body-bg-contrast-more;
 @input-bg-disabled:              @body-bg-contrast-mix;
 
 @input-color:                    @text-color;
@@ -673,7 +693,7 @@
 // Code
 // ------------------------
 @code-color:                  @brand-info;
-@code-bg:                     @body-bg-contrast-more;
+@code-bg:                     @body-bg-contrast-mix;
 
 @pre-bg:                      @code-bg;
 @pre-color:                   @code-color;

@@ -1051,10 +1051,36 @@ body.login div#login p#backtoblog a {}
    Profile page
    ========================================================================== */
 
-// LOGIN FORM
-
 #bbpress-forums #bbp-single-user-details #bbp-user-navigation li.current a {
    opacity: 1;
+   background-color: @body-bg-contrast-mix;
+}
+
+#bbpress-forums fieldset.bbp-form {
+   border: @border-stack;
+}
+
+#bbpress-forums #bbp-your-profile fieldset label[for] {
+   padding: 5px 0 5px 0;
+   text-align: left;
+}
+
+#bbpress-forums #bbp-your-profile fieldset input, 
+#bbpress-forums #bbp-your-profile fieldset textarea,
+#bbpress-forums #bbp-your-profile fieldset select {
+   .form-control;
+}
+
+#bbpress-forums #bbp-your-profile fieldset span.description {
+   .alert;
+   .alert-info;
+   width: 100%;
+   margin: 1em 0;
+}
+
+#bbpress-forums #bbp-your-profile fieldset.submit button {
+   .btn;
+   .btn-primary;
 }
 
 /* ==========================================================================
