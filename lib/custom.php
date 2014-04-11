@@ -3,20 +3,8 @@
  * Custom functions
  */
 
-// Add jQuery Validation plugin //Not needed; compiled into scripts.min.js via grunt build script
-
-// function serverus_scripts() {
-// 	//wp_enqueue_style( 'style-name', get_stylesheet_uri() );
-// 	//wp_enqueue_script( 'script-name', get_template_directory_uri() . '/js/example.js', array(), '1.0.0', true );
-// 	wp_enqueue_script( 'jquery_validate', get_template_directory_uri() . '/assets/js/
-// 		plugins/jquery.validate.min.js'/*, array(), '1.0.0', true*/ );
-// }
-
-// add_action( 'wp_enqueue_scripts', 'serverus_scripts' );
-
 
 // Custom Login form
- 
 function custom_login_stylesheet() { ?>
     <link rel="stylesheet" id="custom_wp_admin_css"  href="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/assets/css/main.min.css'; ?>" type="text/css" media="all" />
 <?php }
@@ -32,43 +20,6 @@ function custom_login_logo_url_title() {
 }
 add_filter( 'login_headertitle', 'custom_login_logo_url_title' );
 
-
-// Override redirect on failed login
-	// hook failed login
-/*if( ! function_exists( 'custom_login_fail' ) ) {
-	function custom_login_fail($username){
-	    // Get the reffering page, where did the post submission come from?
-	    $referrer = $_SERVER['HTTP_REFERER'];
-	 
-	    // if there's a valid referrer, and it's not the default log-in screen
-	    if(!empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin')){
-	        // let's append some information (login=failed) to the URL for the theme to use
-            if ( !strstr($referrer,'?login=failed') ) { // prevent appending twice
-                wp_redirect( $referrer . '?login=failed' );
-            } else {
-                wp_redirect( $referrer );
-            }
-	    exit;
-	    }
-	}
-}
-add_action('wp_login_failed', 'custom_login_fail'); 
-
-	// hook empty login
-if( ! function_exists( 'custom_login_empty' ) ) {
-    function custom_login_empty(){
-        $referrer = $_SERVER['HTTP_REFERER'];
-        if ( strstr($referrer,get_home_url()) && $user==null ) { 
-            if ( !strstr($referrer,'?login=failed') ) { // prevent appending twice
-                wp_redirect( $referrer . '?login=failed' );
-            } else {
-                wp_redirect( $referrer );
-            }
-        }
-    }
-}
-add_action( 'authenticate', 'custom_login_empty');
-*/
 
 // Disable Admin Bar for everyone but administrators
 if (!function_exists('disable_admin_bar')) {
@@ -103,12 +54,53 @@ if (!function_exists('disable_admin_bar')) {
 add_action('init','disable_admin_bar');
 
 
+// Remove unused Widgets from the Dashboard
+function remove_dashboard_widgets()
+{
+    // Globalize the metaboxes array, this holds all the widgets for wp-admin
+    global $wp_meta_boxes;
+     
+    //Main column (left)
+    unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_activity']);
+
+    //Side column (right)
+	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);
+}
+add_action('wp_dashboard_setup', 'remove_dashboard_widgets' );
+
+
+// Remove unused Menus from the Wordpress Admin view
+function remove_menus(){
+  //remove_menu_page( 'index.php' );                  //Dashboard
+  remove_menu_page( 'edit.php' );                   //Posts
+  //remove_menu_page( 'upload.php' );                 //Media
+  //remove_menu_page( 'edit.php?post_type=page' );    //Pages
+  remove_menu_page( 'edit-comments.php' );          //Comments
+  // remove_menu_page( 'themes.php' );                 //Appearance
+  // remove_menu_page( 'plugins.php' );                //Plugins
+  // remove_menu_page( 'users.php' );                  //Users
+  // remove_menu_page( 'tools.php' );                  //Tools
+  // remove_menu_page( 'options-general.php' );        //Settings
+}
+add_action( 'admin_menu', 'remove_menus' );
+
+
+//Remove useless links in the Admin Bar/Toolbar
+add_action( 'admin_bar_menu', 'remove_admin_bar_links', 999 );
+
+function remove_admin_bar_links( $wp_admin_bar ) {
+	$wp_admin_bar->remove_node( 'wp-logo' );
+	$wp_admin_bar->remove_node( 'bar-comments' );
+	$wp_admin_bar->remove_node( 'new-post' );
+}
+
+
 // Enable Lead Reply
 function custom_bbp_show_lead_topic( $show_lead ) {
   $show_lead[] = 'true';
   return $show_lead;
 }
- 
+
 add_filter( 'bbp_show_lead_topic', 'custom_bbp_show_lead_topic' );
 
 
