@@ -3,16 +3,16 @@
  * Custom functions
  */
 
-// Add jQuery Validation plugin
+// Add jQuery Validation plugin //Not needed; compiled into scripts.min.js via grunt build script
 
-function serverus_scripts() {
-	//wp_enqueue_style( 'style-name', get_stylesheet_uri() );
-	//wp_enqueue_script( 'script-name', get_template_directory_uri() . '/js/example.js', array(), '1.0.0', true );
-	wp_enqueue_script( 'jquery_validate', get_template_directory_uri() . '/assets/js/
-		plugins/jquery.validate.min.js'/*, array(), '1.0.0', true*/ );
-}
+// function serverus_scripts() {
+// 	//wp_enqueue_style( 'style-name', get_stylesheet_uri() );
+// 	//wp_enqueue_script( 'script-name', get_template_directory_uri() . '/js/example.js', array(), '1.0.0', true );
+// 	wp_enqueue_script( 'jquery_validate', get_template_directory_uri() . '/assets/js/
+// 		plugins/jquery.validate.min.js'/*, array(), '1.0.0', true*/ );
+// }
 
-add_action( 'wp_enqueue_scripts', 'serverus_scripts' );
+// add_action( 'wp_enqueue_scripts', 'serverus_scripts' );
 
 
 // Custom Login form
