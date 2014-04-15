@@ -7,41 +7,43 @@
  */
 
 
-	//		DEFAULT    BLUE/WHITE 
+
+	//		DARK: BLUE/GRAY
 
 // Brand colors
 // -------------------------
 
-@brand-primary:         #428bca;
-@brand-primary-text-contrast: #ffffff;
+@brand-primary:         #d0b077;
+@brand-primary-text-contrast: #151212;
 
-@brand-complement:      @gray-lighter;
-@brand-complement-text-contrast: @text-color;
+@brand-complement:      #30201C;
+@brand-complement-text-contrast: #fff;
 
-@brand-success:         #5cb85c;
-@brand-success-muted:   #ECFFEC;
-@brand-warning:         #f0ad4e;
-@brand-warning-muted:   #FFF6E8;
-@brand-danger:          #d9534f;
-@brand-danger-muted:    #FDE1DF;
-@brand-info:            #5bc0de;
-@brand-info-muted:      #F4F8FA; 
+// TODO
+@brand-success:         #00548F;
+@brand-success-muted:   #8EBDDF;
+@brand-warning:         #DFCE00;
+@brand-warning-muted:   #F6EF9D;
+@brand-danger:          #C0004A;
+@brand-danger-muted:    #ED98B9;
+@brand-info:            #4FA3DF;
+@brand-info-muted:      #8EBDDF; 
 
 // Scaffolding
 // -------------------------
 
-@body-bg:               #fff;
+@body-bg:               #14120E;
 @body-bg-contrast-mix:  mix(#888, @body-bg, 10%);
-@body-bg-contrast-more:	darken(@body-bg-contrast-mix, 10%);
+@body-bg-contrast-more:	lighten(@body-bg-contrast-mix, 15%);
 @input-bg:              @body-bg;
 
-@back-bg: 				@brand-complement;
+@back-bg: 				#525252;
 
-@text-color:            @gray-dark;
+@text-color:            #f3e6d0;
 @text-muted:            @gray-light;
 
-@border-color-main: #E0E0E0;
-@border-color-main-contrast: darken(@border-color-main, 10%);
+@border-color-main: #291F1C;
+@border-color-main-contrast: lighten(@border-color-main, 10%);
 
 @border-stack: 1px solid @border-color-main; // Standard border stack
 @border-stack-thick: 2px solid @border-color-main; // Standard border stack
@@ -49,10 +51,8 @@
 // Links
 // -------------------------
 
-@link-color:            @brand-primary;
-@link-hover-color:      darken(@link-color, 15%);
-
-
+@link-color:            #b6260c;
+@link-hover-color:      lighten(@link-color, 15%);
 
 
 

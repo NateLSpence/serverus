@@ -34,6 +34,9 @@ function roots_setup() {
     'admin-preview-callback' => '',
   ) );
 
+  // Add Custom Background
+  add_theme_support( 'custom-background' );
+
   // Tell the TinyMCE editor to use a custom stylesheet
   add_editor_style('/assets/css/editor-style.css');
 }
