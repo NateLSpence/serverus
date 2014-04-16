@@ -1,0 +1,44 @@
+	//		LIGHT: ORANGE/Yellow
+
+// Brand colors
+// -------------------------
+
+@brand-primary:         #DF7E00;
+@brand-primary-text-contrast: #ffffff;
+
+@brand-complement:      #F6EF9D;
+@brand-complement-text-contrast: @text-color;
+
+@brand-success:         #00548F;
+@brand-success-muted:   #8EBDDF;
+@brand-warning:         #DFCE00;
+@brand-warning-muted:   #F6EF9D;
+@brand-danger:          #C0004A;
+@brand-danger-muted:    #ED98B9;
+@brand-info:            #4FA3DF;
+@brand-info-muted:      #8EBDDF; 
+
+// Scaffolding
+// -------------------------
+
+@body-bg:               #fff;
+@body-bg-contrast-mix:  mix(#888, @body-bg, 10%);
+@body-bg-contrast-more:	darken(@body-bg-contrast-mix, 15%);
+@input-bg:              @body-bg;
+
+@back-bg: 				@gray-dark;
+
+@text-color:            @gray-dark;
+@text-muted:            @gray-light;
+
+@border-color-main: #E0E0E0;
+@border-color-main-contrast: darken(@border-color-main, 10%);
+
+@border-stack: 1px solid @border-color-main; // Standard border stack
+@border-stack-thick: 2px solid @border-color-main; // Standard border stack
+
+// Links
+// -------------------------
+
+@link-color:            @brand-primary;
+@link-hover-color:      darken(@link-color, 15%);

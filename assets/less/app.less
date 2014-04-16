@@ -856,6 +856,18 @@ div.bbp-template-notice.error {
       margin: .5em 1em;
    }
 
+   // Trashed replies
+   #bbpress-forums .status-trash.even, 
+   #bbpress-forums .status-spam.even {
+      background-color: @brand-danger-muted !important;
+   }
+
+   #bbpress-forums .status-trash.odd, 
+   #bbpress-forums .status-spam.odd {
+      background-color: darken(@brand-danger-muted, 5%) !important;
+   }
+
+
 
 // FRONT PAGE
    #bbpress-forums.srv-front-page div.bbp-topic-content {
