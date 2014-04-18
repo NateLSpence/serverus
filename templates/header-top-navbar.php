@@ -31,4 +31,10 @@
 <!-- <img src="<?php header_image(); ?>" height="" width="<?php echo get_custom_header()->width; ?>" alt="" /> -->
 
 
-<div class="header-image"><div class="container"><a href="<?php echo home_url(); ?>/"><h1 class="header-image-title" >HELLO2</h1></a></div></div>
+<div class="header-image"><div class="container">
+
+  <?php if( get_theme_mod('toggle_header_text') ) { ?>
+    <a href="<?php echo home_url(); ?>/" class="header-image-title-wrapper"><h1 class="header-image-title" ><?php bloginfo('name'); ?><div class="header-image-title-bg"></div></h1></a>
+  <?php } ?>
+
+</div></div>
