@@ -144,6 +144,47 @@ function customize_register( $wp_customize ) {
   	 * Navbar Colors
  	 */
 
+	// Nav bg color
+	$wp_customize->add_setting( 'color_nav_bg' , array(
+    	'sanitize_callback' => 'sanitize_hex_color',
+    	'transport'   => 'refresh',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'color_nav_bg', array(
+		'label'        => __( 'Navbar Color', 'serverus' ),
+		'section'    => 'colors_nav',
+		'settings'   => 'color_nav_bg',
+        'priority'   => 10
+	) ) );
+
+	// Nav bg color active
+	$wp_customize->add_setting( 'color_nav_bg_active' , array(
+    	'sanitize_callback' => 'sanitize_hex_color',
+    	'transport'   => 'refresh',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'color_nav_bg_active', array(
+		'label'        => __( 'Navbar Active Color', 'serverus' ),
+		'section'    => 'colors_nav',
+		'settings'   => 'color_nav_bg_active',
+        'priority'   => 11
+	) ) );
+
+
+	// Nav border color
+	$wp_customize->add_setting( 'color_nav_border' , array(
+    	'sanitize_callback' => 'sanitize_hex_color',
+    	'transport'   => 'refresh',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'color_nav_border', array(
+		'label'        => __( 'Navbar Border Color', 'serverus' ),
+		'section'    => 'colors_nav',
+		'settings'   => 'color_nav_border',
+        'priority'   => 12
+	) ) );
+
+
 	// Nav Link color
 	$wp_customize->add_setting( 'color_nav_link' , array(
     	'sanitize_callback' => 'sanitize_hex_color',
@@ -302,7 +343,7 @@ function serverus_customize_css() {
 	<?php } ?>
 
 	
-	<?php if( get_theme_mod('var_name') ) { ?>
+	<?php if( get_theme_mod('color_nav_link') ) { ?>
         <style type="text/css">
 
 			.navbar-default .navbar-brand{color:<?php echo get_theme_mod('color_nav_link'); ?>}
@@ -314,13 +355,58 @@ function serverus_customize_css() {
 	<?php } ?>
 
 
-	<!-- <?php if( get_theme_mod('var_name') ) { ?>
+	<?php if( get_theme_mod('color_nav_link_hover') ) { ?>
+        <style type="text/css">
+			body.bbpress nav .menu-forums,body.bbpress nav .menu-forums:hover,body.bbpress nav .menu-forums:focus{color:<?php echo get_theme_mod('color_nav_link_hover'); ?>;}
+			.navbar-default .navbar-nav>li>a:hover,.navbar-default .navbar-nav>li>a:focus{color:<?php echo get_theme_mod('color_nav_link_hover'); ?>;}
+			.navbar-default .navbar-nav>.active>a,.navbar-default .navbar-nav>.active>a:hover,.navbar-default .navbar-nav>.active>a:focus{color:<?php echo get_theme_mod('color_nav_link_hover'); ?>;}
+			.navbar-default .navbar-nav>.open>a,.navbar-default .navbar-nav>.open>a:hover,.navbar-default .navbar-nav>.open>a:focus{color:<?php echo get_theme_mod('color_nav_link_hover'); ?>}
+			.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus{color:<?php echo get_theme_mod('color_nav_link_hover'); ?>;}
+			.navbar-default .navbar-nav .open .dropdown-menu>.active>a,.navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover,.navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus{color:<?php echo get_theme_mod('color_nav_link_hover'); ?>;}
+			.navbar-default .navbar-link:hover{color:<?php echo get_theme_mod('color_nav_link_hover'); ?>}
+	
+		</style>
+	<?php } ?>
+
+
+
+	<?php if( get_theme_mod('color_nav_bg') ) { ?>
+	    <style type="text/css">
+	
+			.navbar-default {background-color: <?php echo get_theme_mod('color_nav_bg'); ?>;}
+	
+		</style>
+	<?php } ?>
+
+
+
+	<?php if( get_theme_mod('color_nav_bg_active') ) { ?>
+        <style type="text/css">
+	
+			.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {background-color: <?php echo get_theme_mod('color_nav_bg_active'); ?>;}
+
+		</style>
+	<?php } ?>
+
+
+
+	<?php if( get_theme_mod('color_nav_border') ) { ?>
+        <style type="text/css">
+	
+			.navbar-default {border-color: <?php echo get_theme_mod('color_nav_border'); ?>;}
+			.navbar-default .navbar-collapse, .navbar-default .navbar-form {border-color: <?php echo get_theme_mod('color_nav_border'); ?>;}
+	
+		</style>
+	<?php } ?>
+
+<!-- 
+	<?php if( get_theme_mod('var_name') ) { ?>
 	        <style type="text/css">
 	
 	
 		</style>
-	<?php } ?> -->
-
+	<?php } ?>
+ -->
 
     <?php
 }
