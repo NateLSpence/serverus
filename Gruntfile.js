@@ -79,7 +79,7 @@ module.exports = function(grunt) {
         ],
         tasks: ['jshint', 'uglify', 'version']
       },
-      livereload: {
+/*      livereload: {
         // Browser live reloading
         // https://github.com/gruntjs/grunt-contrib-watch#live-reloading
         options: {
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
           'templates/*.php',
           '*.php'
         ]
-      }
+      }*/
     },
     clean: {
       dist: [

@@ -58,6 +58,12 @@ body.bbpress nav .menu-forums {
 }
 
 
+.header-image .header-image-title-wrapper .header-image-title {
+   top: 48px;
+   left: 48px;
+}
+
+
 .login-register-widget {
    float: left;
    line-height: @line-height-computed;
@@ -789,10 +795,16 @@ div.bbp-template-notice.error {
    }
    
    #bbpress-forums span.bbp-admin-links a {
-      .text-muted;
+      color: @text-muted;
       font-size: 10px;
       text-transform: uppercase;
       text-decoration: none;
+   }
+
+   .bbp-forum-header a.bbp-forum-permalink, 
+   .bbp-topic-header a.bbp-topic-permalink, 
+   .bbp-reply-header a.bbp-reply-permalink {
+      color: @text-muted;
    }
 
    // Reply avatar and author info

@@ -31,8 +31,7 @@ function customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'title_tagline' , array(
 		'title'		=> __('Site Title','serverus'),
 		'priority'	=> 20,
-	));
-
+	) );
 
 	$wp_customize->add_section( 'colors_main' , array(
 	    'title'      => __('Main Colors','serverus'),
@@ -44,6 +43,10 @@ function customize_register( $wp_customize ) {
 	    'priority'   => 22,
 	) );
 
+	$wp_customize->add_section( 'color_schemes' , array(
+	    'title'      => __('Color Schemes','serverus'),
+	    'priority'   => 30,
+	) );
 
 
 	/**
@@ -107,7 +110,7 @@ function customize_register( $wp_customize ) {
 	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
 		'color_header_alpha',
         array(
-            'label'          => __( 'Title Transparency (1-100)', 'serverus' ),
+            'label'          => __( 'Title Opacity (1-100)', 'serverus' ),
             'section'        => 'title_tagline',
             'settings'       => 'color_header_alpha',
         	'priority'   	 => 23
@@ -115,22 +118,38 @@ function customize_register( $wp_customize ) {
     ) );
 
 
-	// Title Position
-	$wp_customize->add_setting( 'header_title_position' , array(
+	// Title Vertical Position
+	$wp_customize->add_setting( 'header_title_vertical_position' , array(
 		'transport'   => 'refresh',
 		'default'	  => '48',
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
-		'header_title_position',
+		'header_title_vertical_position',
         array(
-            'label'          => __( 'Title Position (distance from the top)', 'serverus' ),
+            'label'          => __( 'Title Vertical Position', 'serverus' ),
             'section'        => 'title_tagline',
-            'settings'       => 'header_title_position',
+            'settings'       => 'header_title_vertical_position',
         	'priority'   	 => 30
         )
     ) );
 
+
+	// Title Horizontal Position
+	$wp_customize->add_setting( 'header_title_horizontal_position' , array(
+		'transport'   => 'refresh',
+		'default'	  => '48',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+		'header_title_horizontal_position',
+        array(
+            'label'          => __( 'Title Horizontal Position', 'serverus' ),
+            'section'        => 'title_tagline',
+            'settings'       => 'header_title_horizontal_position',
+        	'priority'   	 => 30
+        )
+    ) );
 
 
 	/**
@@ -161,6 +180,35 @@ function customize_register( $wp_customize ) {
   	 * Main Colors
  	 */
 
+
+	// Background color (@back-bg)
+	$wp_customize->add_setting( 'color_bg_serverus' , array(
+    	'sanitize_callback' => 'sanitize_hex_color',
+    	'transport'   => 'refresh',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'color_bg_serverus', array(
+		'label'        => __( 'Background Color', 'serverus' ),
+		'section'    => 'colors_main',
+		'settings'   => 'color_bg_serverus',
+        'priority'   => 10
+	) ) );
+
+
+	// Text color (@text-color)
+	$wp_customize->add_setting( 'color_text_serverus' , array(
+    	'sanitize_callback' => 'sanitize_hex_color',
+    	'transport'   => 'refresh',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'color_text_serverus', array(
+		'label'        => __( 'Text Color', 'serverus' ),
+		'section'    => 'colors_main',
+		'settings'   => 'color_text_serverus',
+        'priority'   => 12
+	) ) );
+
+
 	// Brand primary color
 	$wp_customize->add_setting( 'color_brand_primary' , array(
     	//'default' => '#000',
@@ -169,7 +217,7 @@ function customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'color_brand_primary', array(
-		'label'        => __( 'Primary Color', 'serverus' ),
+		'label'        => __( 'Primary Accent', 'serverus' ),
 		'section'    => 'colors_main',
 		'settings'   => 'color_brand_primary',
         'priority'   => 21
@@ -183,7 +231,7 @@ function customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'color_brand_primary_text', array(
-		'label'        => __( 'Primary Text Color', 'serverus' ),
+		'label'        => __( 'Primary Accent Text', 'serverus' ),
 		'section'    => 'colors_main',
 		'settings'   => 'color_brand_primary_text',
         'priority'   => 22
@@ -196,7 +244,7 @@ function customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'color_brand_complement', array(
-		'label'        => __( 'Complementary Color', 'serverus' ),
+		'label'        => __( 'Complementary Accent', 'serverus' ),
 		'section'    => 'colors_main',
 		'settings'   => 'color_brand_complement',
         'priority'   => 23
@@ -209,7 +257,7 @@ function customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'color_brand_complement_text', array(
-		'label'        => __( 'Complementary Text Color', 'serverus' ),
+		'label'        => __( 'Complementary Accent Text', 'serverus' ),
 		'section'    => 'colors_main',
 		'settings'   => 'color_brand_complement_text',
         'priority'   => 24
@@ -322,14 +370,61 @@ function customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'color_nav_link_hover', array(
-		'label'        => __( 'Nav Link Hover Color', 'serverus' ),
+		'label'        => __( 'Nav Link Hover/Active Color', 'serverus' ),
 		'section'    => 'colors_nav',
 		'settings'   => 'color_nav_link_hover',
         'priority'   => 21
 	) ) );
 
+
+
+	/**
+  	 * Color Schemes
+ 	 */
+
+	// Color Scheme radio buttons
+	$wp_customize->add_setting( 'scheme_picker' , array(
+		'transport'   => 'refresh',
+		'default'	  => 'light-blue',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+		'scheme_picker',
+        array(
+            'label'          => __( 'Choose a base color scheme:', 'serverus' ),
+            'section'        => 'color_schemes',
+            'settings'       => 'scheme_picker',
+            'type'           => 'radio',
+            'choices'        => array(
+                'light-blue'   => __( 'Default Blue' ),
+                'light-brown'  => __( 'Minecraft' ),
+                'light-red'  => __( 'Red' ),
+                'light-teal'  => __( 'League' ),
+                'dark-tan'  => __( 'Diablo (Dark)' ),
+                'dark-yellow'  => __( 'Yellow (Dark)' )
+            )
+        )
+    ) );
+
+
+
 }
 add_action( 'customize_register', 'customize_register' );
+
+
+function serverus_enqueue_stylesheet() {
+	switch ( get_theme_mod('scheme_picker') ) {
+		case 'light-blue':
+			wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/default.min.css', false);
+			break;
+		
+		default:
+			wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/main.min.css', false, 'a57a4dc860e57c6e3992b03fa0d88207');
+			break;
+	}
+
+	//
+}
 
 
 
@@ -342,6 +437,7 @@ function serverus_customize_css() {
 		.form-control:focus{border-color:<?php echo get_theme_mod('color_brand_primary'); ?>;}
 		.btn-primary{background-color:<?php echo get_theme_mod('color_brand_primary'); ?>;}
 		.btn-primary.active{background-color:<?php echo get_theme_mod('color_brand_primary'); ?>;}
+		.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,.open .dropdown-toggle.btn-primary{background-color:<?php echo get_theme_mod('color_brand_complement'); ?>;}
 		.btn-primary .badge{color:<?php echo get_theme_mod('color_brand_primary'); ?>;}
 		.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus{background-color:<?php echo get_theme_mod('color_brand_primary'); ?>}
 		.nav-pills>li.active>a,.nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus{background-color:<?php echo get_theme_mod('color_brand_primary'); ?>}
@@ -555,14 +651,40 @@ function serverus_customize_css() {
 	<?php } ?>
 
 
-	<?php if( get_theme_mod('header_title_position') ) { ?>
+	<?php if( get_theme_mod('header_title_vertical_position') ) { ?>
         <style type="text/css">
 	
-			.header-image .header-image-title-wrapper .header-image-title {top: <?php echo get_theme_mod('header_title_position'); ?>px;}
+			.header-image .header-image-title-wrapper .header-image-title {top: <?php echo get_theme_mod('header_title_vertical_position'); ?>px;}
 	
 		</style>
 	<?php } ?>
 
+
+	<?php if( get_theme_mod('header_title_horizontal_position') ) { ?>
+        <style type="text/css">
+	
+			.header-image .header-image-title-wrapper .header-image-title {left: <?php echo get_theme_mod('header_title_horizontal_position'); ?>px;}
+	
+		</style>
+	<?php } ?>
+
+
+	<?php if( get_theme_mod('color_bg_serverus') ) { ?>
+        <style type="text/css">
+			body { 
+		   		background-color: <?php echo get_theme_mod('color_bg_serverus'); ?>;
+		   	}
+		</style>
+	<?php } ?>
+
+
+	<?php if( get_theme_mod('color_text_serverus') ) { ?>
+        <style type="text/css">
+			body {
+  				color: <?php echo get_theme_mod('color_text_serverus'); ?>;
+			}
+		</style>
+	<?php } ?>
 
 <!-- 
 	<?php if( get_theme_mod('var_name') ) { ?>
