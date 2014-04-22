@@ -3,7 +3,7 @@
  * Enqueue scripts and stylesheets
  *
  * Enqueue stylesheets in the following order:
- * 1. /theme/assets/css/main.abd801b0.min.css
+ * 1. /theme/assets/css/main.6f820ad3.min.css
  *
  * Enqueue scripts in the following order:
  * 1. jquery-1.10.2.min.js via Google CDN
@@ -11,7 +11,7 @@
  * 3. /theme/assets/js/main.min.js (in footer)
  */
 function roots_scripts() {
-  //wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/main.abd801b0.min.css', false, null);
+  //wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/main.6f820ad3.min.css', false, null);
 
   // jQuery is loaded using the same method from HTML5 Boilerplate:
   // Grab Google CDN's latest jQuery with a protocol relative URL; fallback to local if offline
