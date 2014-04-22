@@ -56,13 +56,28 @@ module.exports = function(grunt) {
         }
       }
     },
-    version: {
+    /*version: {
       options: {
         file: 'lib/scripts.php',
         css: 'assets/css/main.min.css',
         cssHandle: 'roots_main',
         js: 'assets/js/scripts.min.js',
         jsHandle: 'roots_scripts'
+      }
+    },*/
+    version: {
+      assets: {
+        options: {
+          style : 'roots_main',
+          script : 'roots_scripts',
+          minify: 'true',
+          minifyname: 'min',
+          manifest: 'assets/manifest.json',
+        },
+        files: {
+          'lib/scripts.php' : ['assets/css/main.min.css' , 'assets/js/scripts.min.js'],
+          'lib/custom.php' : ['assets/css/main.min.css']
+        }
       }
     },
     watch: {
@@ -107,7 +122,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-wp-version');
+  //grunt.loadNpmTasks('grunt-wp-version');
+  grunt.loadNpmTasks('grunt-wp-assets');
 
   // Register tasks
   grunt.registerTask('default', [

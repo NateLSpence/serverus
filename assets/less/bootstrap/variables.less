@@ -7,41 +7,42 @@
  */
 
 
-	//		LIGHT: BLUE/GRAY  	DEFAULT
+	//		LIGHT: BROWN/GREEN/GRAY/BLUE  -  Inspired by Minecraft
 
 // Brand colors
 // -------------------------
 
-@brand-primary:         #428bca;
-@brand-primary-text-contrast: #ffffff;
+@brand-primary:         #74543B;
+@brand-primary-text-contrast: #fff;
 
-@brand-complement:      @gray-lighter;
-@brand-complement-text-contrast: @text-color;
+@brand-complement:      #67AB3E;
+@brand-complement-text-contrast: #fff;
 
-@brand-success:         #5cb85c;
-@brand-success-muted:   #ECFFEC;
-@brand-warning:         #f0ad4e;
-@brand-warning-muted:   #FFF6E8;
-@brand-danger:          #d9534f;
-@brand-danger-muted:    #FDE1DF;
-@brand-info:            #5bc0de;
-@brand-info-muted:      #F4F8FA; 
+@brand-success:         #4CDCE5; // Kinda bright
+@brand-success-muted:   #FAFEFF;
+@brand-warning:         #975151;
+@brand-warning-muted:   #EEE6E6;
+@brand-danger:          #FC5700;
+@brand-danger-muted:    #FAF2E1;
+@brand-info:            #40D062;
+@brand-info-muted:      #F5FCF7; 
 
 // Scaffolding
 // -------------------------
 
-@body-bg:               #fff;
-@body-bg-contrast-mix:  mix(#888, @body-bg, 10%);
-@body-bg-contrast-more:	darken(@body-bg-contrast-mix, 10%);
-@input-bg:              @body-bg;
+@body-bg:               @gray-lighter;
+@body-bg-contrast-mix:  mix(#888, @body-bg, 20%);
+@body-bg-contrast-more:	darken(@body-bg-contrast-mix, 15%);
 
-@back-bg: 				@brand-complement;
+@input-bg:              #fff;
 
-@text-color:            @gray-dark;
-@text-muted:            @gray-light;
+@back-bg: 				#85B1EE;
 
-@border-color-main: #E0E0E0;
-@border-color-main-contrast: darken(@border-color-main, 10%);
+@text-color:            #212121;
+@text-muted:            #555;
+
+@border-color-main: @gray-light;
+@border-color-main-contrast: darken(@border-color-main, 15%);
 
 @border-stack: 1px solid @border-color-main; // Standard border stack
 @border-stack-thick: 2px solid @border-color-main; // Standard border stack
@@ -49,8 +50,9 @@
 // Links
 // -------------------------
 
-@link-color:            @brand-primary;
-@link-hover-color:      darken(@link-color, 15%);
+@link-color:            #2F25AA;
+@link-hover-color:      lighten(@link-color, 20%);
+
 
 
 
