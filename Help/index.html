@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.ico"> -->
+
+    <title>Off Canvas Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dist/css/serverus-help.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar navbar-fixed-top navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#prerequisites">Prerequisites</a></li>
+            <li><a href="#plugins">Plugins</a></li>
+            <li><a href="#setup">Setup</a></li>
+            <li><a href="#widgets">Widgets</a></li>
+            <li><a href="#users">Users</a></li>
+            <li><a href="#customizing">Customizing</a></li>
+            <!-- <li><a href="#"><span class="caret-up"></span> Top</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="row">
+
+            <section id="prerequisites" class="col-12 col-xs-12">
+
+              <h2>Prerequisites</h2>
+
+              <div class="subsection">
+                <h4>Set up WordPress and log in</h4>
+                <p>You'll need a host, a domain name, and an updated version of WordPress installed in order to use Serverus. Refer to the resources here- LINK <!-- TODO --> for instructions on this.</p>
+                <p>If you're not signed in already, head to yourwebsite.com/wp-admin to log in as an administrator.</p>
+                <p>Please note! As administrator, you'll see the WordPress Admin Toolbar at the top of the webpage- other users won't see this. You'll also be able to see IP addresses and extra buttons on posts for moderation. Blocked/muted users and posts will be visible to you, but not regular uesrs. Otherwise, what you see is what your users will see for the most part.</p>
+              </div>
+
+              <hr>
+
+              <div class="subsection">
+                <h4>Enable mod_rewrite</h4>
+                <p>Refer to this resource- LINK <!-- TODO --></p>
+              </div>
+
+            </section><!--/span-->
+
+
+            <section id="plugins" class="col-12 col-xs-12">
+              
+              <h2>Plugins</h2>
+              
+              <div class="subsection">
+                <h4>Required Plugins</h4>
+                <p>bbPress</p>
+              </div>
+
+              <hr>
+
+              <div class="subsection">
+                <h4>Recommended Plugins</h4>
+                <p>bbPress Moderation</p>
+                <p>bbP Signature</p>
+                <p>Easy Bootstrap Shortcode</p>
+              </div>
+
+            </section><!--/span-->
+
+            <section id="setup" class="col-12 col-xs-12">
+              <h2>Setup</h2>
+              
+              <div id="front-page-setup" class="subsection">
+                <h4>Front Page Setup</h4>
+                <p>Like most forums, you can have your front page display news. This will display the latest topics from a single forum (for example, "Server News"), newest first, without any of the posts attached to them.</p>
+                <p>You'll need to put in a shortcode to enable the Serverus front page if you want it. The simplest form of it looks like this: <code>[srv_frontpage forum_id=#]</code></p>
+                <p>To set which forum to display posts from, change the "forum_id=#" to the id number of your preferred forum. You'll find the ID... <!-- TODO --></p>
+                <p>There are some additional settings to customize the way the front page works. The following are optional: <code>posts_per_page=5 char_limit=0 show_stickies=false</code> Configuring all these settings in the shortcode would look like this: <code>[srv_frontpage forum_id=12 posts_per_page=7 char_limit=450 show_stickies=true]</code></p>
+              </div>
+
+              <hr>
+
+              <div id="forums-setup" class="subsection">
+                <h4>Forums Setup</h4>
+                <p>Create a blank page called "forums". Serverus will take care of the rest here. What's important is that you have a page with the slug "forums", so after you create this page, you can edit its title to whatever you want and it won't break anything.</p>
+                <p>Under the Forums menu, you'll have to create the forums you want, along with categories to put them under. All forums require a category, even if everything is under one category.</p>
+              </div>  
+
+            </section><!--/span-->
+
+            <section id="widgets" class="col-12 col-xs-12">
+              <h2>Widgets</h2>
+
+              <div class="subsection">
+                <h4>Login/Registration Widget</h4>
+                <p>Drag the <span class="text-danger">(Serverus) Login Widget</span> to the Login Location. Now you and your users can log in.</p>
+              </div>  
+
+              <hr>
+
+              <div class="subsection">
+                <h4>Recent Topics Widget</h4>
+                <p>This widget displays a list of recent posts made by your users.</p> 
+              </div>  
+
+              <hr>
+
+              <div class="subsection">
+                <h4>Other Widgets</h4>
+                <p>The (bbPress) Forums Statistics widget and (bbPress) Forums List widgets might be useful as well. Text widgets work for any static information you want visible (Server IP, links, etc). For any third-party widgets, paste the code into a Text widget.</p> 
+              </div>  
+
+            </section><!--/span-->
+
+            <section id="users" class="col-12 col-xs-12">
+              <h2>Users</h2>
+
+              <div class="subsection">
+                <h4>Enable Registration</h4>
+                <p>To open your forums to the world, you'll have to enable registration in order for users to make their own account. Make sure "Anyone can register" is checked under Settings. Alternatively, you can opt to add users manually via the Users menu.</p>
+              </div>  
+              
+              <hr>
+
+              <div class="subsection">
+                <h4>Modify Users</h4>
+                <p>There are two places you can edit a user's information- the Users menu from the WordPress menus, or by clicking on the user's name in the forums and viewing their profile. These are basically the same, but as an administrator you might find them both useful. In the WordPress menus, you can see all of the users in a list, instead of digging through posts to find a specific person. Making quick tweaks might be easier from the forum profile view.</p>
+              </div>  
+            
+              <hr>
+
+              <div class="subsection">
+                <h4>Moderation</h4>
+                <p>If you've installed the bbPress Moderation plugin, this is a pretty simple process. Individual posts have buttons for moderation, and you can set a user to "Blocked" as their forum role to ban them. Setting a user to "Moderator" gives them the ability to edit other users/posts and see a minimal version of the WordPress administration menus.</p>
+              </div>  
+
+            </section><!--/span-->
+
+            <section id="customizing" class="col-12 col-xs-12">
+              <h2>Customizing</h2>
+              <p>Time to customize! Add a header image and text, a background image, and choose a color scheme that suits your fancy.</p>
+              <p>Serverus is simple, but you can dig into the color scheme if you want to. The best method is to choose a color scheme that is closest to what you need already, and then tweak it from there. If you're itching to change something, but it doesn't have an option, you can always override the default CSS <!-- TODO -->.</p>
+            </section><!--/span-->
+
+
+          </div><!--/row-->
+        </div><!--/span-->
+
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2014</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script src="dist/js/scrollspy.js"></script>
+  </body>
+</html>

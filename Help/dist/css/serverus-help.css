@@ -1,0 +1,26 @@
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+
+section {
+	margin-bottom: 48px;
+	padding-top: 32px;
+	border-top: 1px dotted #999;
+}
+
+.subsection {
+	
+}
+
+
+.caret-up {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: 2px;
+	vertical-align: middle;
+	border-bottom: 4px solid;
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent;
+}
