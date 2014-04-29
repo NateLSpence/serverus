@@ -4,8 +4,10 @@
  */
 
 
+
+
 /**
- *	Customization options //TODO does this duplicate in general settings section?
+ *	Customization options //TODO does this duplicate in general settings section? NOPE
  */
 function customize_register( $wp_customize ) {
 
@@ -439,7 +441,7 @@ function serverus_enqueue_stylesheet() {
 			break;
 
 		default:
-			wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/main.6f820ad3.min.css', false, null);
+			wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/main.a57a4dc8.min.css', false, null);
 			break;
 	}
 
@@ -727,7 +729,7 @@ add_action( 'wp_head', 'serverus_customize_css');
 
 // Custom Login form
 function custom_login_stylesheet() { ?>
-    <link rel="stylesheet" id="custom_wp_admin_css"  href="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/assets/css/main.6f820ad3.min.css'; ?>" type="text/css" media="all" />
+    <link rel="stylesheet" id="custom_wp_admin_css"  href="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/assets/css/main.a57a4dc8.min.css'; ?>" type="text/css" media="all" />
 <?php }
 add_action( 'login_enqueue_scripts', 'custom_login_stylesheet' );
 
@@ -775,19 +777,64 @@ if (!function_exists('disable_admin_bar')) {
 add_action('init','disable_admin_bar');
 
 
+
+/**
+ *	Dashboard Widgets
+ */
+
+// Add theme setup walkthrough widget
+function serverus_add_dashboard_widgets() {
+	add_meta_box('serverus_dashboard_widget_setup', __('Serverus Configuration'), 'serverus_dashboard_widget_setup_function', 'dashboard', 'side', 'high');
+}
+add_action( 'wp_dashboard_setup', 'serverus_add_dashboard_widgets' );
+
+function serverus_dashboard_widget_setup_function() {
+	// Display whatever it is you want to show.
+	echo "<p>Hello World, I'm a great Dashboard Widget</p>";
+} 
+
+
 // Remove unused Widgets from the Dashboard
-function remove_dashboard_widgets()
-{
+function remove_dashboard_widgets() {
     // Globalize the metaboxes array, this holds all the widgets for wp-admin
     global $wp_meta_boxes;
      
+
     //Main column (left)
     unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_activity']);
+	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']);
 
     //Side column (right)
 	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);
 }
 add_action('wp_dashboard_setup', 'remove_dashboard_widgets' );
+
+
+// Remove unused Widgets from Appearance->Widgets page
+function unregister_default_widgets() {
+	// WordPress defaults
+	unregister_widget('WP_Widget_Pages');
+	unregister_widget('WP_Widget_Calendar');
+	unregister_widget('WP_Widget_Archives');
+	//unregister_widget('WP_Widget_Links');
+	unregister_widget('WP_Widget_Meta');
+	unregister_widget('WP_Widget_Search');
+	// unregister_widget('WP_Widget_Text');
+	unregister_widget('WP_Widget_Categories');
+	unregister_widget('WP_Widget_Recent_Posts');
+	unregister_widget('WP_Widget_Recent_Comments');
+	unregister_widget('WP_Widget_RSS');
+	unregister_widget('WP_Widget_Tag_Cloud');
+	//unregister_widget('WP_Nav_Menu_Widget');
+
+	// bbPress defaults
+	unregister_widget('BBP_Login_Widget');
+	unregister_widget('BBP_Views_Widget');
+	unregister_widget('BBP_Search_Widget');
+	unregister_widget('BBP_Topics_Widget');
+	unregister_widget('BBP_Replies_Widget');
+}
+add_action('widgets_init', 'unregister_default_widgets', 11);
 
 
 // Remove unused Menus from the Wordpress Admin view
@@ -973,7 +1020,7 @@ function set_header_properties() {
  *	Custom Shortcodes
  */
 
-// [srv_frontpage forum_id=0 posts_per_page=5 char_limit=0 show_avatar=true show_stickies=false]
+// [srv_frontpage forum_id=0 posts_per_page=5 char_limit=0 /*show_avatar=true*/ show_stickies=false]
 class srv_frontpage_class {
 
 	public static $attr = array();
