@@ -3,10 +3,23 @@ body {
   padding-top: 70px;
 }
 
+h2 {
+	background-color: #999;
+	color: #FFF;
+	padding: 4px 4px 4px 8px;
+	margin-top: 80px;
+}
+
+h4 {
+	background-color: #F0F0F0;
+	padding: 2px 2px 2px 4px;
+}
+
 section {
-	margin-bottom: 48px;
-	padding-top: 32px;
-	border-top: 1px dotted #999;
+/* 	margin-bottom: 48px;
+	padding-top: 32px; */
+	/*border-top: 1px dotted #999;*/
+	
 }
 
 .subsection {

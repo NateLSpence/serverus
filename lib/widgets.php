@@ -28,7 +28,7 @@ function roots_widgets_init() {
   register_sidebar(array(
     'name' => __('Login Location', 'serverus'),
     'id' => 'sidebar-login',
-    'description' => 'Put the Login/Register widget here.',
+    'description' => 'Leave this area blank.',
     'before_widget' => '<div class="%1$s %2$s">',
     'after_widget' => '</div>',
     'before_title' => '',
@@ -184,10 +184,10 @@ class Serverus_Login_Widget extends WP_Widget {
   public function __construct() {
     $widget_ops = array(
       'classname'   => 'login-register-widget',
-      'description' => __( 'A bbPress login/register widget for the Serverus theme. Place in the "Login Location" area.', 'bbpress' ) /*TODO should this (and below) say bbpress or serverus?*/
+      'description' => __( 'A bbPress login/register widget for the Serverus theme. Place in the "Login Location" area.', 'Serverus' ) 
     );
 
-    parent::__construct( false, __( '(Serverus) Login Widget', 'bbpress' ), $widget_ops );
+    parent::__construct( false, __( '(Serverus) Login Widget', 'Serverus' ), $widget_ops );
   }
 
   /**
@@ -215,7 +215,7 @@ class Serverus_Login_Widget extends WP_Widget {
     if ( !is_user_logged_in() ) : ?>
 
         <div class="bbp-login-links">
-          <a href="<?php echo wp_login_url( $_SERVER['REQUEST_URI'] ); ?>" title="<?php esc_attr_e( 'Login/Register', 'bbpress' ); ?>" class="serverus-login-link"><?php _e( 'Login/Register', 'bbpress' ); ?></a>
+          <a href="<?php echo wp_login_url( $_SERVER['REQUEST_URI'] ); ?>" title="<?php esc_attr_e( 'Login/Register', 'Serverus' ); ?>" class="serverus-login-link"><?php _e( 'Login/Register', 'Serverus' ); ?></a>
         </div>
 
     <?php else : ?>
@@ -257,10 +257,10 @@ class Serverus_Topics_Widget extends WP_Widget {
   public function __construct() {
     $widget_ops = array(
       'classname'   => 'widget_serverus_display_topics',
-      'description' => __( 'A list of recent topics.', 'bbpress' )
+      'description' => __( 'A list of recent topics.', 'Serverus' )
     );
 
-    parent::__construct( false, __( '(Serverus) Recent Topics', 'bbpress' ), $widget_ops );
+    parent::__construct( false, __( '(Serverus) Recent Topics', 'Serverus' ), $widget_ops );
   }
 
   /**

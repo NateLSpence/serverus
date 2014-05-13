@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.ico"> -->
 
-    <title>Off Canvas Template for Bootstrap</title>
+    <title>Serverus Help</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.css" rel="stylesheet">
@@ -43,6 +43,7 @@
             <li><a href="#widgets">Widgets</a></li>
             <li><a href="#users">Users</a></li>
             <li><a href="#customizing">Customizing</a></li>
+            <li><a href="#troubleshooting">Help</a></li>
             <!-- <li><a href="#"><span class="caret-up"></span> Top</a></li> -->
           </ul>
         </div>
@@ -59,22 +60,17 @@
           </p>
           <div class="row">
 
+            <h1 class="center-block">Setting up Serverus</h1>
+
             <section id="prerequisites" class="col-12 col-xs-12">
 
               <h2>Prerequisites</h2>
 
               <div class="subsection">
                 <h4>Set up WordPress and log in</h4>
-                <p>You'll need a host, a domain name, and an updated version of WordPress installed in order to use Serverus. Refer to the resources here- LINK <!-- TODO --> for instructions on this.</p>
-                <p>If you're not signed in already, head to yourwebsite.com/wp-admin to log in as an administrator.</p>
-                <p>Please note! As administrator, you'll see the WordPress Admin Toolbar at the top of the webpage- other users won't see this. You'll also be able to see IP addresses and extra buttons on posts for moderation. Blocked/muted users and posts will be visible to you, but not regular uesrs. Otherwise, what you see is what your users will see for the most part.</p>
-              </div>
-
-              <hr>
-
-              <div class="subsection">
-                <h4>Enable mod_rewrite</h4>
-                <p>Refer to this resource- LINK <!-- TODO --></p>
+                <p>You'll need a <a href="http://wordpress.org/hosting/">host and domain name</a> with an <a href="http://wordpress.org/download/">updated version of WordPress installed</a> in order to use Serverus.</p>
+                <p>Once you have WordPress up and running, log in.</p>
+                <p class="text-info small">Please note! As administrator, you'll see the WordPress Admin Toolbar at the top of the webpage- other users won't see this. You'll also be able to see IP addresses and extra buttons on posts for moderation. Blocked/muted users and posts will be visible to you, but not regular users. Otherwise, what you see is what your users will see for the most part.</p>
               </div>
 
             </section><!--/span-->
@@ -87,6 +83,7 @@
               <div class="subsection">
                 <h4>Required Plugins</h4>
                 <p>bbPress</p>
+                <p class="text-danger">Note: Enable this before activating Serverus!</p>
               </div>
 
               <hr>
@@ -98,14 +95,33 @@
                 <p>Easy Bootstrap Shortcode</p>
               </div>
 
+              <hr>
+
+              <div class="subsection">
+                <h4>Additional Plugins</h4>
+                <p>Author Avatars List</p>
+                <p>bbPress Admin Bar Addition</p>
+              </div>
+
             </section><!--/span-->
 
             <section id="setup" class="col-12 col-xs-12">
               <h2>Setup</h2>
               
-              <div id="front-page-setup" class="subsection">
+              <div class="subsection">
+                <h4>Theme Installation</h4>
+                <p>Install and activate the Serverus theme. Go to the Admin page and navigate to Appearance->Themes. Click "Add New Theme" and then "Upload Theme" at the top of the page. Click "Choose File" and navigate to the serverus-theme.zip file. Upload it, and click "Install Now". Now activate the theme.</p>
+                <img src="dist/img/add_theme.png" alt="" class="img-responsive">
+                <img src="dist/img/upload_theme.png" alt="" class="img-responsive">
+                <img src="dist/img/upload_theme_2.png" alt="" class="img-responsive">
+              </div>
+
+              <hr>
+
+              <div class="subsection">
                 <h4>Front Page Setup</h4>
-                <p>Like most forums, you can have your front page display news. This will display the latest topics from a single forum (for example, "Server News"), newest first, without any of the posts attached to them.</p>
+                <p>Like most forums, you can have your front page display news. This will display the latest topics from a single forum (for example, "Server News"), newest first, without any of the replies attached to them.</p>
+                <p>To enable this, you need to set up and find the ID of the forum you want to display on the front page.</p>
                 <p>You'll need to put in a shortcode to enable the Serverus front page if you want it. The simplest form of it looks like this: <code>[srv_frontpage forum_id=#]</code></p>
                 <p>To set which forum to display posts from, change the "forum_id=#" to the id number of your preferred forum. You'll find the ID... <!-- TODO --></p>
                 <p>There are some additional settings to customize the way the front page works. The following are optional: <code>posts_per_page=5 char_limit=0 show_stickies=false</code> Configuring all these settings in the shortcode would look like this: <code>[srv_frontpage forum_id=12 posts_per_page=7 char_limit=450 show_stickies=true]</code></p>
@@ -115,21 +131,21 @@
 
               <div id="forums-setup" class="subsection">
                 <h4>Forums Setup</h4>
-                <p>Create a blank page called "forums". Serverus will take care of the rest here. What's important is that you have a page with the slug "forums", so after you create this page, you can edit its title to whatever you want and it won't break anything.</p>
-                <p>Under the Forums menu, you'll have to create the forums you want, along with categories to put them under. All forums require a category, even if everything is under one category.</p>
-              </div>  
-
-            </section><!--/span-->
-
-            <section id="widgets" class="col-12 col-xs-12">
-              <h2>Widgets</h2>
-
-              <div class="subsection">
-                <h4>Login/Registration Widget</h4>
-                <p>Drag the <span class="text-danger">(Serverus) Login Widget</span> to the Login Location. Now you and your users can log in.</p>
+                <p>Under the Forums menu, create the forums you want, along with categories to put them under. <span class="text-danger">All forums require a category</span>, even if everything is under one category.</p>
               </div>  
 
               <hr>
+
+              <div class="subsection">
+                <h4>Menus</h4>
+                <p>This is no different from your typical WordPress menus. If your pages aren't showing up in your Nav bar and you're not sure how to add them, read <a href="http://codex.wordpress.org/WordPress_Menu_User_Guide#Adding_Items_to_a_Menu">this guide</a>. To change the colors of the Nav bar, check out the <a href="#customizing">"Customizing" section</a> below.</p>
+              </div>  
+            </section><!--/span-->
+
+
+            <section id="widgets" class="col-12 col-xs-12">
+
+              <h2>Widgets</h2>
 
               <div class="subsection">
                 <h4>Recent Topics Widget</h4>
@@ -140,7 +156,14 @@
 
               <div class="subsection">
                 <h4>Other Widgets</h4>
-                <p>The (bbPress) Forums Statistics widget and (bbPress) Forums List widgets might be useful as well. Text widgets work for any static information you want visible (Server IP, links, etc). For any third-party widgets, paste the code into a Text widget.</p> 
+                <p>The <em>(bbPress) Forums Statistics</em> widget and <em>(bbPress) Forums List</em> widgets might be useful as well. <em>Text</em> widgets work for any static information you want visible (Server IP, links, etc). For any third-party widgets, paste the code into a <em>Text</em> widget.</p> 
+              </div>  
+
+              <hr>
+
+              <div class="subsection">
+                <h4>Advertisements</h4>
+                <p>...</p> <!-- TODO -->
               </div>  
 
             </section><!--/span-->
@@ -171,8 +194,52 @@
 
             <section id="customizing" class="col-12 col-xs-12">
               <h2>Customizing</h2>
-              <p>Time to customize! Add a header image and text, a background image, and choose a color scheme that suits your fancy.</p>
-              <p>Serverus is simple, but you can dig into the color scheme if you want to. The best method is to choose a color scheme that is closest to what you need already, and then tweak it from there. If you're itching to change something, but it doesn't have an option, you can always override the default CSS <!-- TODO -->.</p>
+
+              <div class="subsection">
+                <h4>The "Customize" screen</h4>
+                <p>Time to customize! Add a header image and text, a background image, and choose a color scheme that suits your fancy.</p>
+                <p>Serverus is simple, but you can dig into the color scheme if you want to. The best method is to choose a color scheme that is closest to what you need already, and then tweak it from there. If you're itching to change something, but it doesn't have an option, you can always override the default CSS<!-- TODO -->.</p>
+              </div>
+
+              <hr>
+
+              <div class="subsection">
+                <h4>Single pages</h4>
+                <p>If you want to use some of the slick Bootstrap elements, make sure you've got the Easy Bootstrap Shortcodes plugin installed.</p> <!-- TODO explain how to use it -->
+              </div>
+
+              <hr>
+
+              <div class="subsection">
+                <h4>Disable the sidebar, nav bar, or foreground</h4>
+                <p>If you want something like a landing page, you may want to make a page that doesn't have the sidebar, the top navigation bar, or the foreground. To do this, create or edit the page in question, and find the "Template" dropdown in the "Page Attributes" box on the right. Choose the template<!-- TODO add/name templates --> you want and save the page.</p>
+              </div>  
+
+            
+            </section><!--/span-->
+
+            <section id="troubleshooting" class="col-12 col-xs-12">
+              <h2>Troubleshooting</h2>
+
+              <div class="subsection">
+                <h4>I can't get to any of my pages.</h4>
+                <p>If you're getting an error along the lines of "404 page not found" then you probably need to <a href="http://codex.wordpress.org/Using_Permalinks#Using_.22Pretty.22_permalinks">enable Pretty Permalinks and mod_rewrite</a>. If you're having trouble with this, contact your web host's support.</p>
+              </div>
+
+              <hr>
+
+              <div class="subsection">
+                <h4>I just see a white screen!</h4>
+                <p>This is what WordPress does when it breaks. What is the very last thing you did before you saw the white screen? If you just enabled the theme, or one of the plugins, your best bet is to follow <a href="https://codex.wordpress.org/Common_WordPress_Errors#The_White_Screen_of_Death">WordPress's help guide</a>. After that, double-check that you've updated WordPress, bbPress, and Serverus itself to their latest versions. Double-check the <a href="#prerequisites">Prerequisites</a> section. Lastly, remember that bbPress must be activated for Serverus to work properly. Disabling it while Serverus is activated might cause issues.</p>
+              </div>  
+
+              <hr>
+
+              <div class="subsection">
+                <h4>There's a third-party plugin I want to use, but it doesn't work right with Serverus.</h4>
+                <p>I can help you with that! Post it in the <a href="#"><!-- TODO -->support forums</a> and I'll check it out. Make sure to tell me what specifically isn't working right with the plugin for you.</p>
+              </div>  
+
             </section><!--/span-->
 
 
@@ -183,7 +250,7 @@
       <hr>
 
       <footer>
-        <p>&copy; Company 2014</p>
+        <p>&copy; Company 2014</p> <!-- TODO -->
       </footer>
 
     </div><!--/.container-->

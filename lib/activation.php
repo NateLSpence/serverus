@@ -64,7 +64,19 @@ function roots_theme_activation_options_render_page() { ?>
                 <option selected="selected" value="true"><?php echo _e('Yes', 'roots'); ?></option>
                 <option value="false"><?php echo _e('No', 'roots'); ?></option>
               </select>
-              <p class="description"><?php printf(__('Create a page called Home and set it to be the static front page', 'roots')); ?></p>
+              <p class="description"><?php printf(__('Create a page called Home and set it to be the static front page. Select yes if unsure.', 'roots')); ?></p>
+            </fieldset>
+          </td>
+        </tr>
+        <tr valign="top"><th scope="row"><?php _e('Create a new forums page?', 'roots'); ?></th>
+          <td>
+            <fieldset>
+              <legend class="screen-reader-text"><span><?php _e('Create a new forums page?', 'roots'); ?></span></legend>
+              <select name="roots_theme_activation_options[create_forums_page]" id="create_forums_page">
+                <option selected="selected" value="true"><?php echo _e('Yes', 'roots'); ?></option>
+                <option value="false"><?php echo _e('No', 'roots'); ?></option>
+              </select>
+              <p class="description"><?php printf(__('Create an empty forums page. Select yes if this is a new forum. If you select no, be aware that bbPress requires its forums page slug to be \'forums\'.' , 'roots')); ?></p>
             </fieldset>
           </td>
         </tr>
@@ -76,7 +88,7 @@ function roots_theme_activation_options_render_page() { ?>
                 <option selected="selected" value="true"><?php echo _e('Yes', 'roots'); ?></option>
                 <option value="false"><?php echo _e('No', 'roots'); ?></option>
               </select>
-              <p class="description"><?php printf(__('Change permalink structure to /&#37;postname&#37;/', 'roots')); ?></p>
+              <p class="description"><?php printf(__('Change permalink structure to /&#37;postname&#37;/. This is required for the theme, so don\'t change it unless you\'re a wizard.', 'roots')); ?></p>
             </fieldset>
           </td>
         </tr>
@@ -88,7 +100,7 @@ function roots_theme_activation_options_render_page() { ?>
                 <option selected="selected" value="true"><?php echo _e('Yes', 'roots'); ?></option>
                 <option value="false"><?php echo _e('No', 'roots'); ?></option>
               </select>
-              <p class="description"><?php printf(__('Create the Primary Navigation menu and set the location', 'roots')); ?></p>
+              <p class="description"><?php printf(__('Create the Primary Navigation menu and set the location. Select yes if unsure.', 'roots')); ?></p>
             </fieldset>
           </td>
         </tr>
@@ -100,7 +112,7 @@ function roots_theme_activation_options_render_page() { ?>
                 <option selected="selected" value="true"><?php echo _e('Yes', 'roots'); ?></option>
                 <option value="false"><?php echo _e('No', 'roots'); ?></option>
               </select>
-              <p class="description"><?php printf(__('Add all current published pages to the Primary Navigation', 'roots')); ?></p>
+              <p class="description"><?php printf(__('Add all current published pages to the Primary Navigation. Select yes if unsure.', 'roots')); ?></p>
             </fieldset>
           </td>
         </tr>
@@ -136,7 +148,7 @@ function roots_theme_activation_action() {
     foreach ($pages_to_create as $new_page_title) {
       $add_default_pages = array(
         'post_title' => $new_page_title,
-        'post_content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat, orci ac laoreet cursus, dolor sem luctus lorem, eget consequat magna felis a magna. Aliquam scelerisque condimentum ante, eget facilisis tortor lobortis in. In interdum venenatis justo eget consequat. Morbi commodo rhoncus mi nec pharetra. Aliquam erat volutpat. Mauris non lorem eu dolor hendrerit dapibus. Mauris mollis nisl quis sapien posuere consectetur. Nullam in sapien at nisi ornare bibendum at ut lectus. Pellentesque ut magna mauris. Nam viverra suscipit ligula, sed accumsan enim placerat nec. Cras vitae metus vel dolor ultrices sagittis. Duis venenatis augue sed risus laoreet congue ac ac leo. Donec fermentum accumsan libero sit amet iaculis. Duis tristique dictum enim, ac fringilla risus bibendum in. Nunc ornare, quam sit amet ultricies gravida, tortor mi malesuada urna, quis commodo dui nibh in lacus. Nunc vel tortor mi. Pellentesque vel urna a arcu adipiscing imperdiet vitae sit amet neque. Integer eu lectus et nunc dictum sagittis. Curabitur commodo vulputate fringilla. Sed eleifend, arcu convallis adipiscing congue, dui turpis commodo magna, et vehicula sapien turpis sit amet nisi.',
+        'post_content' => '[srv_frontpage forum_id=0 posts_per_page=5 char_limit=0 show_stickies=false]',
         'post_status' => 'publish',
         'post_type' => 'page'
       );
@@ -154,6 +166,33 @@ function roots_theme_activation_action() {
     );
     wp_update_post($home_menu_order);
   }
+
+  // CREATE FORUMS PAGE
+  if ($roots_theme_activation_options['create_forums_page'] === 'true') {
+    $roots_theme_activation_options['create_forums_page'] = false;
+
+    $default_pages = array('Forums');
+    $existing_pages = get_pages();
+    $temp = array();
+
+    foreach ($existing_pages as $page) {
+      $temp[] = $page->post_title;
+    }
+
+    $pages_to_create = array_diff($default_pages, $temp);
+
+    foreach ($pages_to_create as $new_page_title) {
+      $add_default_pages = array(
+        'post_title' => $new_page_title,
+        'post_content' => '',
+        'post_status' => 'publish',
+        'post_type' => 'page'
+      );
+
+      $result = wp_insert_post($add_default_pages);
+    }
+  }
+
 
   if ($roots_theme_activation_options['change_permalink_structure'] === 'true') {
     $roots_theme_activation_options['change_permalink_structure'] = false;

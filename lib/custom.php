@@ -7,7 +7,7 @@
 
 
 /**
- *	Customization options //TODO does this duplicate in general settings section? NOPE
+ *	Customization options 
  */
 function customize_register( $wp_customize ) {
 
@@ -22,6 +22,57 @@ function customize_register( $wp_customize ) {
 	// Remove Default Controls
 	$wp_customize->remove_control( 'blogdescription' );
 	$wp_customize->remove_control( 'display_header_text' );
+
+
+
+
+
+	/**
+  	 * New Color Control
+ 	 */
+/*
+	class Serverus_Customize_Color_Control extends WP_Customize_Color_Control {
+	    public $type = 'color';
+	 
+		public function render_content() {
+			$this_default = $this->setting->default;
+			$default_attr = '';
+			if ( $this_default ) {
+
+				if ( $this_default !== 'false' ) {
+					if ( false === strpos( $this_default, '#' ) )
+						$this_default = '#' . $this_default;
+				}
+
+				$default_attr = ' data-default-color="' . esc_attr( $this_default ) . '"';
+			}
+			// The input's value gets set by JS. Don't fill it.
+			?>
+			<label>
+				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+				<div class="customize-control-content">
+					<input class="color-picker-hex" type="text" maxlength="7" placeholder="<?php esc_attr_e( 'Hex Value' ); ?>"<?php echo $default_attr; ?> />
+				</div>
+			</label>
+			<?php
+		}
+	}
+
+	$wp_customize->add_section( 'test_section' , array(
+	    'title'      => __('Test Section','serverus'),
+	    'priority'   => 35,
+	) );
+
+	$wp_customize->add_setting( 'test_setting', array(
+	    'default'        => 'false',
+	) );
+	 
+	$wp_customize->add_control( new Serverus_Customize_Color_Control( $wp_customize, 'test_setting', array(
+	    'label'   => 'Test Setting',
+	    'section' => 'test_section',
+	    'settings'   => 'test_setting',
+	) ) );
+*/
 
 
 
@@ -77,7 +128,6 @@ function customize_register( $wp_customize ) {
 
 	// Header text color
 	$wp_customize->add_setting( 'color_header_text' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -91,7 +141,6 @@ function customize_register( $wp_customize ) {
 
 	// Header text bg color
 	$wp_customize->add_setting( 'color_header_bg' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -185,7 +234,6 @@ function customize_register( $wp_customize ) {
 
 	// Background color (@back-bg)
 	$wp_customize->add_setting( 'color_bg_serverus' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -199,7 +247,6 @@ function customize_register( $wp_customize ) {
 
 	// Text color (@text-color)
 	$wp_customize->add_setting( 'color_text_serverus' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -213,8 +260,6 @@ function customize_register( $wp_customize ) {
 
 	// Brand primary color
 	$wp_customize->add_setting( 'color_brand_primary' , array(
-    	//'default' => '#000',
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -226,9 +271,9 @@ function customize_register( $wp_customize ) {
 	) ) );
 
 
+
 	// Brand primary text contrast color
 	$wp_customize->add_setting( 'color_brand_primary_text' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -241,7 +286,6 @@ function customize_register( $wp_customize ) {
 
 	// Brand complement color
 	$wp_customize->add_setting( 'color_brand_complement' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -254,7 +298,6 @@ function customize_register( $wp_customize ) {
 
 	// Brand complement text contrast color
 	$wp_customize->add_setting( 'color_brand_complement_text' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -267,7 +310,6 @@ function customize_register( $wp_customize ) {
 
 	// Link color
 	$wp_customize->add_setting( 'color_link' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -280,7 +322,6 @@ function customize_register( $wp_customize ) {
 
 	// Link hover color
 	$wp_customize->add_setting( 'color_link_hover' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -298,7 +339,6 @@ function customize_register( $wp_customize ) {
 
 	// Nav bg color
 	$wp_customize->add_setting( 'color_nav_bg' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -312,7 +352,6 @@ function customize_register( $wp_customize ) {
 
 	// Nav bg color active
 	$wp_customize->add_setting( 'color_nav_bg_active' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -326,7 +365,6 @@ function customize_register( $wp_customize ) {
 
 	// Nav bg color hover
 	$wp_customize->add_setting( 'color_nav_bg_hover' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -340,7 +378,6 @@ function customize_register( $wp_customize ) {
 
 	// Nav border color
 	$wp_customize->add_setting( 'color_nav_border' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -354,7 +391,6 @@ function customize_register( $wp_customize ) {
 
 	// Nav Link color
 	$wp_customize->add_setting( 'color_nav_link' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -367,7 +403,6 @@ function customize_register( $wp_customize ) {
 
 	// Nav Link hover color
 	$wp_customize->add_setting( 'color_nav_link_hover' , array(
-    	'sanitize_callback' => 'sanitize_hex_color',
     	'transport'   => 'refresh',
 	) );
 
@@ -448,9 +483,12 @@ function serverus_enqueue_stylesheet() {
 	//
 }
 add_action( 'wp_enqueue_scripts', 'serverus_enqueue_stylesheet', 99 );
+// Custom Login form
+add_action( 'login_enqueue_scripts', 'serverus_enqueue_stylesheet', 99 );
+?>
 
 
-
+<?php 
 function serverus_customize_css() {
 
 	if( get_theme_mod('color_brand_primary') ) { ?>
@@ -721,18 +759,18 @@ function serverus_customize_css() {
     <?php
 }
 add_action( 'wp_head', 'serverus_customize_css');
+add_action( 'login_enqueue_scripts', 'serverus_customize_css', 99 );
+?>
 
 
+<?php 
 /**
  *	General WP changes
  */
+ ?>
 
-// Custom Login form
-function custom_login_stylesheet() { ?>
-    <link rel="stylesheet" id="custom_wp_admin_css"  href="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/assets/css/main.a57a4dc8.min.css'; ?>" type="text/css" media="all" />
-<?php }
-add_action( 'login_enqueue_scripts', 'custom_login_stylesheet' );
-
+<?php 
+//Login page tweaks
 function custom_login_logo_url() {
     return get_bloginfo( 'url' );
 }
@@ -742,8 +780,9 @@ function custom_login_logo_url_title() {
     return 'Home';
 }
 add_filter( 'login_headertitle', 'custom_login_logo_url_title' );
+?>
 
-
+<?php 
 // Disable Admin Bar for everyone but administrators
 if (!function_exists('disable_admin_bar')) {
 
@@ -790,7 +829,38 @@ add_action( 'wp_dashboard_setup', 'serverus_add_dashboard_widgets' );
 
 function serverus_dashboard_widget_setup_function() {
 	// Display whatever it is you want to show.
-	echo "<p>Hello World, I'm a great Dashboard Widget</p>";
+	$output = '';
+	$output .= '
+<div>
+	<p>We assembled some links to get you started:</p>
+	<div>
+		<div>
+			<a class="button button-primary button-hero" href="' . '#' . '">Setup Tutorial</a>
+		</div>
+		<div>
+			<h4>Next Steps</h4>
+			<ul>
+				<li><a href="http://localhost/wordpress-2/wp-admin/post.php?post=4&amp;action=edit">Edit your front page</a></li>
+				<li><a href="http://localhost/wordpress-2/wp-admin/post-new.php?post_type=page">Add additional pages</a></li>
+						<li><a href="http://localhost/wordpress-2/">View your site</a></li>
+			</ul>
+		</div>
+		<div>
+			<h4>More Actions</h4>
+			<ul>
+				<li><div class="welcome-icon welcome-widgets-menus">Manage <a href="http://localhost/wordpress-2/wp-admin/widgets.php">widgets</a> or <a href="http://localhost/wordpress-2/wp-admin/nav-menus.php">menus</a></div></li>
+						<li><a href="http://localhost/wordpress-2/wp-admin/options-discussion.php" class="welcome-icon welcome-comments">Turn comments on or off</a></li>
+				<li><a href="http://codex.wordpress.org/First_Steps_With_WordPress" class="welcome-icon welcome-learn-more">Learn more about getting started</a></li>
+				<a class="button button-primary button-hero" href="' . get_admin_url( null, "customize.php" ) . '">Customize</a>
+
+			</ul>
+		</div>
+	</div>
+</div>
+
+	';
+
+	echo $output;
 } 
 
 
