@@ -20,10 +20,10 @@ function roots_setup() {
   // add_theme_support('post-formats', array('aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat'));
   
   add_theme_support( 'custom-header', array(
-    'default-image'          => 'get_template_directory_uri() . "/assets/img/header1.png"',
+    'default-image'          => get_template_directory_uri() . "/assets/img/header1.png",
     'random-default'         => false,
     'width'                  => 0,
-    'height'                 => 0,
+    'height'                 => 250,
     'flex-height'            => true,
     'flex-width'             => true,
     'default-text-color'     => '',

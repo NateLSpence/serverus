@@ -2,6 +2,119 @@
 /**
  * Custom functions
  */
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+//Plugin install on activation
+require_once dirname( __FILE__ ) . '/class-tgm-plugin-activation.php';
+
+add_action( 'tgmpa_register', 'my_theme_register_required_plugins' );
+/**
+ * Register the required plugins for this theme.
+ *
+ * In this example, we register two plugins - one included with the TGMPA library
+ * and one from the .org repo.
+ *
+ * The variable passed to tgmpa_register_plugins() should be an array of plugin
+ * arrays.
+ *
+ * This function is hooked into tgmpa_init, which is fired within the
+ * TGM_Plugin_Activation class constructor.
+ */
+function my_theme_register_required_plugins() {
+
+    /**
+     * Array of plugin arrays. Required keys are name and slug.
+     * If the source is NOT from the .org repo, then source is also required.
+     */
+    $plugins = array(
+
+        // bbPress. Required, pulling from wp repo
+        array(
+            'name'      => 'bbPress',
+            'slug'      => 'bbpress',
+            'required'  => true,
+            'force_activation'   => true, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
+        ),
+
+
+        // Not required. Pulling from wp repo
+        array(
+            'name'      => 'bbPress Moderation',
+            'slug'      => 'bbpressmoderation',
+            'required'  => false,
+        ),
+
+        array(
+            'name'      => 'bbPress Signature',
+            'slug'      => 'bbp-signature',
+            'required'  => false,
+        ),
+
+        array(
+            'name'      => 'Easy Bootstrap Shortcodes',
+            'slug'      => 'easy-bootstrap-shortcodes',
+            'required'  => false,
+        ),
+
+        array(
+            'name'      => 'Author Avatars List',
+            'slug'      => 'author-avatars',
+            'required'  => false,
+        ),
+
+
+        array(
+            'name'      => 'bbPress Admin Bar Addition',
+            'slug'      => 'bbpress-admin-bar-addition',
+            'required'  => false,
+        ),
+
+    );
+
+    /**
+     * Array of configuration settings. Amend each line as needed.
+     * If you want the default strings to be available under your own theme domain,
+     * leave the strings uncommented.
+     * Some of the strings are added into a sprintf, so see the comments at the
+     * end of each line for what each argument will be.
+     */
+    $config = array(
+        'id'           => 'tgmpa',                 // Unique ID for hashing notices for multiple instances of TGMPA.
+        'default_path' => '',                      // Default absolute path to pre-packaged plugins.
+        'menu'         => 'tgmpa-install-plugins', // Menu slug.
+        'has_notices'  => true,                    // Show admin notices or not.
+        'dismissable'  => true,                    // If false, a user cannot dismiss the nag message.
+        'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
+        'is_automatic' => true,                   // Automatically activate plugins after installation or not.
+        'message'      => '',                      // Message to output right before the plugins table.
+        'strings'      => array(
+            'page_title'                      => __( 'Install Required Plugins', 'tgmpa' ),
+            'menu_title'                      => __( 'Install Plugins', 'tgmpa' ),
+            'installing'                      => __( 'Installing Plugin: %s', 'tgmpa' ), // %s = plugin name.
+            'oops'                            => __( 'Something went wrong with the plugin API.', 'tgmpa' ),
+            'notice_can_install_required'     => _n_noop( 'This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.', 'tgmpa' ), // %1$s = plugin name(s).
+            'notice_can_install_recommended'  => _n_noop( 'This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.', 'tgmpa' ), // %1$s = plugin name(s).
+            'notice_cannot_install'           => _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.', 'tgmpa' ), // %1$s = plugin name(s).
+            'notice_can_activate_required'    => _n_noop( 'The following required plugin is currently inactive: %1$s.', 'The following required plugins are currently inactive: %1$s.', 'tgmpa' ), // %1$s = plugin name(s).
+            'notice_can_activate_recommended' => _n_noop( 'The following recommended plugin is currently inactive: %1$s.', 'The following recommended plugins are currently inactive: %1$s.', 'tgmpa' ), // %1$s = plugin name(s).
+            'notice_cannot_activate'          => _n_noop( 'Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated.', 'Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the administrator of this site for help on getting the plugins activated.', 'tgmpa' ), // %1$s = plugin name(s).
+            'notice_ask_to_update'            => _n_noop( 'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.', 'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.', 'tgmpa' ), // %1$s = plugin name(s).
+            'notice_cannot_update'            => _n_noop( 'Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated.', 'Sorry, but you do not have the correct permissions to update the %s plugins. Contact the administrator of this site for help on getting the plugins updated.', 'tgmpa' ), // %1$s = plugin name(s).
+            'install_link'                    => _n_noop( 'Begin installing plugin', 'Begin installing plugins', 'tgmpa' ),
+            'activate_link'                   => _n_noop( 'Begin activating plugin', 'Begin activating plugins', 'tgmpa' ),
+            'return'                          => __( 'Return to Required Plugins Installer', 'tgmpa' ),
+            'plugin_activated'                => __( 'Plugin activated successfully.', 'tgmpa' ),
+            'complete'                        => __( 'All plugins installed and activated successfully. %s', 'tgmpa' ), // %s = dashboard link.
+            'nag_type'                        => 'updated' // Determines admin notice type - can only be 'updated', 'update-nag' or 'error'.
+        )
+    );
+
+    tgmpa( $plugins, $config );
+
+}
+
+
+
 
 
 
@@ -783,6 +896,7 @@ add_filter( 'login_headertitle', 'custom_login_logo_url_title' );
 ?>
 
 <?php 
+if( class_exists( 'bbpress' ) ){ 
 // Disable Admin Bar for everyone but administrators
 if (!function_exists('disable_admin_bar')) {
 
@@ -814,14 +928,14 @@ if (!function_exists('disable_admin_bar')) {
   	}
 }
 add_action('init','disable_admin_bar');
-
+} //end class_exists
 
 
 /**
  *	Dashboard Widgets
  */
 
-// Add theme setup walkthrough widget
+/*// Add theme setup walkthrough widget
 function serverus_add_dashboard_widgets() {
 	add_meta_box('serverus_dashboard_widget_setup', __('Serverus Configuration'), 'serverus_dashboard_widget_setup_function', 'dashboard', 'side', 'high');
 }
@@ -833,7 +947,12 @@ function serverus_dashboard_widget_setup_function() {
 	$output .= '
 <div>
 	<p>We assembled some links to get you started:</p>
+	
+	<a class="button button-primary button-hero" href="' . get_admin_url( null, "customize.php" ) . '">Customize</a>
+
 	<div>
+
+
 		<div>
 			<a class="button button-primary button-hero" href="' . '#' . '">Setup Tutorial</a>
 		</div>
@@ -851,7 +970,7 @@ function serverus_dashboard_widget_setup_function() {
 				<li><div class="welcome-icon welcome-widgets-menus">Manage <a href="http://localhost/wordpress-2/wp-admin/widgets.php">widgets</a> or <a href="http://localhost/wordpress-2/wp-admin/nav-menus.php">menus</a></div></li>
 						<li><a href="http://localhost/wordpress-2/wp-admin/options-discussion.php" class="welcome-icon welcome-comments">Turn comments on or off</a></li>
 				<li><a href="http://codex.wordpress.org/First_Steps_With_WordPress" class="welcome-icon welcome-learn-more">Learn more about getting started</a></li>
-				<a class="button button-primary button-hero" href="' . get_admin_url( null, "customize.php" ) . '">Customize</a>
+				
 
 			</ul>
 		</div>
@@ -861,7 +980,7 @@ function serverus_dashboard_widget_setup_function() {
 	';
 
 	echo $output;
-} 
+} */
 
 
 // Remove unused Widgets from the Dashboard
@@ -948,7 +1067,7 @@ remove_filter('the_content', 'wpautop');
 /**
  *	bbPress changes
  */
-
+if( class_exists( 'bbpress' ) ){ 
 
 // Replace bbPress time since function to only output the largest chunk of time passed. 
 // There ought to be a better way. This is replacing the functionality of already-run code. 
@@ -1048,7 +1167,7 @@ function serverus_get_time_since( $output, $older_date, $newer_date = false ) {
 	return $output;
 }
 
-
+} //end class_exists
 
 /**
  * Custom Style Declaration and hook (Ahjira)
@@ -1089,6 +1208,8 @@ function set_header_properties() {
 /**
  *	Custom Shortcodes
  */
+
+if( class_exists( 'bbpress' ) ){ 
 
 // [srv_frontpage forum_id=0 posts_per_page=5 char_limit=0 /*show_avatar=true*/ show_stickies=false]
 class srv_frontpage_class {
@@ -1281,3 +1402,5 @@ function srv_frontpage_func( $attr ){
 	return $frontpage->srv_get_content();
 }
 add_shortcode( 'srv_frontpage', 'srv_frontpage_func' );
+
+} //end class_exists
