@@ -38,6 +38,7 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#prerequisites">Prerequisites</a></li>
+            <li><a href="#install">Install</a></li>
             <li><a href="#plugins">Plugins</a></li>
             <li><a href="#setup">Setup</a></li>
             <li><a href="#widgets">Widgets</a></li>
@@ -68,12 +69,31 @@
 
               <div class="subsection">
                 <h4>Set up WordPress and log in</h4>
-                <p>You'll need a <a href="http://wordpress.org/hosting/">host and domain name</a> with an <a href="http://wordpress.org/download/">updated version of WordPress installed</a> in order to use Serverus.</p>
+                <p>You'll need a <a href="http://wordpress.org/hosting/">host and domain name</a> with an updated version of WordPress installed in order to use Serverus.</p>
+                <p>Your web host might have an option to install WordPress automatically, or you may have to <a href="http://wordpress.org/download/">download and install it yourself</a>.</p>
                 <p>Once you have WordPress up and running, log in.</p>
                 <p class="text-info small">As administrator, you'll see the WordPress Admin Toolbar at the top of the webpage- other users won't see this. You'll also be able to see IP addresses and extra buttons on posts for moderation. Blocked/muted users and posts will be visible to you, but not regular users. Otherwise, what you see is what your users will see for the most part.</p>
               </div>
 
             </section><!--/span-->
+
+
+            <section id="install" class="col-12 col-xs-12">
+
+              <h2>Installation</h2>
+
+              <div class="subsection">
+                <h4>Theme Installation</h4>
+                <p>Go to the Admin page and navigate to Appearance->Themes. Click "Add New" at the top of the page.</p>
+                <img src="dist/img/add_theme.png" alt="" class="img-responsive">
+                <p>Click "Upload Theme" at the top of the page.</p> 
+                <img src="dist/img/upload_theme.png" alt="" class="img-responsive">
+                <p>Click "Choose File" and navigate to the serverus-theme.zip <!-- TODO --> file. Upload it, and click "Install Now".</p>
+                <img src="dist/img/upload_theme_2.png" alt="" class="img-responsive">
+                <p>Now activate the theme.</p> <!-- TODO -->
+              </div>
+
+            </section>
 
 
             <section id="plugins" class="col-12 col-xs-12">
@@ -82,36 +102,39 @@
               <div class="subsection">
                 <h4>Required and Recommended Plugins</h4>
                 <p>Upon activating Serverus, you will see a prompt asking you to install some plugins. You can just select them all and tell them to install, or you can pick and choose. If you've dismissed the prompt, you can still view these plugins under "Appearance->Install Plugins".</p>
-                <p><span class="text-danger">bbPress</span> is required for Serverus to run. The others are simply to add functionality.</p> 
-                <p><span class="text-warning">bbPress Moderation</span> makes it easier to prevent spam by making a user's first post require approval by a moderator.</p>
-                <p><span class="text-warning">bbPress Signature</span> adds the ability for users to put a signature in their posts.</p>
-                <p><span class="text-warning">Easy Bootstrap Shortcodes</span> gives you more options for pretty formatting when making additional pages.</p>
-                <p><span class="text-warning">Author Avatars List</span> lets you display a widget showing all of your forum's users. Common use would be to set the Avatar size to 32 or 16, and show the following roles: Keymaster, Moderator, Participant.</p>
-                <p><span class="text-warning">bbPress Admin Bar Addition</span> gives Admins and Moderators a handy menu on the top Admin bar to better manage the forums.</p>
+                <p><em class="text-danger">bbPress</em> is the forum software. It's required for Serverus to run.</p> 
+                <p><em class="text-warning">bbPress Moderation</em> makes it easier to prevent spam by making a user's first post require approval by a moderator.</p>
+                <p><em class="text-warning">bbPress Signature</em> adds the ability for users to put a signature in their posts.</p>
+                <p><em class="text-warning">Easy Bootstrap Shortcodes</em> gives you more options for pretty formatting when making additional pages.</p>
+                <p><em class="text-warning">Author Avatars List</em> lets you display a widget showing all of your forum's users. Common use would be to set the Avatar size to 32 or 16, and show the following roles: Keymaster, Moderator, and Participant.</p>
+                <p><em class="text-warning">bbPress Admin Bar Addition</em> gives Admins and Moderators a handy menu on the top Admin bar to better manage the forums.</p>
+                <br>
+                <em class="text-muted">Feel free to browse around for more plugins! If there's something you want to do with your site or forum, there's usually a plugin that makes it easy.</em>
               </div>
 
             </section><!--/span-->
+
+
 
             <section id="setup" class="col-12 col-xs-12">
               <h2>Setup</h2>
               
               <div class="subsection">
-                <h4>Theme Installation</h4>
-                <p>Install and activate the Serverus theme. Go to the Admin page and navigate to Appearance->Themes. Click "Add New Theme" and then "Upload Theme" at the top of the page. Click "Choose File" and navigate to the serverus-theme.zip file. Upload it, and click "Install Now". Now activate the theme.</p>
-                <img src="dist/img/add_theme.png" alt="" class="img-responsive">
-                <img src="dist/img/upload_theme.png" alt="" class="img-responsive">
-                <img src="dist/img/upload_theme_2.png" alt="" class="img-responsive">
-              </div>
-
-              <hr>
-
-              <div class="subsection">
                 <h4>Front Page Setup</h4>
                 <p>Like most forums, you can have your front page display news. This will display the latest topics from a single forum (for example, "Server News"), newest first, without any of the replies attached to them.</p>
-                <p>To enable this, you need to set up and find the ID of the forum you want to display on the front page.</p>
-                <p>You'll need to put in a shortcode to enable the Serverus front page if you want it. The simplest form of it looks like this: <code>[srv_frontpage forum_id=#]</code></p>
-                <p>To set which forum to display posts from, change the "forum_id=#" to the id number of your preferred forum. You'll find the ID... <!-- TODO --></p>
-                <p>There are some additional settings to customize the way the front page works. The following are optional: <code>posts_per_page=5 char_limit=0 show_stickies=false</code> Configuring all these settings in the shortcode would look like this: <code>[srv_frontpage forum_id=12 posts_per_page=7 char_limit=450 show_stickies=true]</code></p>
+                <p>Serverus uses a shortcode to determine which forum to get news from, and to set some options:</p>
+                <p><code>[srv_frontpage forum_id=# posts_per_page=5 char_limit=0 show_stickies=false]</code></p>
+                <p>Firstly, <code>forum_id=#</code> is the ID of the forum to display. Browse to a forum to find its ID (only Admins and Mods see them). Use a number here; no quotes or symbols.</p>
+                <p>Then, <code>posts_per_page=5</code> decides how many posts to display on the front page before you have to click "Next".</p>
+                <p>The option <code>char_limit=0</code> is the maximum length, in characters, to display for each post. 0 means there is no limit.</p>
+                <p>Lastly, <code>show_stickies=false</code> decides whether or not to display "sticky" threads in your news page. Use <code>true</code> or <code>false</code> here.</p>
+
+                <br>
+
+                <p>An example of a customized shortcode might look like this:</p>
+                <p><code>[srv_frontpage forum_id=15 posts_per_page=20 char_limit=450 show_stickies=false]</code></p>
+                <p>In this example, our front page will display posts from the forum with the ID of 15. It will display a maximum of 20 posts, but only the first 450 characters from each. Sticky threads won't be displayed.</p>
+
               </div>
 
               <hr>
