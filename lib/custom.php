@@ -7,7 +7,7 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 //Plugin install on activation
 require_once dirname( __FILE__ ) . '/class-tgm-plugin-activation.php';
 
-add_action( 'tgmpa_register', 'my_theme_register_required_plugins' );
+add_action( 'tgmpa_register', 'serverus_register_required_plugins' );
 /**
  * Register the required plugins for this theme.
  *
@@ -20,7 +20,7 @@ add_action( 'tgmpa_register', 'my_theme_register_required_plugins' );
  * This function is hooked into tgmpa_init, which is fired within the
  * TGM_Plugin_Activation class constructor.
  */
-function my_theme_register_required_plugins() {
+function serverus_register_required_plugins() {
 
     /**
      * Array of plugin arrays. Required keys are name and slug.
@@ -112,13 +112,11 @@ function my_theme_register_required_plugins() {
     tgmpa( $plugins, $config );
 
 }
+?>
 
 
 
-
-
-
-
+<?php
 /**
  *	Customization options 
  */
@@ -589,7 +587,7 @@ function serverus_enqueue_stylesheet() {
 			break;
 
 		default:
-			wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/main.a57a4dc8.min.css', false, null);
+			wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/main.b4516c23.min.css', false, null);
 			break;
 	}
 
