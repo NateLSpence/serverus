@@ -69,8 +69,8 @@
 
               <div class="subsection">
                 <h4>Set up WordPress and log in</h4>
-                <p>You'll need a <a href="http://wordpress.org/hosting/">host and domain name</a> with an updated version of WordPress installed in order to use Serverus.</p>
-                <p>Your web host might have an option to install WordPress automatically, or you may have to <a href="http://wordpress.org/download/">download and install it yourself</a>.</p>
+                <p>You'll need a <a href="http://wordpress.org/hosting/" target="_blank">host and domain name</a> with an updated version of WordPress installed in order to use Serverus.</p>
+                <p>Your web host might have an option to install WordPress automatically, or you may have to <a href="http://wordpress.org/download/" target="_blank">download and install it yourself</a>.</p>
                 <p>Once you have WordPress up and running, log in.</p>
                 <p class="text-info small">As administrator, you'll see the WordPress Admin Toolbar at the top of the webpage- other users won't see this. You'll also be able to see IP addresses and extra buttons on posts for moderation. Blocked/muted users and posts will be visible to you, but not regular users. Otherwise, what you see is what your users will see for the most part.</p>
               </div>
@@ -93,6 +93,16 @@
                 <p>Now activate the theme.</p> <!-- TODO -->
               </div>
 
+              <hr>
+
+              <div class="subsection">
+                <h4>Theme Activation</h4>
+                <p>Once you click the "Activate" button, you should be taken to a screen that will run you through some first-time setup.</p>
+                <img src="dist/img/activate_theme.png" alt="" class="img-responsive">
+                <small class="text-info">This screen is always available under Appearance->Theme Activation.</small>
+                <p>Once you're done selecting your options, click "Save Changes".</p>
+              </div>
+
             </section>
 
 
@@ -101,13 +111,32 @@
               <h2>Plugins</h2>
               <div class="subsection">
                 <h4>Required and Recommended Plugins</h4>
-                <p>Upon activating Serverus, you will see a prompt asking you to install some plugins. You can just select them all and tell them to install, or you can pick and choose. If you've dismissed the prompt, you can still view these plugins under "Appearance->Install Plugins".</p>
+                <p>Upon activating Serverus, you will see a nagging box asking you to install some plugins. Click "Begin installing plugins".</p>
+                <img src="dist/img/install_plugins_1.png" alt="" class="img-responsive">
+                <small class="text-info">If you've dismissed the prompt, you can still view these plugins under "Appearance->Install Plugins".</small>
+                <p>Select the plugins you would like to install. <i class="text-muted">See below for an explanation of each plugin's functions.</i></p>
+                <img src="dist/img/install_plugins_2.png" alt="" class="img-responsive">
+                <p>Select "Install" under the "Bulk Actions" dropdown and hit Apply.</p>
+                <img src="dist/img/install_plugins_3.png" alt="" class="img-responsive">
+                <p>You'll need to enter your FTP credentials. You'll find these somewhere on your web host's dashboard.</p>
+                <img src="dist/img/install_plugins_4.png" alt="" class="img-responsive">
+                <p>Once the plugins finish downloading and installing, you're clear! You can return to the Dashboard and continue to set up your site.</p>
+                <img src="dist/img/install_plugins_5.png" alt="" class="img-responsive">
+
+              </div>
+
+              <hr>
+
+              <div class="subsection">
+                <h4>Required and Recommended Plugins</h4>
                 <p><em class="text-danger">bbPress</em> is the forum software. It's required for Serverus to run.</p> 
                 <p><em class="text-warning">bbPress Moderation</em> makes it easier to prevent spam by making a user's first post require approval by a moderator.</p>
                 <p><em class="text-warning">bbPress Signature</em> adds the ability for users to put a signature in their posts.</p>
                 <p><em class="text-warning">Easy Bootstrap Shortcodes</em> gives you more options for pretty formatting when making additional pages.</p>
                 <p><em class="text-warning">Author Avatars List</em> lets you display a widget showing all of your forum's users. Common use would be to set the Avatar size to 32 or 16, and show the following roles: Keymaster, Moderator, and Participant.</p>
                 <p><em class="text-warning">bbPress Admin Bar Addition</em> gives Admins and Moderators a handy menu on the top Admin bar to better manage the forums.</p>
+                <p><em class="text-warning">Simple Custom CSS</em> adds a place for you to put in your own CSS (under "Appearance").</p>
+                <p><em class="text-warning">Add Custom Scripts</em> lets you put in your own Javascript (like Google Analytics, for example). Found under "Tools">"Header/Footer Scripts".</p>
                 <br>
                 <em class="text-muted">Feel free to browse around for more plugins! If there's something you want to do with your site or forum, there's usually a plugin that makes it easy.</em>
               </div>
@@ -118,7 +147,17 @@
 
             <section id="setup" class="col-12 col-xs-12">
               <h2>Setup</h2>
-              
+                
+              <div class="subsection">
+                <h4>General Wordpress Setup</h4>
+                <p>You should check out the Settings pages and decide what will be best for your site. The most important ones to look at are General, Reading, Forums, and bbPress Moderation.</p>
+                <small class="text-warning">Note that "Writing" and "Discussion" aren't very useful to you, since those default WordPress functions aren't in use with Serverus.</small>
+                <img src="dist/img/general_setup.png" alt="" class="img-responsive">
+
+              </div>
+
+              <hr>
+
               <div class="subsection">
                 <h4>Front Page Setup</h4>
                 <p>Like most forums, you can have your front page display news. This will display the latest topics from a single forum (for example, "Server News"), newest first, without any of the replies attached to them.</p>
@@ -148,7 +187,7 @@
 
               <div class="subsection">
                 <h4>Menus</h4>
-                <p>This is no different from your typical WordPress menus. If your pages aren't showing up in your Nav bar and you're not sure how to add them, read <a href="http://codex.wordpress.org/WordPress_Menu_User_Guide#Adding_Items_to_a_Menu">this guide</a>. To change the colors of the Nav bar, check out the <a href="#customizing">"Customizing" section</a> below.</p>
+                <p>This is no different from your typical WordPress menus. If your pages aren't showing up in your Nav bar and you're not sure how to add them, read <a href="http://codex.wordpress.org/WordPress_Menu_User_Guide#Adding_Items_to_a_Menu" target="_blank">this guide</a>. To change the colors of the Nav bar, check out the <a href="#customizing">"Customizing" section</a> below.</p>
               </div>  
             </section><!--/span-->
 
@@ -173,7 +212,8 @@
 
               <div class="subsection">
                 <h4>Advertisements</h4>
-                <p>...</p> <!-- TODO -->
+                <p>There are three places you can display ads for revenue. The first is on the front page (where the front page shortcode is), the second is directly below the first post in a thread, and the third is in the sidebar.</p> <!-- TODO -->
+                <p>To use these, paste the code for your ad in a Text widget. The location of the widget (Primary, Frontpage, Under First Post) will determine where the ad displays.</p> <!-- TODO -->
               </div>  
 
             </section><!--/span-->
@@ -242,21 +282,21 @@
 
               <div class="subsection">
                 <h4>I can't get to any of my pages.</h4>
-                <p>If you're getting an error along the lines of "404 page not found" then you probably need to <a href="http://codex.wordpress.org/Using_Permalinks#Using_.22Pretty.22_permalinks">enable Pretty Permalinks and mod_rewrite</a>. If you're having trouble with this, contact your web host's support.</p>
+                <p>If you're getting an error along the lines of "404 page not found" then you probably need to <a href="http://codex.wordpress.org/Using_Permalinks#Using_.22Pretty.22_permalinks" target="_blank">enable Pretty Permalinks and mod_rewrite</a>. If you're having trouble with this, contact your web host's support.</p>
               </div>
 
               <hr>
 
               <div class="subsection">
                 <h4>I just see a white screen!</h4>
-                <p>This is what WordPress does when it breaks. What is the very last thing you did before you saw the white screen? If you just enabled the theme, or one of the plugins, your best bet is to follow <a href="https://codex.wordpress.org/Common_WordPress_Errors#The_White_Screen_of_Death">WordPress's help guide</a>. After that, double-check that you've updated WordPress, bbPress, and Serverus itself to their latest versions. Double-check the <a href="#prerequisites">Prerequisites</a> section. Lastly, remember that bbPress must be activated for Serverus to work properly. Disabling it while Serverus is activated might cause issues.</p>
+                <p>This is what WordPress does when it breaks. What is the very last thing you did before you saw the white screen? If you just enabled the theme, or one of the plugins, your best bet is to follow <a href="https://codex.wordpress.org/Common_WordPress_Errors#The_White_Screen_of_Death" target="_blank">WordPress's help guide</a>. After that, double-check that you've updated WordPress, bbPress, and Serverus itself to their latest versions. Double-check the <a href="#prerequisites">Prerequisites</a> section. Lastly, remember that bbPress must be activated for Serverus to work properly. Disabling it while Serverus is activated might cause issues.</p>
               </div>  
 
               <hr>
 
               <div class="subsection">
                 <h4>There's a third-party plugin I want to use, but it doesn't work right with Serverus.</h4>
-                <p>I can help you with that! Post it in the <a href="#"><!-- TODO -->support forums</a> and I'll check it out. Make sure to tell me what specifically isn't working right with the plugin for you.</p>
+                <p>I can help you with that! Post it in the <a href="#" target="_blank"><!-- TODO -->support forums</a> and I'll check it out. Make sure to tell me what specifically isn't working right with the plugin for you.</p>
               </div>  
 
             </section><!--/span-->

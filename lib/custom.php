@@ -69,6 +69,18 @@ function serverus_register_required_plugins() {
             'required'  => false,
         ),
 
+        array(
+            'name'      => 'Simple Custom CSS',
+            'slug'      => 'simple-custom-css',
+            'required'  => false,
+        ),
+
+        array(
+            'name'      => 'Add Custom Scripts',
+            'slug'      => 'add-custom-scripts',
+            'required'  => false,
+        ),
+
     );
 
     /**
