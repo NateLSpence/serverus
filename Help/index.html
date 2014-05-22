@@ -85,11 +85,11 @@
               <div class="subsection">
                 <h4>Theme Installation</h4>
                 <p>Go to the Admin page and navigate to Appearance->Themes. Click "Add New" at the top of the page.</p>
-                <img src="dist/img/add_theme.png" alt="" class="img-responsive">
+                <img src="dist/img/add_theme.png" alt="" class="img-responsive img-rounded">
                 <p>Click "Upload Theme" at the top of the page.</p> 
-                <img src="dist/img/upload_theme.png" alt="" class="img-responsive">
+                <img src="dist/img/upload_theme.png" alt="" class="img-responsive img-rounded">
                 <p>Click "Choose File" and navigate to the serverus-theme.zip <!-- TODO --> file. Upload it, and click "Install Now".</p>
-                <img src="dist/img/upload_theme_2.png" alt="" class="img-responsive">
+                <img src="dist/img/upload_theme_2.png" alt="" class="img-responsive img-rounded">
                 <p>Now activate the theme.</p> <!-- TODO -->
               </div>
 
@@ -98,7 +98,7 @@
               <div class="subsection">
                 <h4>Theme Activation</h4>
                 <p>Once you click the "Activate" button, you should be taken to a screen that will run you through some first-time setup.</p>
-                <img src="dist/img/activate_theme.png" alt="" class="img-responsive">
+                <img src="dist/img/activate_theme.png" alt="" class="img-responsive img-rounded">
                 <small class="text-info">This screen is always available under Appearance->Theme Activation.</small>
                 <p>Once you're done selecting your options, click "Save Changes".</p>
               </div>
@@ -112,16 +112,16 @@
               <div class="subsection">
                 <h4>Required and Recommended Plugins</h4>
                 <p>Upon activating Serverus, you will see a nagging box asking you to install some plugins. Click "Begin installing plugins".</p>
-                <img src="dist/img/install_plugins_1.png" alt="" class="img-responsive">
+                <img src="dist/img/install_plugins_1.png" alt="" class="img-responsive img-rounded">
                 <small class="text-info">If you've dismissed the prompt, you can still view these plugins under "Appearance->Install Plugins".</small>
-                <p>Select the plugins you would like to install. <i class="text-muted">See below for an explanation of each plugin's functions.</i></p>
-                <img src="dist/img/install_plugins_2.png" alt="" class="img-responsive">
+                <p>Select the plugins you would like to install. <em class="text-muted">See below for an explanation of each plugin's functions.</em></p>
+                <img src="dist/img/install_plugins_2.png" alt="" class="img-responsive img-rounded">
                 <p>Select "Install" under the "Bulk Actions" dropdown and hit Apply.</p>
-                <img src="dist/img/install_plugins_3.png" alt="" class="img-responsive">
+                <img src="dist/img/install_plugins_3.png" alt="" class="img-responsive img-rounded">
                 <p>You'll need to enter your FTP credentials. You'll find these somewhere on your web host's dashboard.</p>
-                <img src="dist/img/install_plugins_4.png" alt="" class="img-responsive">
+                <img src="dist/img/install_plugins_4.png" alt="" class="img-responsive img-rounded">
                 <p>Once the plugins finish downloading and installing, you're clear! You can return to the Dashboard and continue to set up your site.</p>
-                <img src="dist/img/install_plugins_5.png" alt="" class="img-responsive">
+                <img src="dist/img/install_plugins_5.png" alt="" class="img-responsive img-rounded">
 
               </div>
 
@@ -152,7 +152,7 @@
                 <h4>General Wordpress Setup</h4>
                 <p>You should check out the Settings pages and decide what will be best for your site. The most important ones to look at are General, Reading, Forums, and bbPress Moderation.</p>
                 <small class="text-warning">Note that "Writing" and "Discussion" aren't very useful to you, since those default WordPress functions aren't in use with Serverus.</small>
-                <img src="dist/img/general_setup.png" alt="" class="img-responsive">
+                <img src="dist/img/general_setup.png" alt="" class="img-responsive img-rounded">
 
               </div>
 
@@ -161,9 +161,13 @@
               <div class="subsection">
                 <h4>Front Page Setup</h4>
                 <p>Like most forums, you can have your front page display news. This will display the latest topics from a single forum (for example, "Server News"), newest first, without any of the replies attached to them.</p>
+                <img src="dist/img/front_page.png" alt="" class="img-responsive img-rounded">
+                <p>Edit the front page to adjust these options.</p>
+                <img src="dist/img/frontpage_edit.png" alt="" class="img-responsive img-rounded">
                 <p>Serverus uses a shortcode to determine which forum to get news from, and to set some options:</p>
                 <p><code>[srv_frontpage forum_id=# posts_per_page=5 char_limit=0 show_stickies=false]</code></p>
-                <p>Firstly, <code>forum_id=#</code> is the ID of the forum to display. Browse to a forum to find its ID (only Admins and Mods see them). Use a number here; no quotes or symbols.</p>
+                <p>Firstly, <code>forum_id=#</code> is the ID of the forum to display. <strong>Browse to a forum to find its ID</strong> (only Admins and Mods see them). Use a number here; no quotes or symbols.</p>
+                <img src="dist/img/forum_id.png" alt="" class="img-responsive img-rounded">
                 <p>Then, <code>posts_per_page=5</code> decides how many posts to display on the front page before you have to click "Next".</p>
                 <p>The option <code>char_limit=0</code> is the maximum length, in characters, to display for each post. 0 means there is no limit.</p>
                 <p>Lastly, <code>show_stickies=false</code> decides whether or not to display "sticky" threads in your news page. Use <code>true</code> or <code>false</code> here.</p>
@@ -171,8 +175,14 @@
                 <br>
 
                 <p>An example of a customized shortcode might look like this:</p>
-                <p><code>[srv_frontpage forum_id=15 posts_per_page=20 char_limit=450 show_stickies=false]</code></p>
-                <p>In this example, our front page will display posts from the forum with the ID of 15. It will display a maximum of 20 posts, but only the first 450 characters from each. Sticky threads won't be displayed.</p>
+                <p><code>[srv_frontpage forum_id=12 posts_per_page=20 char_limit=450 show_stickies=false]</code></p>
+                <p>In this example, our front page will display posts from the forum with the ID of 12. It will display a maximum of 20 posts, but only the first 450 characters from each. Sticky threads won't be displayed.</p>
+
+                <br>
+
+                <p>Remember to click "Update" when you're finished editing the page.</p>
+                <img src="dist/img/frontpage_edit_save.png" alt="" class="img-responsive img-rounded">
+
 
               </div>
 
@@ -180,7 +190,15 @@
 
               <div id="forums-setup" class="subsection">
                 <h4>Forums Setup</h4>
-                <p>Under the Forums menu, create the forums you want, along with categories to put them under. <span class="text-danger">All forums require a category</span>, even if everything is under one category.</p>
+                <p>To create a forum, click "New Forum" in the "Forums" menu.</p>
+                <img src="dist/img/forum_new_1.png" alt="" class="img-responsive img-rounded">
+                <p>First create your forum's categories. <span class="text-danger">All forums require a category</span>, even if everything is under the same category.</p>
+                <img src="dist/img/forum_new_2.png" alt="" class="img-responsive img-rounded">
+                <p>Next, create the forums you want and place them under their categories.</p>
+                <img src="dist/img/forum_new_3.png" alt="" class="img-responsive img-rounded">
+                <p>Check your forums page to make sure everything is displaying correctly.</p>
+                <img src="dist/img/forum_new_4.png" alt="" class="img-responsive img-rounded">
+
               </div>  
 
               <hr>
@@ -192,13 +210,19 @@
             </section><!--/span-->
 
 
+
             <section id="widgets" class="col-12 col-xs-12">
 
               <h2>Widgets</h2>
+              <img src="dist/img/widgets_1.png" alt="" class="img-responsive img-rounded">
+
+              <br>
 
               <div class="subsection">
                 <h4>Recent Topics Widget</h4>
                 <p>This widget displays a list of recent posts made by your users.</p> 
+                <img src="dist/img/widgets_recenttopics_1.png" alt="" class="img-responsive img-rounded">
+                <img src="dist/img/widgets_recenttopics_2.png" alt="" class="img-responsive img-rounded">
               </div>  
 
               <hr>
@@ -212,8 +236,13 @@
 
               <div class="subsection">
                 <h4>Advertisements</h4>
-                <p>There are three places you can display ads for revenue. The first is on the front page (where the front page shortcode is), the second is directly below the first post in a thread, and the third is in the sidebar.</p> <!-- TODO -->
-                <p>To use these, paste the code for your ad in a Text widget. The location of the widget (Primary, Frontpage, Under First Post) will determine where the ad displays.</p> <!-- TODO -->
+                <p>There are three places you can display ads for revenue.</p>
+                <p>The first is in the sidebar, the second is on the front page (where the front page shortcode is).</p>
+                <img src="dist/img/widgets_ads_2.png" alt="" class="img-responsive img-rounded">
+                <p>And the third is directly below the first post in a thread.</p>
+                <img src="dist/img/widgets_ads_3.png" alt="" class="img-responsive img-rounded">
+                <p>To use these, paste the code for your ad in a Text widget. The location of the widget (Primary, Frontpage, Under First Post) will determine where the ad displays.</p> 
+                <img src="dist/img/widgets_ads_1.png" alt="" class="img-responsive img-rounded">
               </div>  
 
             </section><!--/span-->
@@ -223,21 +252,39 @@
 
               <div class="subsection">
                 <h4>Enable Registration</h4>
-                <p>To open your forums to the world, you'll have to enable registration in order for users to make their own account. Make sure "Anyone can register" is checked under Settings. Alternatively, you can opt to add users manually via the Users menu.</p>
+                <p>To open your forums to the world, you'll have to enable registration in order for users to make their own account. Make sure "Anyone can register" is checked under Settings.</p>
+                <img src="dist/img/registration.png" alt="" class="img-responsive img-rounded">
+                <p>Alternatively, you can opt to add users manually via the Users menu.</p>
               </div>  
               
               <hr>
 
               <div class="subsection">
                 <h4>Modify Users</h4>
-                <p>There are two places you can edit a user's information- the Users menu from the WordPress menus, or by clicking on the user's name in the forums and viewing their profile. These are basically the same, but as an administrator you might find them both useful. In the WordPress menus, you can see all of the users in a list, instead of digging through posts to find a specific person. Making quick tweaks might be easier from the forum profile view.</p>
+                <p>There are two places you can edit a user's information. The first is the Users menu from the WordPress menus.</p>
+                <img src="dist/img/users_1.png" alt="" class="img-responsive img-rounded">
+                <p>The second is accessed by clicking on the user's name in the forums and viewing their profile.</p>
+                <img src="dist/img/users_2.png" alt="" class="img-responsive img-rounded">
+                <img src="dist/img/users_3.png" alt="" class="img-responsive img-rounded">
+                <p>These are basically the same, but as an administrator you might find them both useful. In the WordPress menus, you can see all of the users in a list, instead of digging through posts to find a specific person. Making quick tweaks might be easier from the forum profile view.</p>
               </div>  
             
               <hr>
 
               <div class="subsection">
                 <h4>Moderation</h4>
-                <p>If you've installed the bbPress Moderation plugin, this is a pretty simple process. Individual posts have buttons for moderation, and you can set a user to "Blocked" as their forum role to ban them. Setting a user to "Moderator" gives them the ability to edit other users/posts and see a minimal version of the WordPress administration menus.</p>
+                <p>If you've installed the bbPress Moderation plugin, then a user's first post won't be displayed until it's approved. Only administators and moderators can see and approve them.</p>
+                <p>You can mark it as spam on the Replies menu.</p>
+                <img src="dist/img/moderation_1.png" alt="" class="img-responsive img-rounded">
+                <p>Or you can select it and click "Publish" to approve it.</p>
+                <img src="dist/img/moderation_2.png" alt="" class="img-responsive img-rounded">
+                <p>In the forum, individual posts have buttons for moderation.</p>
+                <img src="dist/img/moderation_3.png" alt="" class="img-responsive img-rounded">
+                <p>From either a user's profile view or from the "Users" menu, you can set a user to "Blocked" as their forum role to ban them. Setting a user to "Moderator" gives them the ability to edit other users/posts and see a minimal version of the WordPress administration menus.</p>                
+                <img src="dist/img/moderation_4.png" alt="" class="img-responsive img-rounded">
+                <img src="dist/img/moderation_5.png" alt="" class="img-responsive img-rounded">
+
+
               </div>  
 
             </section><!--/span-->
@@ -247,32 +294,41 @@
 
               <div class="subsection">
                 <h4>The "Customize" screen</h4>
-                <p>Time to customize! Add a header image and text, a background image, and choose a color scheme that suits your fancy.</p>
-                <p>Serverus is simple, but you can dig into the color scheme if you want to. The best method is to choose a color scheme that is closest to what you need already, and then tweak it from there. If you're itching to change something, but it doesn't have an option, you can always override the default CSS<!-- TODO -->.</p>
+                <p>Time to customize! Access the Customize screen from one of three places:</p>
+                <img src="dist/img/customize_1.png" alt="" class="img-responsive img-rounded">
+                <p>Add a header image and text, a background image, and choose a color scheme that suits your fancy.</p>
+                <img src="dist/img/customize_2.png" alt="" class="img-responsive img-rounded">
+                <p>Serverus is simple, but you can dig into the color scheme if you want to. The best method is to choose a color scheme that is closest to what you need already, and then tweak it from there.</p>
+                <img src="dist/img/customize_3.png" alt="" class="img-responsive img-rounded">
+                <p>If you're itching to change something, but it doesn't have an option, you can always override the default CSS, assuming you've installed the Simple CSS plugin.</p>
+                <img src="dist/img/customize_4.png" alt="" class="img-responsive img-rounded">
               </div>
 
               <hr>
 
               <div class="subsection">
                 <h4>Single pages</h4>
-                <p>If you want to use some of the slick Bootstrap elements, make sure you've got the Easy Bootstrap Shortcodes plugin installed.</p> <!-- TODO explain how to use it -->
+                <p>If you have the Easy Bootstrap Shortcodes plugin installed, you'll see buttons for Bootstrap elements when editing a page.</p>
+                <img src="dist/img/bootstrap.png" alt="" class="img-responsive img-rounded">
               </div>
 
               <hr>
 
               <div class="subsection">
                 <h4>Make a Landing Page/Splash Screen</h4>
-                <p>Create a page and choose the template labeled "Splash". Save the page.</p>
-                <p>Keep in mind that this also disables the Nav bar, so you'll need to include a link so users can click through to the rest of your site.</p> <!-- TODO -->
-                <p>To make this page the home page, go to "Settings" -> "Reading", and under "Front Page Displays", select the dropdown box labeled "Front Page" and choose your Splash page.</p> <!-- TODO -->
+                <p>To make a page without the Nav bar and sidebar, choose the template labeled "Splash".</p>
+                <img src="dist/img/splash_1.png" alt="" class="img-responsive img-rounded">
+                <p class="text-warning">Keep in mind that since this disables the Nav bar, so you'll need to include a link so users can click through to the rest of your site.</p>
+                <p>To make this page the home page, go to "Settings" -> "Reading", and under "Front Page Displays", select the dropdown box labeled "Front Page" and choose your Splash page.</p> 
+                <img src="dist/img/splash_3.png" alt="" class="img-responsive img-rounded">
               </div>  
 
               <hr>
 
               <div class="subsection">
                 <h4>Disable the Sidebar</h4>
-                <p>Edit the page and choose the template labeled "No Sidebar". Save the page.</p>
-                <p>If you want something like a landing page, you may want to make a page that doesn't have the sidebar, the top navigation bar, and the foreground. To do this, create or edit the page in question, and find the "Template" dropdown in the "Page Attributes" box on the right. Choose the template<!-- TODO add/name templates --> you want and save the page.</p>
+                <p>Same as above, but choose the template labeled "No Sidebar".</p>
+                <img src="dist/img/nosidebar.png" alt="" class="img-responsive img-rounded">
               </div>  
             
             </section><!--/span-->

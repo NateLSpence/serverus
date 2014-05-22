@@ -27,7 +27,11 @@
 
 <?php if ( bbp_current_user_can_access_create_topic_form() ) : ?>
 
+	<?php if ( bbp_is_topic_edit() ) : ?>
+	<div id="new-topic-<?php bbp_topic_id(); ?>" class="bbp-topic-form">
+	<?php else: ?>
 	<div id="new-topic-<?php bbp_topic_id(); ?>" class="bbp-topic-form hidden">
+	<?php endif; ?>
 
 		<form id="new-post" name="new-post" role="form" method="post" action="<?php the_permalink(); ?>">
 
