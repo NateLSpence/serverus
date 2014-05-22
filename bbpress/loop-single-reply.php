@@ -67,7 +67,7 @@
 
 		<?php 
 
-			// TODO clean up this mess. This filter is being applied twice, somewhere, and I really should pull out the second call rather than removing this. This should be fine if the duplicate is taken out, but it's just silly. 
+			// TODO clean up this mess. This filter is being applied twice, somewhere, and I really should pull out the second call rather than removing this, but I think the problem is in the core bbPress files. This should be fine if the duplicate is taken out, but it's just silly. 
 			remove_filter( 'bbp_get_reply_content', 'bbp_reply_content_append_revisions',  99 );
 
 			if ( ! has_filter( 'bbp_get_reply_content', 'bbp_reply_content_append_revisions' ) )
