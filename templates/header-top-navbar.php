@@ -28,9 +28,6 @@
 
 
 
-<!-- <img src="<?php header_image(); ?>" height="" width="<?php echo get_custom_header()->width; ?>" alt="" /> -->
-
-
 <div class="header-image"><div class="container">
 
   <?php if( get_theme_mod('toggle_header_text') ) { ?>

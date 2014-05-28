@@ -184,7 +184,7 @@ class Serverus_Login_Widget extends WP_Widget {
   public function __construct() {
     $widget_ops = array(
       'classname'   => 'login-register-widget',
-      'description' => __( 'A bbPress login/register widget for the Serverus theme. Place in the "Login Location" area.', 'Serverus' ) 
+      'description' => __( 'This works automatically. Do not touch. :)', 'Serverus' ) 
     );
 
     parent::__construct( false, __( '(Serverus) Login Widget', 'Serverus' ), $widget_ops );

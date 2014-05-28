@@ -627,57 +627,6 @@ add_action('init','disable_admin_bar');
 } //end class_exists
 
 
-/**
- *	Dashboard Widgets
- */
-
-/*// Add theme setup walkthrough widget
-function serverus_add_dashboard_widgets() {
-	add_meta_box('serverus_dashboard_widget_setup', __('Serverus Configuration'), 'serverus_dashboard_widget_setup_function', 'dashboard', 'side', 'high');
-}
-add_action( 'wp_dashboard_setup', 'serverus_add_dashboard_widgets' );
-
-function serverus_dashboard_widget_setup_function() {
-	// Display whatever it is you want to show.
-	$output = '';
-	$output .= '
-<div>
-	<p>We assembled some links to get you started:</p>
-	
-	<a class="button button-primary button-hero" href="' . get_admin_url( null, "customize.php" ) . '">Customize</a>
-
-	<div>
-
-
-		<div>
-			<a class="button button-primary button-hero" href="' . '#' . '">Setup Tutorial</a>
-		</div>
-		<div>
-			<h4>Next Steps</h4>
-			<ul>
-				<li><a href="http://localhost/wordpress-2/wp-admin/post.php?post=4&amp;action=edit">Edit your front page</a></li>
-				<li><a href="http://localhost/wordpress-2/wp-admin/post-new.php?post_type=page">Add additional pages</a></li>
-						<li><a href="http://localhost/wordpress-2/">View your site</a></li>
-			</ul>
-		</div>
-		<div>
-			<h4>More Actions</h4>
-			<ul>
-				<li><div class="welcome-icon welcome-widgets-menus">Manage <a href="http://localhost/wordpress-2/wp-admin/widgets.php">widgets</a> or <a href="http://localhost/wordpress-2/wp-admin/nav-menus.php">menus</a></div></li>
-						<li><a href="http://localhost/wordpress-2/wp-admin/options-discussion.php" class="welcome-icon welcome-comments">Turn comments on or off</a></li>
-				<li><a href="http://codex.wordpress.org/First_Steps_With_WordPress" class="welcome-icon welcome-learn-more">Learn more about getting started</a></li>
-				
-
-			</ul>
-		</div>
-	</div>
-</div>
-
-	';
-
-	echo $output;
-} */
-
 
 // Remove unused Widgets from the Dashboard
 function remove_dashboard_widgets() {
@@ -907,7 +856,7 @@ function set_header_properties() {
 
 if( class_exists( 'bbpress' ) ){ 
 
-// [srv_frontpage forum_id=0 posts_per_page=5 char_limit=0 /*show_avatar=true*/ show_stickies=false]
+// [srv_frontpage forum_id=0 posts_per_page=5 char_limit=0 show_stickies=false]
 class srv_frontpage_class {
 
 	public static $attr = array();
@@ -938,7 +887,7 @@ class srv_frontpage_class {
 
 	}
 
-	private static function srv_unset_globals() { //TODO can cull some of this?
+	private static function srv_unset_globals() { //TODO can cull some of this
 		$bbp = bbpress();
 
 		// Unset global queries

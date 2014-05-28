@@ -3,16 +3,31 @@ body {
   padding-top: 70px;
 }
 
+h1 {
+	color: #26425A;
+	text-align: center;
+	font-weight: 100;
+	border-bottom: 1px solid #DCE4F1;
+	margin-bottom: -30px;
+	padding-bottom: 5px;
+	font-family: Consolas, monaco, monospace;
+}
+
 h2 {
-	background-color: #999;
+	background-color: #428bca;
 	color: #FFF;
-	padding: 4px 4px 4px 8px;
+	padding: 4px 8px 4px 8px;
 	margin-top: 80px;
+	margin-left: -8px;
+	margin-right: -8px;
 }
 
 h4 {
-	background-color: #F0F0F0;
+	background-color: #999;
+	color: #FFF;
 	padding: 2px 2px 2px 4px;
+/*	margin-left: 8px;
+	margin-right: 8px;*/
 }
 
 section {
@@ -40,4 +55,8 @@ section {
 
 img {
 	margin-bottom: 10px;
+}
+
+hr {
+	border-top: 1px solid #DCE4F1;
 }

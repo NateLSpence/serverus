@@ -17,13 +17,6 @@
 
 		<?php echo bbp_get_topic_title(); ?>
 
-		<!-- <span class='pull-right'>
-
-			<?php bbp_topic_subscription_link( array( 'before' => '' ) ); ?>
-
-			<?php bbp_topic_favorite_link(); ?>
-
-		</span> -->
 
 	</li><!-- .bbp-header -->
 
@@ -73,12 +66,6 @@
 		</div><!-- .bbp-meta -->
 
 	</div><!-- .bbp-topic-header -->
-
-<!-- 	<li class="bbp-footer">
-
-		&nbsp;
-
-	</li> -->
 
 </ul><!-- #bbp-topic-<?php bbp_topic_id(); ?>-lead -->
 

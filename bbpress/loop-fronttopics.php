@@ -13,23 +13,6 @@
 
 <ul id="bbp-forum-<?php bbp_forum_id(); ?>" class="bbp-topics">
 
-<!-- 	<li class="bbp-header">
-
-		<ul class="forum-titles">
-
-			<?php if ( current_user_can( 'moderate' ) ) { ?>
-				<li class="bbp-topic-title">Topics <span class="small">(Forum ID <?php bbp_forum_id(); ?>)</span></li>
-			<?php } else { ?>
-				<li class="bbp-topic-title"><?php _e( 'Topics', 'bbpress' ); ?></li>
-			<?php } ?>
-
-			<li class="bbp-topic-voice-count"><?php _e( 'Voices', 'bbpress' ); ?></li>
-			<li class="bbp-topic-reply-count"><?php bbp_show_lead_topic() ? _e( 'Replies', 'bbpress' ) : _e( 'Posts', 'bbpress' ); ?></li>
-			<li class="bbp-topic-freshness"><?php _e( 'Last Reply', 'bbpress' ); ?></li>
-		</ul>
-
-	</li> -->
-
 	<li class="bbp-body">
 
 		<?php while ( bbp_topics() ) : bbp_the_topic(); ?>
@@ -39,16 +22,6 @@
 		<?php endwhile; ?>
 
 	</li>
-
-<!-- 	<li class="bbp-footer">
-
-		<div class="tr">
-			<p>
-				<span class="td colspan<?php echo ( bbp_is_user_home() && ( bbp_is_favorites() || bbp_is_subscriptions() ) ) ? '5' : '4'; ?>">&nbsp;</span>
-			</p>
-		</div>
-
-	</li> -->
 
 </ul><!-- #bbp-forum-<?php bbp_forum_id(); ?> -->
 
