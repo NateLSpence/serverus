@@ -118,7 +118,9 @@
                 <img src="dist/img/install_plugins_3.png" alt="" class="img-responsive img-rounded">
                 <p>You'll need to enter your FTP credentials. You'll find these somewhere on your web host's dashboard.</p>
                 <img src="dist/img/install_plugins_4.png" alt="" class="img-responsive img-rounded">
-                <p>Once the plugins finish downloading and installing, you're clear! You can return to the Dashboard and continue to set up your site.</p>
+                <p id="ebs-help">Once the plugins finish downloading and installing, you have one more step! Configure the Easy Bootstrap Shortcodes plugin to work with Serverus by going to "EBS Settings" on the left, selecting the "Use from theme..." option for the JS and CSS settings, and clicking "Update Settings".</p>
+                <img src="dist/img/install_plugins_6.png" alt="" class="img-responsive img-rounded">
+                <p>If you didn't install the Easy Bootstrap Shortcodes plugin, you're clear! You can return to the Dashboard and continue to set up your site.</p>
                 <img src="dist/img/install_plugins_5.png" alt="" class="img-responsive img-rounded">
 
               </div>
@@ -351,6 +353,14 @@
               <div class="subsection">
                 <h4>When I add a widget, it collapses and I can't see the options.</h4>
                 <p>Click the "Save" button after you add the widget, and it should expand again. If it doesn't, try refreshing the page.</p>
+              </div>  
+
+              <hr>
+
+              <div class="subsection">
+                <h4>Dropdown menus aren't working.</h4>
+                <p>Most likely, this is being caused by the Easy Bootstrap Shortcodes plugin. If you haven't configured it yet, check out the <a href="#ebs-help">directions for configuring it</a> and make sure you've done this.</p>
+                <p class="text-info">This problem is usually because the dropdown.js plugin in Bootstrap is being included twice. Serverus is built on Bootstrap, so it doesn't need bootstrap.js included again. If the above directions don't fix your problem, see if there's another reason you might have bootstrap.js (which comes with dropdown.js in it) being included a second time.</p>
               </div>  
 
               <hr>

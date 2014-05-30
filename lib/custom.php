@@ -548,7 +548,7 @@ function serverus_enqueue_stylesheet() {
 			break;
 
 		default:
-			wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/main.fe77bb04.min.css', false, null);
+			wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/main.1296fa09.min.css', false, null);
 			break;
 	}
 
