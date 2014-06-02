@@ -33,7 +33,35 @@ body {
       border: none; 
       .box-shadow( none );
       height: 100vh;
+
+      /* set the height of the element which contains what you want to center */ 
+      // height: 100%; 
+      /* these styles are optional, to set width horizontally center the page */ 
+      // max-width: 500px; 
+      // margin: 0 auto; 
+      .splash-page-container {
+         /* these are the important styles for the centered element: */ 
+         display: inline-block; 
+         vertical-align: middle; 
+         width: 100%;
+      }
    }
+
+   .wrap.container.splash-page:before { 
+      /* this is the important part */ 
+      content: ''; 
+      display: inline-block; 
+      width: 0; 
+      height: 100%; 
+      vertical-align: middle; 
+      /* this just takes care of whitespace added by having display:inline-block (there are other methods) */ 
+      margin-left: -0.25em; 
+   } 
+
+/*float:none;
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:-4px;*/
 }
 
 
