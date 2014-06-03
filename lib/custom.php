@@ -548,7 +548,7 @@ function serverus_enqueue_stylesheet() {
 			break;
 
 		default:
-			wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/main.e17f7147.min.css', false, null);
+			wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/main.995eaad4.min.css', false, null);
 			break;
 	}
 
@@ -1012,7 +1012,7 @@ class srv_frontpage_class {
 					'posts_per_page' => self::$attr['posts_per_page'],   // Topics per page
 					'paged'          => bbp_get_paged(),           // Page Number
 					's'              => $default_topic_search,     // Topic Search
-					'show_stickies'  => self::$attr['show_stickies'],    // Ignore sticky topics?
+					'show_stickies'  => self::$attr['show_stickies'],    // Ignore stickiness?
 					'max_num_pages'  => false,                     // Maximum number of pages to show
 				) ) ) : 
 

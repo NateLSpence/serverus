@@ -459,6 +459,7 @@ figure.alignnone { margin-left: 0; margin-right: 0; }
    border-top: none;
 }
 
+
 // AVATARS
 #bbpress-forums p.bbp-topic-meta img.avatar, 
 #bbpress-forums ul.bbp-reply-revision-log img.avatar, 
@@ -711,6 +712,20 @@ div.bbp-template-notice.error {
       background-color: @body-bg-contrast-mix;
    }
 
+   #bbpress-forums ul.bbp-topics-front ul.super-sticky, 
+   #bbpress-forums ul.bbp-topics ul.super-sticky, 
+   #bbpress-forums ul.bbp-topics ul.sticky, 
+   #bbpress-forums ul.bbp-forum-content ul.sticky {
+      background-color: @body-bg-contrast-more !important;
+      border-bottom: 2px solid @body-bg;
+   }
+
+   // Closed Topics
+   #bbpress-forums ul.status-closed, 
+   #bbpress-forums ul.status-closed a {
+      color: @text-muted;
+   }
+
 
    // NEW TOPIC FORM
       // Form
@@ -880,6 +895,13 @@ div.bbp-template-notice.error {
    #bbpress-forums .bbp-body div.bbp-reply-author {
       background-color: @body-bg-contrast-mix;
    }
+
+   // Closed topics
+   #bbpress-forums div.status-closed, 
+   #bbpress-forums div.status-closed a {
+      color: @text-muted;
+   }
+
 
    // Tag list
    #bbpress-forums div.bbp-topic-tags {
