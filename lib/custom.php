@@ -124,11 +124,10 @@ function serverus_register_required_plugins() {
     tgmpa( $plugins, $config );
 
 }
-?>
 
 
 
-<?php
+
 /**
  *	Customization options 
  */
@@ -557,10 +556,10 @@ function serverus_enqueue_stylesheet() {
 add_action( 'wp_enqueue_scripts', 'serverus_enqueue_stylesheet', 99 );
 // Custom Login form
 add_action( 'login_enqueue_scripts', 'serverus_enqueue_stylesheet', 99 );
-?>
 
 
-<?php 
+
+
 /* 
 	function serverus_customize_css() 
 
@@ -569,16 +568,16 @@ add_action( 'login_enqueue_scripts', 'serverus_enqueue_stylesheet', 99 );
 */
 
 include('customize-css.php');
-?>
 
 
-<?php 
+
 /**
  *	General WP changes
  */
- ?>
 
-<?php 
+
+
+
 //Login page tweaks
 function custom_login_logo_url() {
     return get_bloginfo( 'url' );
@@ -589,9 +588,9 @@ function custom_login_logo_url_title() {
     return 'Home';
 }
 add_filter( 'login_headertitle', 'custom_login_logo_url_title' );
-?>
 
-<?php 
+
+
 if( class_exists( 'bbpress' ) ){ 
 // Disable Admin Bar for everyone but administrators
 if (!function_exists('disable_admin_bar')) {
@@ -698,7 +697,8 @@ add_action( 'admin_bar_menu', 'remove_admin_bar_links', 999 );
 
 // Enable Lead Reply
 function custom_bbp_show_lead_topic( $show_lead ) {
-  $show_lead[] = 'true';
+  //$show_lead[] = 'true';
+  $show_lead = 'true';
   return $show_lead;
 }
 add_filter( 'bbp_show_lead_topic', 'custom_bbp_show_lead_topic' );
