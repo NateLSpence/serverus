@@ -15,8 +15,38 @@ module.exports = function(grunt) {
     less: {
       dist: {
         files: {
-          'assets/css/main.min.css': [
-            'assets/less/app.less'
+          'assets/css/default.min.css': [
+            'assets/less/color-schemes/light-blue.less'
+          ],
+          'assets/css/dark-tan.min.css': [
+            'assets/less/color-schemes/dark-tan.less'
+          ],
+          'assets/css/dark-yellow.min.css': [
+            'assets/less/color-schemes/dark-yellow.less'
+          ],
+          'assets/css/light-brown.min.css': [
+            'assets/less/color-schemes/light-brown.less'
+          ],
+          'assets/css/light-red.min.css': [
+            'assets/less/color-schemes/light-red.less'
+          ],
+          'assets/css/light-teal.min.css': [
+            'assets/less/color-schemes/light-teal.less'
+          ]
+        },
+        options: {
+          compress: true,
+          // LESS source map
+          // To enable, set sourceMap to true and update sourceMapRootpath based on your install
+          sourceMap: false,
+          sourceMapFilename: 'assets/css/main.min.css.map',
+          sourceMapRootpath: '/app/themes/roots/'
+        }
+      },
+      quick: {
+        files: {
+          'assets/css/default.min.css': [
+            'assets/less/color-schemes/light-blue.less'
           ]
         },
         options: {
@@ -76,7 +106,7 @@ module.exports = function(grunt) {
         },
         files: {
           'lib/scripts.php' : ['assets/css/main.min.css' , 'assets/js/scripts.min.js'],
-          'lib/custom.php' : ['assets/css/main.min.css']
+          //'lib/custom.php' : ['assets/css/main.min.css']
         }
       }
     },
@@ -122,13 +152,18 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
-  //grunt.loadNpmTasks('grunt-wp-version');
+  grunt.loadNpmTasks('grunt-wp-version');
   grunt.loadNpmTasks('grunt-wp-assets');
 
   // Register tasks
   grunt.registerTask('default', [
     'clean',
-    'less',
+    'less:quick',
+    'version'
+  ]);
+  grunt.registerTask('all', [
+    'clean',
+    'less:dist',
     'uglify',
     'version'
   ]);

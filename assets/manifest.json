@@ -1,9 +1,5 @@
 {
   "dest": "assets/manifest.json",
-  "assets/css/main.min.css": {
-    "path": "assets/css/main.995eaad4.min.css",
-    "hash": "995eaad4"
-  },
   "assets/js/scripts.min.js": {
     "path": "assets/js/scripts.7b8797d9.min.js",
     "hash": "7b8797d9"
