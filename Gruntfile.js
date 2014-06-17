@@ -105,7 +105,8 @@ module.exports = function(grunt) {
           manifest: 'assets/manifest.json',
         },
         files: {
-          'lib/scripts.php' : ['assets/css/main.min.css' , 'assets/js/scripts.min.js'],
+          'lib/scripts.php' : ['assets/js/scripts.min.js'],
+          //'lib/scripts.php' : ['assets/css/main.min.css' , 'assets/js/scripts.min.js'],
           //'lib/custom.php' : ['assets/css/main.min.css']
         }
       }
@@ -159,7 +160,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'clean',
     'less:quick',
-    'version'
+    'version:assets'
   ]);
   grunt.registerTask('all', [
     'clean',

@@ -280,7 +280,7 @@ function customize_register( $wp_customize ) {
 
  		// Header Repeat?
 	$wp_customize->add_setting( 'header_repeat' , array(
-		'default' 	=>	'false',
+		'default' 	=>	'true',
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 

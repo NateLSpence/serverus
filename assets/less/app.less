@@ -92,13 +92,11 @@ body.bbpress nav .menu-forums {
 
 }
 
-
 .header-image .header-image-title-wrapper .header-image-title {
    top: 48px;
    left: 48px;
    white-space: nowrap;
 }
-
 
 .login-register-widget {
    float: left;
@@ -446,6 +444,43 @@ figure.alignnone { margin-left: 0; margin-right: 0; }
 
 @media (min-width: @screen-lg-min) { }
 
+@media (max-width:@screen-xs-max){
+   .header-image .header-image-title-wrapper h1.header-image-title {
+      font-size: @font-size-h1;
+      white-space: normal;
+   }   
+
+   #bbpress-forums .bbp-header ul li.bbp-forum-topic-count,
+   #bbpress-forums .bbp-header ul li.bbp-forum-reply-count,
+   #bbpress-forums .bbp-header ul li.bbp-forum-freshness,
+   #bbpress-forums .bbp-header ul li.bbp-topic-voice-count,
+   #bbpress-forums .bbp-header ul li.bbp-topic-reply-count,
+   #bbpress-forums .bbp-header ul li.bbp-topic-freshness,
+   #bbpress-forums .bbp-subforum ul li.bbp-forum-topic-count,
+   #bbpress-forums .bbp-subforum ul li.bbp-forum-reply-count {
+      display: none;
+   }
+
+   #bbpress-forums .bbp-subforum ul li.bbp-forum-info {
+      margin-bottom: 0;
+      padding-bottom: 0;
+   }
+
+   #bbpress-forums .bbp-subforum ul li.bbp-forum-freshness {
+      width: 100%;
+      text-align: left;
+      border: none;
+      margin-top: 0;
+      padding-top: @padding-base-vertical;
+      padding-left: @padding-base-horizontal; 
+
+      p.bbp-topic-meta {
+         display: inline-block;
+         margin-left: 5px;
+      }
+   }
+
+}
 
 
 
@@ -671,7 +706,6 @@ div.bbp-template-notice.error {
          padding-top: 26px;
          padding-bottom: 26px;
       }
-
 
       // Last reply author line
       #bbpress-forums p.bbp-topic-meta {
